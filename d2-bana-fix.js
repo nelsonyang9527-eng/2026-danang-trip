@@ -14,6 +14,19 @@
     delete item.destination;
   }
 
+  // 9/15 已有巴拿山規劃，不再顯示舊的「可塞時段／適合安排」。
+  const d2Card = document.querySelector('.trip-day[data-tab-day="2026-09-15"]');
+  if (d2Card) {
+    [...d2Card.querySelectorAll('h3')].forEach(h => {
+      const text = h.textContent.trim();
+      if (text === '可塞時段' || text === '適合安排') {
+        const p = h.nextElementSibling;
+        if (p?.tagName === 'P') p.remove();
+        h.remove();
+      }
+    });
+  }
+
   const style = document.createElement('style');
   style.textContent = `
     .day-timeline li.booking-pending-item,
