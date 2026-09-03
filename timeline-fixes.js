@@ -8,7 +8,10 @@
 
   // 抵達峴港／前往飯店也是固定行程，套用固定行程淡藍色樣式。
   const arriveDanang = byId('d1-arrive');
-  if (arriveDanang) arriveDanang.important = true;
+  if (arriveDanang) {
+    arriveDanang.important = true;
+    arriveDanang.detail = '遊覽車 B車';
+  }
 
   const freeSuggestions = {
     'd1-free1': '建議：飯店附近、美溪沙灘、咖啡、按摩',
@@ -70,7 +73,7 @@
   const dinner = byId('d3-dinner');
   if (dinner) {
     dinner.title = 'PPA 全公司聚餐：BRILLIANT SEAFOOD';
-    dinner.detail = '建議 17:30～17:35 從飯店出發，18:00 前抵達';
+    dinner.detail = '6桌｜建議 17:30～17:35 從飯店出發，18:00 前抵達';
     dinner.important = true;
   }
 
