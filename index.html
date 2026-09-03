@@ -153,7 +153,7 @@ li.next-step::before{
     <div class="countdown" id="countdownBox">
       <div class="countdown-label">距離 9/14 送機接送出發</div>
       <div class="countdown-main" id="countdown">計算中…</div>
-      <div class="countdown-sub" id="countdownSub">送機接送：2026/9/14 06:30（台灣時間）</div>
+      <div class="countdown-sub" id="countdownSub">出發時間：2026/9/14 06:30（台灣時間）</div>
     </div>
   </header>
 
@@ -168,7 +168,7 @@ li.next-step::before{
 
   
     <section class="card trip-day" data-day-start="2026-09-14T00:00:00+08:00" data-day-end="2026-09-15T00:00:00+07:00">
-      <div class="toprow"><h2>9/14（一）</h2><span class="tag">抵達日</span></div>
+      <div class="toprow"><h2>9/14（一）</h2><span class="tag">出發日</span></div>
       <div class="badge">空閒度 ★★☆☆☆</div>
       <h3>固定行程</h3>
       <ul><li class="trip-step" data-start="2026-09-14T06:30:00+08:00" data-end="2026-09-14T07:00:00+08:00"><strong>06:30｜送機接送出發</strong></li><li class="trip-step" data-start="2026-09-14T07:00:00+08:00" data-end="2026-09-14T09:45:00+08:00"><strong>07:00｜桃園國際機場第二航廈集合</strong><br>
@@ -275,7 +275,7 @@ li.next-step::before{
     <p>
       <strong>9/15、9/17：</strong>最適合大型行程<br>
       <strong>9/16：</strong>可排半日～大半日<br>
-      <strong>9/14：</strong>抵達日，適合輕鬆活動<br>
+      <strong>9/14：</strong>出發日，適合輕鬆活動<br>
       <strong>9/18：</strong>早餐後準備回程
     </p>
   </section>
@@ -341,7 +341,7 @@ function updateCountdown(){
       `<span class="num">${pad2(hours)}</span> 時 ` +
       `<span class="num">${pad2(mins)}</span> 分 ` +
       `<span class="num">${pad2(secs)}</span> 秒`;
-    sub.textContent = '送機接送：2026/9/14 06:30（台灣時間）';
+    sub.textContent = '出發時間：2026/9/14 06:30（台灣時間）';
   } else if (now <= tripEnd) {
     el.textContent = '旅程進行中 ✈️';
     sub.textContent = '下方會依目前時間自動標示今天與正在進行／接下來的行程';
