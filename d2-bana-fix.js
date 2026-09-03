@@ -55,3 +55,12 @@
   const observer = new MutationObserver(decorateBanaItem);
   document.querySelectorAll('.day-timeline').forEach(el => observer.observe(el, {childList:true, subtree:true}));
 })();
+
+// 載入 9/17 會安討論中行程。
+(() => {
+  if (document.querySelector('script[data-hoian-plan]')) return;
+  const script = document.createElement('script');
+  script.src = 'd4-hoian-fix.js';
+  script.dataset.hoianPlan = '1';
+  document.body.append(script);
+})();
