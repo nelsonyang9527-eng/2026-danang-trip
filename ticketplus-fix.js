@@ -73,3 +73,12 @@
     observer.observe(el, {childList:true, subtree:true});
   });
 })();
+
+// 載入 9/15 巴拿山包車規劃；獨立檔案便於之後訂車後直接更新狀態。
+(() => {
+  if (document.querySelector('script[data-bana-plan]')) return;
+  const script = document.createElement('script');
+  script.src = 'd2-bana-fix.js';
+  script.dataset.banaPlan = '1';
+  document.body.append(script);
+})();
