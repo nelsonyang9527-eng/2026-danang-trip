@@ -17,6 +17,20 @@
     delete d1Free.destination;
   }
 
+  // 第一天下方已由 Timeline 完整呈現，不再顯示空閒度／可塞時段／適合安排。
+  const d1Card = document.querySelector('.trip-day[data-tab-day="2026-09-14"]');
+  if (d1Card) {
+    d1Card.querySelector('.badge')?.remove();
+    [...d1Card.querySelectorAll('h3')].forEach(h => {
+      const text = h.textContent.trim();
+      if (text === '可塞時段' || text === '適合安排') {
+        const p = h.nextElementSibling;
+        if (p?.tagName === 'P') p.remove();
+        h.remove();
+      }
+    });
+  }
+
   const style = document.createElement('style');
   style.textContent = `
     .tl-ticket-btn,.tl-exchange-btn{flex:0 0 auto;align-self:center;min-height:40px;padding:8px 11px;border-radius:11px;text-decoration:none;font-size:13px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
