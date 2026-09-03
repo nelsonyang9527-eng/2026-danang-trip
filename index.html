@@ -12,7 +12,7 @@
 <body>
 <main>
 <section class="live-mode" id="liveMode" aria-live="polite">
-  <div class="live-head"><div><div class="live-kicker" id="liveDayTitle">🇻🇳 峴港旅遊現場</div><div class="live-test" id="testModeLabel">測試時間模式</div></div><div class="live-clock" id="liveClock">越南 --:--</div></div>
+  <div class="live-head"><div><div class="live-kicker">最新動態</div><div id="liveDayTitle" hidden></div><div class="live-test" id="testModeLabel">測試時間模式</div></div><div class="live-clock" id="liveClock">越南 --:--</div></div>
   <div class="live-grid">
     <div class="live-panel now"><div class="live-label">🟢 現在</div><div class="live-title" id="liveNowTitle">讀取行程中…</div><div class="live-time" id="liveNowTime"></div></div>
     <div class="live-panel next"><div class="live-label" id="liveNextLabel">下一個</div><div class="live-title" id="liveNextTitle">讀取行程中…</div><div class="live-time" id="liveNextTime"></div><div class="live-countdown" id="liveCountdown"></div><div class="live-destination" id="liveDestination"></div>
@@ -28,10 +28,9 @@
   <div class="countdown" id="countdownBox"><div class="countdown-label">距離 9/14 送機接送出發</div><div class="countdown-main" id="countdown">計算中…</div><div class="countdown-sub" id="countdownSub">送機接送：2026/9/14 06:30（台灣時間）</div></div>
 </header>
 <nav class="day-tabs-wrap" aria-label="行程日期分頁"><div class="day-tabs" id="dayTabs">
-  <button class="day-tab" type="button" data-tab="all">全部</button><button class="day-tab" type="button" data-tab="2026-09-14"><span class="dlabel">D1</span>9/14</button><button class="day-tab" type="button" data-tab="2026-09-15"><span class="dlabel">D2</span>9/15</button><button class="day-tab" type="button" data-tab="2026-09-16"><span class="dlabel">D3</span>9/16</button><button class="day-tab" type="button" data-tab="2026-09-17"><span class="dlabel">D4</span>9/17</button><button class="day-tab" type="button" data-tab="2026-09-18"><span class="dlabel">D5</span>9/18</button>
+  <button class="day-tab" type="button" data-tab="all">全部</button><button class="day-tab" type="button" data-tab="2026-09-14">9/14</button><button class="day-tab" type="button" data-tab="2026-09-15">9/15</button><button class="day-tab" type="button" data-tab="2026-09-16">9/16</button><button class="day-tab" type="button" data-tab="2026-09-17">9/17</button><button class="day-tab" type="button" data-tab="2026-09-18">9/18</button>
 </div></nav>
 <section class="mapcard" id="mainMapCard"><div class="maphead"><button class="map-toggle" id="mapToggle" type="button" aria-expanded="false" aria-controls="mapCollapse"><strong>主要地點地圖</strong><span class="map-toggle-meta"><span id="mapScopeLabel">全部行程</span><span class="map-chevron">⌄</span></span></button></div><div class="map-collapse" id="mapCollapse" hidden><div id="map"></div><div class="mapnote">地圖會依目前選擇的日期顯示相關地點；點標記可直接用 Google Maps 開啟。</div></div></section>
-
 <section class="card trip-day" data-tab-day="2026-09-14">
   <div class="toprow"><h2>9/14（一）</h2><span class="tag">出發日</span></div><div class="badge">空閒度 ★★☆☆☆</div><div class="timeline-title">今日 Timeline</div><ul class="day-timeline" data-timeline></ul>
   <h3>固定行程</h3><ul><li class="trip-step" data-start="2026-09-14T06:30:00+08:00" data-end="2026-09-14T07:00:00+08:00"><strong>06:30｜送機接送出發</strong></li><li class="trip-step" data-start="2026-09-14T07:00:00+08:00" data-end="2026-09-14T09:45:00+08:00"><strong>07:00｜桃園國際機場第二航廈集合</strong><br>集合地點：長榮航空 18 號櫃檯。<br>抵達後請尋找福委 EJ／慧柔，領取護照及登機證。</li><li class="trip-step" data-start="2026-09-14T09:45:00+08:00" data-end="2026-09-14T11:35:00+07:00">09:45｜BR383 起飛</li><li class="trip-step" data-start="2026-09-14T11:35:00+07:00" data-end="2026-09-14T13:30:00+07:00">11:35｜抵達峴港</li><li class="trip-step" data-start="2026-09-14T11:35:00+07:00" data-end="2026-09-14T13:30:00+07:00">抵達後｜Peninsula Hotel Danang 寄放行李</li><li class="trip-step" data-start="2026-09-14T18:00:00+07:00">18:00｜PPA 聚餐：Mộc quán Seafood</li></ul>
