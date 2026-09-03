@@ -48,3 +48,12 @@
   const observer = new MutationObserver(decorateHoianItem);
   document.querySelectorAll('.day-timeline').forEach(el => observer.observe(el, {childList:true, subtree:true}));
 })();
+
+// 載入 Day 3／Day 5 顯示整理。
+(() => {
+  if (document.querySelector('script[data-day-labels-fix]')) return;
+  const script = document.createElement('script');
+  script.src = 'day-labels-fix.js';
+  script.dataset.dayLabelsFix = '1';
+  document.body.append(script);
+})();
