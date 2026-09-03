@@ -1,9 +1,9 @@
-// 9/17 會安規劃：目前仍在討論中，預排會安印象秀並提供 Klook 連結。
+// 9/17 會安規劃：目前仍在討論中，交通預計一起包車，並預排會安印象秀。
 (() => {
   const item = itinerary.find(i => i.id === 'd4-free');
   if (item) {
     item.title = '會安（討論中）';
-    item.detail = '預排行程：會安印象秀｜時間與交通方式待確認';
+    item.detail = '交通：一起包車前往｜預排行程：會安印象秀｜時間待確認';
     item.type = 'planned';
     item.important = false;
   }
@@ -13,7 +13,7 @@
     const tag = card.querySelector('.tag');
     if (tag) tag.textContent = '會安討論中';
     const badge = card.querySelector('.badge');
-    if (badge) badge.textContent = '預排：會安印象秀';
+    if (badge) badge.textContent = '包車前往｜預排會安印象秀';
   }
 
   const style = document.createElement('style');
@@ -29,7 +29,7 @@
       if (title !== '會安（討論中）') return;
 
       const detail = li.querySelector('.tl-detail');
-      const text = '預排行程：會安印象秀｜時間與交通方式待確認';
+      const text = '交通：一起包車前往｜預排行程：會安印象秀｜時間待確認';
       if (detail && detail.textContent !== text) detail.textContent = text;
 
       if (li.querySelector('.tl-hoian-klook-btn')) return;
