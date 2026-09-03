@@ -1,6 +1,18 @@
 // 「最新動態」補強：剩餘可停留時間與步行／開車粗估。
 // 不使用 Google Maps Directions API，因此不是即時路況；僅以直線距離乘道路係數後，用一般市區速度估算。
 (() => {
+  const style = document.createElement('style');
+  style.textContent = `
+    .live-stay-badge{display:inline-block;margin-left:7px;color:#16784a;font-weight:900;font-size:12px}
+    .live-travel-estimate{margin-top:10px;padding-top:9px;border-top:1px dashed #d9dee5;font-size:14px;font-weight:800;color:#35404b;line-height:1.55}
+    .live-leave-by{margin-top:4px;font-size:13px;color:#66717d;line-height:1.5}
+    .live-leave-by.urgent{color:#c43d3d;font-weight:850}
+    .day-tab[data-tab="all"]{font-size:14px}
+    .day-tab[data-tab="all"]::after{content:none}
+    @media(max-width:520px){.live-stay-badge{display:block;margin:4px 0 0}.live-travel-estimate{font-size:13px}}
+  `;
+  document.head.append(style);
+
   let gpsPoint = null;
   const nowPanel = document.querySelector('.live-panel.now');
   if (!nowPanel) return;
@@ -63,6 +75,7 @@
     stayBadge.textContent = '';
     travel.textContent = '';
     leave.textContent = '';
+    leave.classList.remove('urgent');
 
     if (!next) return;
 
@@ -70,7 +83,7 @@
 
     if (!source || !target) {
       stayBadge.textContent = `｜距下一行程 ${formatMinutes(minsUntilNext)}`;
-      travel.textContent = '交通時間：取得目前位置後可估算步行／開車時間';
+      travel.textContent = '交通時間：點「取得目前位置」後可估算步行／開車時間';
       return;
     }
 
@@ -83,15 +96,14 @@
     // 最醒目的數字採「搭車還可停留多久」，因峴港旅途中最常用 Grab／汽車移動。
     stayBadge.textContent = driveStay > 0 ? `｜還可停留約 ${formatMinutes(driveStay)}` : '｜建議現在出發';
 
-    const sourceText = gpsPoint ? '目前 GPS' : '目前行程地點';
-    travel.textContent = `🚶 約 ${walkMin} 分　🚕 約 ${driveMin} 分（${sourceText}粗估）`;
+    const sourceText = gpsPoint ? 'GPS' : '目前行程地點';
+    travel.textContent = `🚶 步行約 ${walkMin} 分　🚕 開車約 ${driveMin} 分（${sourceText}粗估）`;
 
     if (driveStay <= 0) {
-      leave.textContent = '搭車時間已接近下一個行程，建議準備出發';
+      leave.textContent = '已接近下一個行程時間，建議準備出發';
       leave.classList.add('urgent');
     } else {
-      leave.classList.remove('urgent');
-      leave.textContent = `搭車最晚約 ${formatLeaveTime(driveLeaveAt, next.zone)} 離開｜若走路可停留約 ${formatMinutes(walkStay)}`;
+      leave.textContent = `搭車最晚約 ${formatLeaveTime(driveLeaveAt, next.zone)} 離開｜若走路還可停留約 ${formatMinutes(walkStay)}`;
     }
   }
 
