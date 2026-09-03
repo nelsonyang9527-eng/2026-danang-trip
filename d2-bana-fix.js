@@ -94,3 +94,12 @@
   script.dataset.hoianPlan = '1';
   document.body.append(script);
 })();
+
+// 載入 9/14 晚餐後的龍橋散步＋BALI 養生洗頭預排行程。
+(() => {
+  if (document.querySelector('script[data-d1-evening-plan]')) return;
+  const script = document.createElement('script');
+  script.src = 'd1-evening-fix.js';
+  script.dataset.d1EveningPlan = '1';
+  document.body.append(script);
+})();
