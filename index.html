@@ -29,9 +29,18 @@ h1{font-size:30px;line-height:1.25;margin:0 0 8px}
   background:#fff;border:1px solid var(--line);border-radius:22px;
   padding:14px;margin-bottom:18px;box-shadow:0 4px 18px rgba(0,0,0,.04);
 }
-.maphead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:2px 2px 12px}
-.maphead strong{font-size:18px}
-.maphead span{font-size:13px;color:var(--muted)}
+.maphead{margin:0}
+.map-toggle{
+  width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;
+  border:0;background:transparent;color:inherit;padding:3px 2px;cursor:pointer;
+  font:inherit;text-align:left;
+}
+.map-toggle strong{font-size:18px}
+.map-toggle-meta{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}
+.map-chevron{font-size:15px;transition:transform .2s ease}
+.map-toggle[aria-expanded="true"] .map-chevron{transform:rotate(180deg)}
+.map-collapse{margin-top:12px}
+.map-collapse[hidden]{display:none}
 
 #map{
   width:100%;
@@ -212,11 +221,15 @@ li.next-step::before{
 
   <section class="mapcard" id="mainMapCard">
     <div class="maphead">
-      <strong>主要地點地圖</strong>
-      <span>可縮放／拖曳／點標記</span>
+      <button class="map-toggle" id="mapToggle" type="button" aria-expanded="false" aria-controls="mapCollapse">
+        <strong>主要地點地圖</strong>
+        <span class="map-toggle-meta"><span id="mapScopeLabel">全部行程</span><span class="map-chevron">⌄</span></span>
+      </button>
     </div>
-    <div id="map"></div>
-    <div class="mapnote">點地圖標記後，可直接用 Google Maps 開啟該地點。</div>
+    <div class="map-collapse" id="mapCollapse" hidden>
+      <div id="map"></div>
+      <div class="mapnote">地圖會依目前選擇的日期顯示相關地點；點標記可直接用 Google Maps 開啟。</div>
+    </div>
   </section>
 
   
@@ -336,41 +349,82 @@ li.next-step::before{
 
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const places = [{"name": "Peninsula Hotel Danang", "lat": 16.0957, "lng": 108.245, "type": "住宿", "map": "https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang"}, {"name": "Mộc quán Seafood Đà Nẵng", "lat": 16.0666, "lng": 108.24, "type": "9/14 晚餐", "map": "https://www.google.com/maps/search/?api=1&query=Moc+quan+Seafood+Da+Nang+26+To+Hien+Thanh"}, {"name": "BRILLIANT SEAFOOD", "lat": 16.0714, "lng": 108.2447, "type": "9/16 公司晚宴", "map": "https://www.google.com/maps/search/?api=1&query=Brilliant+Seafood+178+Ho+Nghinh+Da+Nang"}, {"name": "Da Nang International Terminal T2", "lat": 16.0439, "lng": 108.1994, "type": "9/18 回程機場", "map": "https://www.google.com/maps/search/?api=1&query=Da+Nang+International+Terminal+T2"}];
+const places = [
+  {name:"Peninsula Hotel Danang", lat:16.0957, lng:108.245, type:"住宿", days:["2026-09-14","2026-09-15","2026-09-16","2026-09-17","2026-09-18"], map:"https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang"},
+  {name:"Mộc quán Seafood Đà Nẵng", lat:16.0666, lng:108.24, type:"9/14 晚餐", days:["2026-09-14"], map:"https://www.google.com/maps/search/?api=1&query=Moc+quan+Seafood+Da+Nang+26+To+Hien+Thanh"},
+  {name:"BRILLIANT SEAFOOD", lat:16.0714, lng:108.2447, type:"9/16 公司晚宴", days:["2026-09-16"], map:"https://www.google.com/maps/search/?api=1&query=Brilliant+Seafood+178+Ho+Nghinh+Da+Nang"},
+  {name:"Da Nang International Terminal T2", lat:16.0439, lng:108.1994, type:"9/18 回程機場", days:["2026-09-18"], map:"https://www.google.com/maps/search/?api=1&query=Da+Nang+International+Terminal+T2"}
+];
 
-window.addEventListener('load', function () {
-  const map = L.map('map', {
-    scrollWheelZoom: false,
-    zoomControl: true
+let map = null;
+let mapMarkers = null;
+
+function initMap(){
+  if (map) return;
+
+  map = L.map('map', {
+    scrollWheelZoom:false,
+    zoomControl:true
   });
 
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; OpenStreetMap'
+    maxZoom:19,
+    attribution:'&copy; OpenStreetMap'
   }).addTo(map);
+
+  mapMarkers = L.layerGroup().addTo(map);
+  renderMapForTab(currentTab || 'all');
+}
+
+function renderMapForTab(tab){
+  const label = document.getElementById('mapScopeLabel');
+  if (label) label.textContent = tab === 'all' ? '全部行程' : tab.slice(5).replace('-', '/');
+
+  if (!map || !mapMarkers) return;
+  mapMarkers.clearLayers();
+
+  const visiblePlaces = tab === 'all'
+    ? places
+    : places.filter(p => p.days.includes(tab));
 
   const bounds = L.latLngBounds([]);
 
-  places.forEach(p => {
-    const marker = L.marker([p.lat, p.lng]).addTo(map);
+  visiblePlaces.forEach(p => {
+    const marker = L.marker([p.lat,p.lng]).addTo(mapMarkers);
     marker.bindPopup(
       `<strong>${p.name}</strong><br>${p.type}<br><br>` +
       `<a href="${p.map}" target="_blank" rel="noopener">Google Maps 開啟</a>`
     );
-    bounds.extend([p.lat, p.lng]);
+    bounds.extend([p.lat,p.lng]);
   });
 
-  map.fitBounds(bounds, { padding: [30,30] });
+  if (visiblePlaces.length === 1) {
+    map.setView([visiblePlaces[0].lat, visiblePlaces[0].lng], 15);
+  } else if (visiblePlaces.length > 1) {
+    map.fitBounds(bounds, {padding:[30,30]});
+  }
 
-  // 解決 Netlify / LINE WebView 初始尺寸計算不完整
-  setTimeout(() => map.invalidateSize(), 150);
-  setTimeout(() => map.invalidateSize(), 600);
+  setTimeout(() => map.invalidateSize(), 80);
+}
 
-  window.addEventListener('resize', () => {
-    map.invalidateSize();
-  });
+const mapToggle = document.getElementById('mapToggle');
+const mapCollapse = document.getElementById('mapCollapse');
+
+mapToggle.addEventListener('click', () => {
+  const willOpen = mapCollapse.hidden;
+  mapCollapse.hidden = !willOpen;
+  mapToggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+
+  if (willOpen) {
+    initMap();
+    renderMapForTab(currentTab || 'all');
+    setTimeout(() => map.invalidateSize(), 180);
+  }
 });
 
+window.addEventListener('resize', () => {
+  if (map && !mapCollapse.hidden) map.invalidateSize();
+});
 
 const tripStart = new Date('2026-09-14T06:30:00+08:00');
 const tripEnd = new Date('2026-09-18T18:00:00+08:00');
@@ -416,7 +470,6 @@ function updateCurrentTrip(){
   const steps = [...document.querySelectorAll('.trip-step')];
   steps.forEach(s => s.classList.remove('current-step','next-step'));
 
-  // 優先找「正在進行中」且有明確起訖時間的行程
   const active = steps.find(s => {
     if (!s.dataset.start || !s.dataset.end) return false;
     const start = new Date(s.dataset.start);
@@ -429,7 +482,6 @@ function updateCurrentTrip(){
     return;
   }
 
-  // 沒有正在進行的固定行程時，標示下一個固定行程
   const next = steps
     .filter(s => s.dataset.start && new Date(s.dataset.start) > now)
     .sort((a,b) => new Date(a.dataset.start) - new Date(b.dataset.start))[0];
@@ -475,6 +527,8 @@ function selectDayTab(tab, fromUser = false){
   document.querySelectorAll('.all-only').forEach(section => {
     section.classList.toggle('tab-hidden', tab !== 'all');
   });
+
+  renderMapForTab(tab);
 }
 
 document.querySelectorAll('.day-tab').forEach(btn => {
@@ -483,7 +537,6 @@ document.querySelectorAll('.day-tab').forEach(btn => {
 
 selectDayTab(autoTabForNow());
 
-// 頁面長時間開著跨日時會自動切到新的一天；手動切過分頁後則尊重使用者選擇。
 setInterval(() => {
   if (!userSelectedTab) {
     const autoTab = autoTabForNow();
