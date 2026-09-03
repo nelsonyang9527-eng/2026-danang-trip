@@ -1,17 +1,34 @@
-// 9/15 巴拿山包車規劃：尚未訂車，並提供 Klook 接送連結。
+// 9/15 巴拿山包車規劃：中午 12:00 出發，上午留在飯店休息或附近走走。
 (() => {
-  const item = itinerary.find(i => i.id === 'd2-free');
-  if (item) {
-    item.start = '2026-09-15T07:00:00+07:00';
-    item.end = '2026-09-15T18:00:00+07:00';
-    item.startDate = new Date(item.start);
-    item.endDate = new Date(item.end);
-    item.title = '包車前往巴拿山';
-    item.detail = '尚未訂車｜07:00–18:00';
-    item.type = 'daytrip';
-    item.important = true;
-    item.bookingPending = true;
-    delete item.destination;
+  const morning = itinerary.find(i => i.id === 'd2-free');
+  if (morning) {
+    morning.start = '2026-09-15T08:00:00+07:00';
+    morning.end = '2026-09-15T12:00:00+07:00';
+    morning.startDate = new Date(morning.start);
+    morning.endDate = new Date(morning.end);
+    morning.title = '飯店休息／附近走走';
+    morning.detail = '上午自由安排，可在飯店休息或飯店附近散步';
+    morning.type = 'free';
+    morning.important = false;
+    morning.bookingPending = false;
+    morning.destination = destinations.hotel;
+  }
+
+  if (!itinerary.find(i => i.id === 'd2-bana')) {
+    itinerary.push({
+      id:'d2-bana',
+      day:'2026-09-15',
+      start:'2026-09-15T12:00:00+07:00',
+      end:'2026-09-15T18:00:00+07:00',
+      title:'包車前往巴拿山',
+      detail:'尚未訂車｜12:00–18:00',
+      type:'daytrip',
+      important:true,
+      bookingPending:true,
+      zone:DANANG_TZ,
+      startDate:new Date('2026-09-15T12:00:00+07:00'),
+      endDate:new Date('2026-09-15T18:00:00+07:00')
+    });
   }
 
   // 9/15 已有巴拿山規劃，不再顯示舊的「可塞時段／適合安排」。
