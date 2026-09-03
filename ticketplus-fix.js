@@ -21,7 +21,10 @@
     .insurance-reminder span{font-size:13px;line-height:1.55;color:#62594b}
     .shower-filter-reminder{margin:-6px 0 18px;padding:14px 15px;border-radius:14px;background:#f4f7fa;border:1px solid #dce3ea;border-left:5px solid #6f8799;display:flex;flex-direction:column;gap:4px}
     .shower-filter-reminder strong{font-size:16px;color:#405565}
-    .shower-filter-reminder span{font-size:13px;line-height:1.55;color:#5f6972}
+    .shower-filter-reminder span{font-size:13px;line-height:1.65;color:#5f6972}
+    .travel-safety-reminder{margin:-6px 0 18px;padding:14px 15px;border-radius:14px;background:#fff3f1;border:1px solid #f1cbc5;border-left:5px solid #cc5948;display:flex;flex-direction:column;gap:5px}
+    .travel-safety-reminder strong{font-size:16px;color:#8f3025}
+    .travel-safety-reminder span{font-size:13px;line-height:1.7;color:#65504c}
     @media(max-width:520px){
       .tl-ticket-btn,.tl-exchange-btn{min-width:46px;padding:8px;font-size:0}
       .tl-ticket-btn::before{content:'官網';font-size:12px}
@@ -109,11 +112,26 @@
       esim.insertAdjacentElement('afterend', insurance);
     }
 
-    if (!card.querySelector('.shower-filter-reminder')) {
-      const shower = document.createElement('div');
-      shower.className = 'shower-filter-reminder';
-      shower.innerHTML = '<strong>🚿 行前準備</strong><span>記得帶蓮蓬頭過濾器。</span>';
-      insurance.insertAdjacentElement('afterend', shower);
+    let prep = card.querySelector('.shower-filter-reminder');
+    const prepHtml = '<strong>🧳 行前準備</strong><span>記得帶蓮蓬頭過濾器、萬國插座轉接頭；濕紙巾與面紙可多準備一些，外出時比較方便。</span>';
+    if (prep) {
+      if (prep.innerHTML !== prepHtml) prep.innerHTML = prepHtml;
+    } else {
+      prep = document.createElement('div');
+      prep.className = 'shower-filter-reminder';
+      prep.innerHTML = prepHtml;
+      insurance.insertAdjacentElement('afterend', prep);
+    }
+
+    let safety = card.querySelector('.travel-safety-reminder');
+    const safetyHtml = '<strong>⚠️ 當地注意事項</strong><span>飲食：路邊攤飲料的冰塊來源較難確認，建議直接說「No ice」；能避免就避免，喝水優先買便利商店／超市的瓶裝水。<br>廁所：部分廁所不提供衛生紙，建議隨身帶面紙；衛生紙是否能沖馬桶依現場標示，部分場所需丟垃圾桶。公廁有些會收費，約數千越南盾（約台幣幾元）。<br>財物：手機、錢包、相機與包包不要離身；騎車經過的搶奪案件確實存在，在路邊使用手機或背單肩包時要特別留意。</span>';
+    if (safety) {
+      if (safety.innerHTML !== safetyHtml) safety.innerHTML = safetyHtml;
+    } else {
+      safety = document.createElement('div');
+      safety.className = 'travel-safety-reminder';
+      safety.innerHTML = safetyHtml;
+      prep.insertAdjacentElement('afterend', safety);
     }
   }
 
