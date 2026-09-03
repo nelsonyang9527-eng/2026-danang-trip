@@ -181,3 +181,12 @@
   script.dataset.banaPlan = '1';
   document.body.append(script);
 })();
+
+// 補強主要地點地圖在 LINE / iOS 等行動瀏覽器的展開與尺寸重算。
+(() => {
+  if (document.querySelector('script[data-map-fix]')) return;
+  const script = document.createElement('script');
+  script.src = 'map-fix.js';
+  script.dataset.mapFix = '1';
+  document.body.append(script);
+})();
