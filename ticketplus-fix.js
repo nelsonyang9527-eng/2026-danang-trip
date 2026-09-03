@@ -1,16 +1,29 @@
-// YOASOBI 搶票：精簡售票文字，並在 Timeline 右側加入 Ticket Plus 官網按鈕。
+// Timeline 補充：YOASOBI 官網、第一天換匯、行前提醒。
 (() => {
-  const item = itinerary.find(i => i.id === 'd3-yoasobi-ticket');
-  if (item) item.detail = 'Ticket Plus 遠大售票系統';
+  const ticketItem = itinerary.find(i => i.id === 'd3-yoasobi-ticket');
+  if (ticketItem) ticketItem.detail = 'Ticket Plus 遠大售票系統';
+
+  // 第一天下飛機後先去 Khải Hoàn III 換匯，再前往飯店；不硬猜中途時間。
+  const arriveItem = itinerary.find(i => i.id === 'd1-arrive');
+  if (arriveItem) {
+    arriveItem.title = '抵達峴港／第一站換匯／前往飯店';
+    arriveItem.detail = '遊覽車 B車｜Tiệm vàng Khải Hoàn III - Exchange Money Here';
+  }
 
   const style = document.createElement('style');
   style.textContent = `
-    .tl-ticket-btn{flex:0 0 auto;align-self:center;min-height:40px;padding:8px 11px;border-radius:11px;background:#fff;color:#b42323;border:1px solid #efb0b0;text-decoration:none;font-size:13px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
-    .tl-ticket-btn:active{transform:scale(.98)}
+    .tl-ticket-btn,.tl-exchange-btn{flex:0 0 auto;align-self:center;min-height:40px;padding:8px 11px;border-radius:11px;text-decoration:none;font-size:13px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
+    .tl-ticket-btn{background:#fff;color:#b42323;border:1px solid #efb0b0}
+    .tl-exchange-btn{background:#eef8f2;color:#187548;border:1px solid #b9dfc8}
+    .tl-ticket-btn:active,.tl-exchange-btn:active{transform:scale(.98)}
     .insurance-reminder{margin:-6px 0 18px;padding:14px 15px;border-radius:14px;background:#fff7e8;border:1px solid #f0d9a8;border-left:5px solid #d59125;display:flex;flex-direction:column;gap:4px}
     .insurance-reminder strong{font-size:16px;color:#8a5810}
     .insurance-reminder span{font-size:13px;line-height:1.55;color:#62594b}
-    @media(max-width:520px){.tl-ticket-btn{min-width:46px;padding:8px;font-size:0}.tl-ticket-btn::before{content:'官網';font-size:12px}}
+    @media(max-width:520px){
+      .tl-ticket-btn,.tl-exchange-btn{min-width:46px;padding:8px;font-size:0}
+      .tl-ticket-btn::before{content:'官網';font-size:12px}
+      .tl-exchange-btn::before{content:'換匯';font-size:12px}
+    }
   `;
   document.head.append(style);
 
@@ -39,6 +52,36 @@
     });
   }
 
+  function addExchangeLink() {
+    document.querySelectorAll('.day-timeline li').forEach(li => {
+      const titleEl = li.querySelector('.tl-title');
+      const title = titleEl?.textContent?.trim();
+      if (title !== '抵達峴港／前往飯店' && title !== '抵達峴港／第一站換匯／前往飯店') return;
+
+      if (titleEl && titleEl.textContent !== '抵達峴港／第一站換匯／前往飯店') {
+        titleEl.textContent = '抵達峴港／第一站換匯／前往飯店';
+      }
+      const detail = li.querySelector('.tl-detail');
+      const text = '遊覽車 B車｜Tiệm vàng Khải Hoàn III - Exchange Money Here';
+      if (detail && detail.textContent !== text) detail.textContent = text;
+
+      if (li.querySelector('.tl-exchange-btn')) return;
+      const row = li.querySelector('.tl-row');
+      if (!row) return;
+
+      const link = document.createElement('a');
+      link.className = 'tl-exchange-btn';
+      link.href = 'https://maps.app.goo.gl/otkgnTG5Z6pu3Zz16';
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.textContent = '📍 換匯';
+      link.setAttribute('aria-label', '開啟 Tiệm vàng Khải Hoàn III 換匯地圖');
+      const existingMap = row.querySelector('.tl-map-btn');
+      if (existingMap) row.insertBefore(link, existingMap);
+      else row.append(link);
+    });
+  }
+
   function updatePreTripReminders() {
     const card = [...document.querySelectorAll('.card.all-only')]
       .find(el => el.querySelector('h2')?.textContent.trim() === '行前重點');
@@ -63,12 +106,16 @@
     }
   }
 
-  addTicketLink();
+  function applyTimelineExtras() {
+    addTicketLink();
+    addExchangeLink();
+  }
+
+  applyTimelineExtras();
   updatePreTripReminders();
 
-  // Timeline 每 30 秒可能被重新 render，因此保留 observer；
-  // callback 只處理搶票按鈕，不碰行前提醒，避免不必要的 DOM 觸發。
-  const observer = new MutationObserver(addTicketLink);
+  // Timeline 會定期重新 render；只在按鈕缺少或文字真的不同時才修改 DOM，避免 observer 自我觸發。
+  const observer = new MutationObserver(applyTimelineExtras);
   document.querySelectorAll('.day-timeline').forEach(el => {
     observer.observe(el, {childList:true, subtree:true});
   });
