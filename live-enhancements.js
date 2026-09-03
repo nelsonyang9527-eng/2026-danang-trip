@@ -1,0 +1,114 @@
+// 「最新動態」補強：剩餘可停留時間與步行／開車粗估。
+// 不使用 Google Maps Directions API，因此不是即時路況；僅以直線距離乘道路係數後，用一般市區速度估算。
+(() => {
+  let gpsPoint = null;
+  const nowPanel = document.querySelector('.live-panel.now');
+  if (!nowPanel) return;
+
+  const label = nowPanel.querySelector('.live-label');
+  const stayBadge = document.createElement('span');
+  stayBadge.id = 'liveStayBadge';
+  stayBadge.className = 'live-stay-badge';
+  label?.append(stayBadge);
+
+  const travel = document.createElement('div');
+  travel.id = 'liveTravelEstimate';
+  travel.className = 'live-travel-estimate';
+  nowPanel.append(travel);
+
+  const leave = document.createElement('div');
+  leave.id = 'liveLeaveBy';
+  leave.className = 'live-leave-by';
+  nowPanel.append(leave);
+
+  function formatMinutes(mins) {
+    mins = Math.max(0, Math.floor(mins));
+    const h = Math.floor(mins / 60), m = mins % 60;
+    if (h && m) return `${h} 小時 ${m} 分`;
+    if (h) return `${h} 小時`;
+    return `${m} 分`;
+  }
+
+  function estimateTravel(km) {
+    // 峴港市區「粗估」：步行道路距離約為直線 1.25 倍；開車約 1.2 倍。
+    // 步行 4.5 km/h；開車市區平均 25 km/h，另加 4 分鐘找車／等車／上下車緩衝。
+    const walkKm = km * 1.25;
+    const driveKm = km * 1.20;
+    const walkMin = Math.max(2, Math.ceil((walkKm / 4.5) * 60));
+    const driveMin = Math.max(5, Math.ceil((driveKm / 25) * 60 + 4));
+    return { walkMin, driveMin };
+  }
+
+  function pointFromDestination(dest) {
+    if (!dest || !Number.isFinite(dest.lat) || !Number.isFinite(dest.lng)) return null;
+    return { lat: dest.lat, lng: dest.lng };
+  }
+
+  function formatLeaveTime(date, zone) {
+    try { return formatHM(date, zone || DANANG_TZ); }
+    catch (_) { return ''; }
+  }
+
+  function refresh() {
+    let now, state;
+    try {
+      now = getNow();
+      state = computeTravelState(now);
+    } catch (_) { return; }
+
+    const next = state.next;
+    const source = gpsPoint || pointFromDestination(state.active?.destination);
+    const target = pointFromDestination(next?.destination);
+
+    stayBadge.textContent = '';
+    travel.textContent = '';
+    leave.textContent = '';
+
+    if (!next) return;
+
+    const minsUntilNext = Math.max(0, Math.ceil((next.startDate - now) / 60000));
+
+    if (!source || !target) {
+      stayBadge.textContent = `｜距下一行程 ${formatMinutes(minsUntilNext)}`;
+      travel.textContent = '交通時間：取得目前位置後可估算步行／開車時間';
+      return;
+    }
+
+    const km = haversineKm(source.lat, source.lng, target.lat, target.lng);
+    const { walkMin, driveMin } = estimateTravel(km);
+    const driveStay = Math.max(0, minsUntilNext - driveMin);
+    const walkStay = Math.max(0, minsUntilNext - walkMin);
+    const driveLeaveAt = new Date(next.startDate.getTime() - driveMin * 60000);
+
+    // 最醒目的數字採「搭車還可停留多久」，因峴港旅途中最常用 Grab／汽車移動。
+    stayBadge.textContent = driveStay > 0 ? `｜還可停留約 ${formatMinutes(driveStay)}` : '｜建議現在出發';
+
+    const sourceText = gpsPoint ? '目前 GPS' : '目前行程地點';
+    travel.textContent = `🚶 約 ${walkMin} 分　🚕 約 ${driveMin} 分（${sourceText}粗估）`;
+
+    if (driveStay <= 0) {
+      leave.textContent = '搭車時間已接近下一個行程，建議準備出發';
+      leave.classList.add('urgent');
+    } else {
+      leave.classList.remove('urgent');
+      leave.textContent = `搭車最晚約 ${formatLeaveTime(driveLeaveAt, next.zone)} 離開｜若走路可停留約 ${formatMinutes(walkStay)}`;
+    }
+  }
+
+  // 沿用原本「取得目前位置」按鈕；使用者主動點擊後，補記 GPS 供交通粗估使用。
+  const locationBtn = document.getElementById('liveLocationBtn');
+  locationBtn?.addEventListener('click', () => {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(
+      p => {
+        gpsPoint = { lat: p.coords.latitude, lng: p.coords.longitude };
+        refresh();
+      },
+      () => {},
+      { enableHighAccuracy: false, timeout: 8000, maximumAge: 120000 }
+    );
+  });
+
+  refresh();
+  setInterval(refresh, 30000);
+})();
