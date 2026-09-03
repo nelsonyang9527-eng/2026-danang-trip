@@ -188,3 +188,122 @@
   refresh();
   setInterval(refresh, 30000);
 })();
+
+// 每日卡片：固定行程完整併入 Timeline，並把地圖入口放到每個有目的地的項目右側。
+(() => {
+  const style = document.createElement('style');
+  style.textContent = `
+    .day-timeline{margin-top:8px}
+    .day-timeline li{padding:12px 8px 12px 32px;min-height:54px}
+    .day-timeline li.important-item{background:#f8fafc;border-left:3px solid #d7dde5;border-radius:12px;font-weight:780}
+    .day-timeline li.important-item.done{background:#fafbfc;border-left-color:#e4e7eb}
+    .day-timeline li.now{border-left:3px solid var(--green);background:#f2fbf6}
+    .day-timeline li.next-important{border-left:3px solid #e5ad38;background:#fff8e8}
+    .tl-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;min-width:0}
+    .tl-copy{min-width:0;flex:1}
+    .tl-primary{line-height:1.45}
+    .tl-title{font-weight:inherit}
+    .important-item .tl-title{font-weight:850}
+    .tl-detail{display:block;margin:4px 0 0 54px;font-size:13px;color:#5f6975;line-height:1.5;font-weight:500}
+    .tl-dest{display:block;margin:3px 0 0 54px;font-size:12px;color:var(--muted);line-height:1.45;font-weight:650}
+    .tl-map-btn{flex:0 0 auto;min-width:46px;min-height:40px;padding:8px 10px;border-radius:11px;background:#eef5fb;color:#155f9b;text-decoration:none;font-size:13px;font-weight:850;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
+    .tl-map-btn:active{transform:scale(.98)}
+    @media(max-width:520px){
+      .day-timeline li{padding-right:4px}
+      .tl-row{gap:8px}
+      .tl-detail,.tl-dest{margin-left:0;padding-left:54px}
+      .tl-map-btn{min-width:44px;padding:8px;font-size:0}
+      .tl-map-btn::before{content:'📍';font-size:17px}
+    }
+  `;
+  document.head.append(style);
+
+  // 把舊版「固定行程」與底部重複地圖連結拿掉；資料來源仍保留在 itinerary。
+  document.querySelectorAll('.trip-day').forEach(card => {
+    [...card.querySelectorAll('h3')].forEach(h => {
+      if (h.textContent.trim() === '固定行程') {
+        const next = h.nextElementSibling;
+        if (next?.tagName === 'UL') next.remove();
+        h.remove();
+      }
+    });
+    card.querySelector('.links')?.remove();
+  });
+
+  // 補回原本固定區塊中的重要說明，避免整合後遺失資訊。
+  const extraDetails = {
+    'd1-tpe': '長榮航空 18 號櫃檯｜抵達後請尋找福委 EJ／慧柔，領取護照及登機證。',
+    'd3-meet': '建議 17:30～17:35 從飯店出發',
+    'd5-arrive': '接機接送依實際航班抵達時間安排'
+  };
+  itinerary.forEach(item => {
+    if (extraDetails[item.id]) item.detail = extraDetails[item.id];
+  });
+
+  function renderIntegratedTimelines(now) {
+    document.querySelectorAll('.trip-day').forEach(card => {
+      const items = getDayItems(card.dataset.tabDay);
+      const list = card.querySelector('[data-timeline]');
+      if (!list) return;
+      list.innerHTML = '';
+      const nextImportant = items.find(i => i.startDate > now && i.important);
+
+      items.forEach(item => {
+        const li = document.createElement('li');
+        if (now >= item.endDate) li.className = 'done';
+        else if (now >= item.startDate && now < item.endDate) li.className = 'now';
+        else li.className = 'upcoming';
+        if (item.important) li.classList.add('important-item');
+        if (nextImportant && item.id === nextImportant.id) li.classList.add('next-important');
+
+        const row = document.createElement('div');
+        row.className = 'tl-row';
+        const copy = document.createElement('div');
+        copy.className = 'tl-copy';
+        const primary = document.createElement('div');
+        primary.className = 'tl-primary';
+
+        const t = document.createElement('span');
+        t.className = 'tl-time';
+        t.textContent = formatHM(item.startDate, item.zone || DANANG_TZ);
+        const title = document.createElement('span');
+        title.className = 'tl-title';
+        title.textContent = item.title;
+        primary.append(t, title);
+        copy.append(primary);
+
+        if (item.detail) {
+          const detail = document.createElement('span');
+          detail.className = 'tl-detail';
+          detail.textContent = item.detail;
+          copy.append(detail);
+        }
+        if (item.destination) {
+          const dest = document.createElement('span');
+          dest.className = 'tl-dest';
+          dest.textContent = item.destination.name;
+          copy.append(dest);
+        }
+        row.append(copy);
+
+        if (item.destination) {
+          const map = document.createElement('a');
+          map.className = 'tl-map-btn';
+          map.href = googleDirectionsUrl(item.destination);
+          map.target = '_blank';
+          map.rel = 'noopener';
+          map.setAttribute('aria-label', `用 Google Maps 導航到 ${item.destination.name}`);
+          map.textContent = '📍 地圖';
+          row.append(map);
+        }
+
+        li.append(row);
+        list.append(li);
+      });
+    });
+  }
+
+  // 覆蓋原本 Timeline renderer，之後每 30 秒更新仍會維持整合版。
+  try { renderDayTimelines = renderIntegratedTimelines; } catch (_) {}
+  renderIntegratedTimelines(getNow());
+})();
