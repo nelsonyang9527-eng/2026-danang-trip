@@ -9,9 +9,73 @@
     .live-leave-by.urgent{color:#c43d3d;font-weight:850}
     .day-tab[data-tab="all"]{font-size:14px}
     .day-tab[data-tab="all"]::after{content:none}
+    .live-head.live-toggle{cursor:pointer;user-select:none;-webkit-user-select:none;align-items:center;margin-bottom:14px}
+    .live-toggle-right{display:flex;align-items:center;gap:9px}
+    .live-toggle-chevron{font-size:17px;color:#7b8490;line-height:1;transition:transform .2s ease}
+    .live-head[aria-expanded="true"] .live-toggle-chevron{transform:rotate(180deg)}
+    .live-mode.live-collapsed{padding-bottom:18px}
+    .live-mode.live-collapsed .live-head{margin-bottom:0}
+    .live-grid[hidden]{display:none!important}
     @media(max-width:520px){.live-stay-badge{display:block;margin:4px 0 0}.live-travel-estimate{font-size:13px}}
   `;
   document.head.append(style);
+
+  const liveMode = document.getElementById('liveMode');
+  const liveHead = liveMode?.querySelector('.live-head');
+  const liveGrid = liveMode?.querySelector('.live-grid');
+  const liveClock = document.getElementById('liveClock');
+
+  // 最新動態可收合：旅程開始前預設收起；開始後預設展開。
+  // 使用者一旦手動切換，本次瀏覽期間會記住，不受 30 秒更新影響。
+  if (liveMode && liveHead && liveGrid) {
+    liveHead.classList.add('live-toggle');
+    liveHead.setAttribute('role', 'button');
+    liveHead.setAttribute('tabindex', '0');
+    liveHead.setAttribute('aria-controls', 'liveGrid');
+    liveGrid.id = 'liveGrid';
+
+    const right = document.createElement('div');
+    right.className = 'live-toggle-right';
+    if (liveClock) right.append(liveClock);
+    const chevron = document.createElement('span');
+    chevron.className = 'live-toggle-chevron';
+    chevron.setAttribute('aria-hidden', 'true');
+    chevron.textContent = '⌄';
+    right.append(chevron);
+    liveHead.append(right);
+
+    const storageKey = 'danang-live-mode-expanded';
+    let manualExpanded = null;
+    try {
+      const saved = sessionStorage.getItem(storageKey);
+      if (saved === 'true' || saved === 'false') manualExpanded = saved === 'true';
+    } catch (_) {}
+
+    function setLiveExpanded(expanded, remember = false) {
+      liveGrid.hidden = !expanded;
+      liveHead.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      liveMode.classList.toggle('live-collapsed', !expanded);
+      if (remember) {
+        manualExpanded = expanded;
+        try { sessionStorage.setItem(storageKey, String(expanded)); } catch (_) {}
+      }
+    }
+
+    let defaultExpanded = true;
+    try { defaultExpanded = getNow() >= tripStart; } catch (_) {}
+    setLiveExpanded(manualExpanded ?? defaultExpanded);
+
+    function toggleLive() {
+      setLiveExpanded(liveGrid.hidden, true);
+    }
+    liveHead.addEventListener('click', toggleLive);
+    liveHead.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleLive();
+      }
+    });
+  }
 
   let gpsPoint = null;
   const nowPanel = document.querySelector('.live-panel.now');
