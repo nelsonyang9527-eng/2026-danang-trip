@@ -37,6 +37,8 @@
   // 9/15 已有巴拿山規劃，不再顯示舊的「空閒度／可塞時段／適合安排」。
   const d2Card = document.querySelector('.trip-day[data-tab-day="2026-09-15"]');
   if (d2Card) {
+    const tag = d2Card.querySelector('.tag');
+    if (tag) tag.textContent = '巴拿山日';
     d2Card.querySelector('.badge')?.remove();
     [...d2Card.querySelectorAll('h3')].forEach(h => {
       const text = h.textContent.trim();
