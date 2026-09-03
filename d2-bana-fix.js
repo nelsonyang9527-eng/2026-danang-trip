@@ -14,26 +14,30 @@
     morning.destination = destinations.hotel;
   }
 
-  if (!itinerary.find(i => i.id === 'd2-bana')) {
-    itinerary.push({
+  let bana = itinerary.find(i => i.id === 'd2-bana');
+  if (!bana) {
+    bana = {
       id:'d2-bana',
       day:'2026-09-15',
       start:'2026-09-15T12:00:00+07:00',
       end:'2026-09-15T18:00:00+07:00',
       title:'包車前往巴拿山',
-      detail:'尚未訂車｜12:00–18:00',
+      detail:'',
       type:'daytrip',
       important:true,
       bookingPending:true,
       zone:DANANG_TZ,
       startDate:new Date('2026-09-15T12:00:00+07:00'),
       endDate:new Date('2026-09-15T18:00:00+07:00')
-    });
+    };
+    itinerary.push(bana);
   }
+  bana.detail = '推薦必逛：黃金橋／法國村／Fantasy Park｜尚未訂車｜12:00–18:00';
 
-  // 9/15 已有巴拿山規劃，不再顯示舊的「可塞時段／適合安排」。
+  // 9/15 已有巴拿山規劃，不再顯示舊的「空閒度／可塞時段／適合安排」。
   const d2Card = document.querySelector('.trip-day[data-tab-day="2026-09-15"]');
   if (d2Card) {
+    d2Card.querySelector('.badge')?.remove();
     [...d2Card.querySelectorAll('h3')].forEach(h => {
       const text = h.textContent.trim();
       if (text === '可塞時段' || text === '適合安排') {
@@ -64,6 +68,11 @@
       const title = li.querySelector('.tl-title')?.textContent?.trim();
       if (title !== '包車前往巴拿山') return;
       li.classList.add('booking-pending-item');
+
+      const detail = li.querySelector('.tl-detail');
+      const text = '推薦必逛：黃金橋／法國村／Fantasy Park｜尚未訂車｜12:00–18:00';
+      if (detail && detail.textContent !== text) detail.textContent = text;
+
       if (li.querySelector('.tl-klook-btn')) return;
       const row = li.querySelector('.tl-row');
       if (!row) return;
@@ -81,7 +90,7 @@
   try { updateLiveMode(); } catch (_) {}
   decorateBanaItem();
 
-  // Timeline 每 30 秒會重繪；僅在按鈕不存在時補上，不重寫既有文字，避免 observer 迴圈。
+  // Timeline 每 30 秒會重繪；僅在內容真的不同或按鈕不存在時才修改 DOM，避免 observer 迴圈。
   const observer = new MutationObserver(decorateBanaItem);
   document.querySelectorAll('.day-timeline').forEach(el => observer.observe(el, {childList:true, subtree:true}));
 })();
