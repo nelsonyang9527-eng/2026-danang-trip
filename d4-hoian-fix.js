@@ -1,49 +1,45 @@
-// 9/17 會安規劃：目前仍在討論中，交通預計一起包車，並預排會安印象秀。
+// 9/17 會安規劃：08:00 包車前往，目前尚未訂車。
 (() => {
   const item = itinerary.find(i => i.id === 'd4-free');
   if (item) {
-    item.title = '會安（討論中）';
-    item.detail = '交通：一起包車前往｜預排行程：會安印象秀｜時間待確認';
-    item.type = 'planned';
-    item.important = false;
+    item.start = '2026-09-17T08:00:00+07:00';
+    item.startDate = new Date(item.start);
+    item.title = '包車前往會安';
+    item.detail = '尚未訂車';
+    item.type = 'daytrip';
+    item.important = true;
+    item.bookingPending = true;
+    delete item.destination;
   }
 
   const card = document.querySelector('.trip-day[data-tab-day="2026-09-17"]');
   if (card) {
     const tag = card.querySelector('.tag');
-    if (tag) tag.textContent = '會安討論中';
-    const badge = card.querySelector('.badge');
-    if (badge) badge.textContent = '包車前往｜預排會安印象秀';
-  }
+    if (tag) tag.textContent = '會安';
 
-  const style = document.createElement('style');
-  style.textContent = `
-    .tl-hoian-klook-btn{flex:0 0 auto;margin-left:auto;align-self:center;min-height:40px;padding:8px 11px;border-radius:11px;background:#fff;color:#7a4d00;border:1px solid #e3c68f;text-decoration:none;font-size:13px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
-    @media(max-width:520px){.tl-hoian-klook-btn{min-width:48px;padding:8px;font-size:0}.tl-hoian-klook-btn::before{content:'Klook';font-size:12px}}
-  `;
-  document.head.append(style);
+    // Timeline 已提供完整資訊，移除舊的空閒度與建議摘要。
+    card.querySelector('.badge')?.remove();
+    [...card.querySelectorAll('h3')].forEach(h => {
+      const text = h.textContent.trim();
+      if (text === '可塞時段' || text === '適合安排') {
+        const p = h.nextElementSibling;
+        if (p?.tagName === 'P') p.remove();
+        h.remove();
+      }
+    });
+  }
 
   function decorateHoianItem() {
     document.querySelectorAll('.day-timeline li').forEach(li => {
       const title = li.querySelector('.tl-title')?.textContent?.trim();
-      if (title !== '會安（討論中）') return;
+      if (title !== '包車前往會安') return;
 
+      li.classList.add('booking-pending-item');
       const detail = li.querySelector('.tl-detail');
-      const text = '交通：一起包車前往｜預排行程：會安印象秀｜時間待確認';
-      if (detail && detail.textContent !== text) detail.textContent = text;
+      if (detail && detail.textContent !== '尚未訂車') detail.textContent = '尚未訂車';
 
-      if (li.querySelector('.tl-hoian-klook-btn')) return;
-      const row = li.querySelector('.tl-row');
-      if (!row) return;
-
-      const link = document.createElement('a');
-      link.className = 'tl-hoian-klook-btn';
-      link.href = 'https://s.klook.com/c/l3PK044V3V';
-      link.target = '_blank';
-      link.rel = 'noopener';
-      link.textContent = 'Klook 印象秀';
-      link.setAttribute('aria-label', '開啟 Klook 會安印象秀');
-      row.append(link);
+      // 取消原本會安印象秀規劃，不再顯示 Klook 印象秀按鈕。
+      li.querySelector('.tl-hoian-klook-btn')?.remove();
     });
   }
 
