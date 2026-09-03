@@ -36,5 +36,8 @@
     });
   }
 
+  // 下方已不需要重複顯示「行程空檔總覽」。
+  document.querySelector('.summary.all-only')?.remove();
+
   try { updateLiveMode(); } catch (_) {}
 })();
