@@ -1,1 +1,69 @@
-PLACEHOLDER
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>2026 越南峴港 GO！｜旅遊行程卡</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%23da251d%27/%3E%3Cpolygon points=%2732,9 37.4,25.5 54.8,25.5 40.7,35.7 46.1,52 32,42 17.9,52 23.3,35.7 9.2,25.5 26.6,25.5%27 fill=%27%23ffdf00%27/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%23da251d%27/%3E%3Cpolygon points=%2732,9 37.4,25.5 54.8,25.5 40.7,35.7 46.1,52 32,42 17.9,52 23.3,35.7 9.2,25.5 26.6,25.5%27 fill=%27%23ffdf00%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main>
+<section class="live-mode" id="liveMode" aria-live="polite">
+  <div class="live-head"><div><div class="live-kicker" id="liveDayTitle">🇻🇳 峴港旅遊現場</div><div class="live-test" id="testModeLabel">測試時間模式</div></div><div class="live-clock" id="liveClock">越南 --:--</div></div>
+  <div class="live-grid">
+    <div class="live-panel now"><div class="live-label">🟢 現在</div><div class="live-title" id="liveNowTitle">讀取行程中…</div><div class="live-time" id="liveNowTime"></div></div>
+    <div class="live-panel next"><div class="live-label" id="liveNextLabel">下一個</div><div class="live-title" id="liveNextTitle">讀取行程中…</div><div class="live-time" id="liveNextTime"></div><div class="live-countdown" id="liveCountdown"></div><div class="live-destination" id="liveDestination"></div>
+      <div class="live-actions"><button class="live-action grab" id="liveGrabBtn" type="button" hidden>🚕 Grab</button><a class="live-action maps" id="liveMapsBtn" href="#" target="_blank" rel="noopener" hidden>📍 Google Maps</a><button class="live-action location" id="liveLocationBtn" type="button" hidden>◎ 取得目前位置</button></div>
+      <div class="live-distance" id="liveDistance"></div><div class="live-note" id="liveGrabNote"></div>
+    </div>
+  </div>
+</section>
+<header class="hero">
+  <h1>2026 越南峴港 GO！｜旅遊行程卡</h1>
+  <div class="sub">2026/9/14－9/18｜公司固定行程、集合細節、主要地點地圖與自由時段一次看。</div>
+  <div class="timezones" aria-label="台灣與越南目前時間"><span>🇹🇼 台灣 <strong id="taiwanTime">--:--</strong></span><span>🇻🇳 越南 <strong id="vietnamTime">--:--</strong></span></div>
+  <div class="countdown" id="countdownBox"><div class="countdown-label">距離 9/14 送機接送出發</div><div class="countdown-main" id="countdown">計算中…</div><div class="countdown-sub" id="countdownSub">送機接送：2026/9/14 06:30（台灣時間）</div></div>
+</header>
+<nav class="day-tabs-wrap" aria-label="行程日期分頁"><div class="day-tabs" id="dayTabs">
+  <button class="day-tab" type="button" data-tab="all">全部</button><button class="day-tab" type="button" data-tab="2026-09-14"><span class="dlabel">D1</span>9/14</button><button class="day-tab" type="button" data-tab="2026-09-15"><span class="dlabel">D2</span>9/15</button><button class="day-tab" type="button" data-tab="2026-09-16"><span class="dlabel">D3</span>9/16</button><button class="day-tab" type="button" data-tab="2026-09-17"><span class="dlabel">D4</span>9/17</button><button class="day-tab" type="button" data-tab="2026-09-18"><span class="dlabel">D5</span>9/18</button>
+</div></nav>
+<section class="mapcard" id="mainMapCard"><div class="maphead"><button class="map-toggle" id="mapToggle" type="button" aria-expanded="false" aria-controls="mapCollapse"><strong>主要地點地圖</strong><span class="map-toggle-meta"><span id="mapScopeLabel">全部行程</span><span class="map-chevron">⌄</span></span></button></div><div class="map-collapse" id="mapCollapse" hidden><div id="map"></div><div class="mapnote">地圖會依目前選擇的日期顯示相關地點；點標記可直接用 Google Maps 開啟。</div></div></section>
+
+<section class="card trip-day" data-tab-day="2026-09-14">
+  <div class="toprow"><h2>9/14（一）</h2><span class="tag">出發日</span></div><div class="badge">空閒度 ★★☆☆☆</div><div class="timeline-title">今日 Timeline</div><ul class="day-timeline" data-timeline></ul>
+  <h3>固定行程</h3><ul><li class="trip-step" data-start="2026-09-14T06:30:00+08:00" data-end="2026-09-14T07:00:00+08:00"><strong>06:30｜送機接送出發</strong></li><li class="trip-step" data-start="2026-09-14T07:00:00+08:00" data-end="2026-09-14T09:45:00+08:00"><strong>07:00｜桃園國際機場第二航廈集合</strong><br>集合地點：長榮航空 18 號櫃檯。<br>抵達後請尋找福委 EJ／慧柔，領取護照及登機證。</li><li class="trip-step" data-start="2026-09-14T09:45:00+08:00" data-end="2026-09-14T11:35:00+07:00">09:45｜BR383 起飛</li><li class="trip-step" data-start="2026-09-14T11:35:00+07:00" data-end="2026-09-14T13:30:00+07:00">11:35｜抵達峴港</li><li class="trip-step" data-start="2026-09-14T11:35:00+07:00" data-end="2026-09-14T13:30:00+07:00">抵達後｜Peninsula Hotel Danang 寄放行李</li><li class="trip-step" data-start="2026-09-14T18:00:00+07:00">18:00｜PPA 聚餐：Mộc quán Seafood</li></ul>
+  <h3 class="orange">可塞時段</h3><p>約 13:30～17:00、20:00 後</p><h3 class="blue">適合安排</h3><p>飯店附近、美溪沙灘、咖啡、按摩；避免排太遠。</p><div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang" target="_blank" rel="noopener">📍 飯店</a><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Moc+quan+Seafood+Da+Nang+26+To+Hien+Thanh" target="_blank" rel="noopener">📍 晚餐</a></div>
+</section>
+<section class="card trip-day" data-tab-day="2026-09-15">
+  <div class="toprow"><h2>9/15（二）</h2><span class="tag">完整自由日</span></div><div class="badge">空閒度 ★★★★★</div><div class="timeline-title">今日 Timeline</div><ul class="day-timeline" data-timeline></ul>
+  <h3>固定行程</h3><ul><li>公司無固定集合時間或指定地點</li></ul><h3 class="orange">可塞時段</h3><p>早上～晚上整天</p><h3 class="blue">適合安排</h3><p>最適合大型一日遊：巴拿山、會安、五行山＋會安。</p><div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang" target="_blank" rel="noopener">📍 飯店起點</a></div>
+</section>
+<section class="card trip-day" data-tab-day="2026-09-16">
+  <div class="toprow"><h2>9/16（三）</h2><span class="tag">晚宴日</span></div><div class="badge">空閒度 ★★★★☆</div><div class="timeline-title">今日 Timeline</div><ul class="day-timeline" data-timeline></ul>
+  <h3>固定行程</h3><ul><li class="trip-step" data-start="2026-09-16T17:50:00+07:00" data-end="2026-09-16T18:00:00+07:00">17:50｜BRILLIANT SEAFOOD 集合</li><li class="trip-step" data-start="2026-09-16T18:00:00+07:00" data-end="2026-09-16T21:00:00+07:00">18:00～21:00｜全公司聚餐</li><li>建議 17:30～17:35 從飯店出發</li></ul><h3 class="orange">可塞時段</h3><p>早上～約 16:30</p><h3 class="blue">適合安排</h3><p>市區、山茶半島、五行山、咖啡、按摩；下午回飯店整理。</p><div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Brilliant+Seafood+178+Ho+Nghinh+Da+Nang" target="_blank" rel="noopener">📍 晚宴</a></div>
+</section>
+<section class="card trip-day" data-tab-day="2026-09-17">
+  <div class="toprow"><h2>9/17（四）</h2><span class="tag">完整自由日</span></div><div class="badge">空閒度 ★★★★★</div><div class="timeline-title">今日 Timeline</div><ul class="day-timeline" data-timeline></ul>
+  <h3>固定行程</h3><ul><li>公司無固定集合時間或指定地點</li></ul><h3 class="orange">可塞時段</h3><p>早上～晚上整天</p><h3 class="blue">適合安排</h3><p>大型一日遊、會安夜遊、順化或補前幾天沒去到的景點。</p><div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang" target="_blank" rel="noopener">📍 飯店起點</a></div>
+</section>
+<section class="card trip-day" data-tab-day="2026-09-18">
+  <div class="toprow"><h2>9/18（五）</h2><span class="tag">回程日</span></div><div class="badge">空閒度 ★☆☆☆☆</div><div class="timeline-title">今日 Timeline</div><ul class="day-timeline" data-timeline></ul>
+  <h3>固定行程</h3><ul><li class="trip-step" data-start="2026-09-18T10:30:00+07:00" data-end="2026-09-18T12:55:00+07:00">10:30｜峴港機場 T2 集合（自行前往）</li><li class="trip-step" data-start="2026-09-18T12:55:00+07:00" data-end="2026-09-18T16:45:00+08:00">12:55｜BR384 起飛</li><li class="trip-step" data-start="2026-09-18T16:45:00+08:00" data-end="2026-09-18T18:00:00+08:00">16:45｜抵達桃園</li><li><strong>接機接送｜依實際航班抵達時間安排</strong></li></ul><h3 class="orange">可塞時段</h3><p>早餐～出發前</p><h3 class="blue">適合安排</h3><p>早餐、附近咖啡、整理行李；不建議再跑景點。</p><div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Da+Nang+International+Terminal+T2" target="_blank" rel="noopener">📍 峴港機場 T2</a></div>
+</section>
+<section class="card all-only"><div class="toprow"><h2>行前重點</h2><span class="tag">快速確認</span></div>
+  <h3>時間與時差</h3><ul><li>9/3（四）前完成護照正本繳交。</li><li>越南時間比台灣慢 1 小時；抵達越南後，所有集合及用餐時間均以越南當地時間為準。</li></ul>
+  <h3>行李</h3><ul><li>托運：1 件，最多 23 kg。</li><li>手提：1 件，最多 7 kg。</li><li><strong>行動電源、鋰電池、備用電池不可托運，務必放隨身行李。</strong></li><li>超過 100 ml 液體、噴霧、剪刀及尖銳物品建議放托運行李。</li></ul>
+  <h3>天氣與穿著</h3><ul><li>9 月為雨季初期，約 25～31°C，午後可能有短暫雷雨。</li><li>建議攜帶雨傘、薄外套、薄長袖、防曬用品。</li><li>若前往寺廟或宗教場所，避免露肩及過度暴露服裝。</li></ul>
+  <h3>換匯、付款與用電</h3><ul><li><strong>換匯建議：</strong>可攜帶新台幣或美金，到越南當地換越南盾；若帶美金，建議使用新版、無破損、無污損及無明顯折痕的鈔票。</li><li><strong>Grab：</strong>出發前先完成 App 註冊並綁定信用卡，到越南叫車時可直接使用，減少現金找零的不便。</li><li>快速換算：100,000 越南盾約 NT$130（僅供心算）。</li><li>越南電壓 220V；充電器標示 100～240V 即可直接使用。</li><li>建議帶少量現金；飯店、大型餐廳、超市與 Grab 多可使用信用卡或其他付款方式。</li></ul>
+  <h3>不要帶</h3><ul><li>肉類、水果及動植物產品，避免涉及海關檢疫限制。</li><li>電子煙、加熱菸、煙彈及相關設備建議完全不要攜帶。</li></ul>
+</section>
+<section class="summary all-only"><h3>行程空檔總覽</h3><p><strong>9/15、9/17：</strong>最適合大型行程<br><strong>9/16：</strong>可排半日～大半日<br><strong>9/14：</strong>出發日，適合輕鬆活動<br><strong>9/18：</strong>早餐後準備回程</p></section>
+<div class="toast" id="toast"></div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
