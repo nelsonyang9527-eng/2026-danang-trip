@@ -19,6 +19,9 @@
     .insurance-reminder{margin:-6px 0 18px;padding:14px 15px;border-radius:14px;background:#fff7e8;border:1px solid #f0d9a8;border-left:5px solid #d59125;display:flex;flex-direction:column;gap:4px}
     .insurance-reminder strong{font-size:16px;color:#8a5810}
     .insurance-reminder span{font-size:13px;line-height:1.55;color:#62594b}
+    .shower-filter-reminder{margin:-6px 0 18px;padding:14px 15px;border-radius:14px;background:#f4f7fa;border:1px solid #dce3ea;border-left:5px solid #6f8799;display:flex;flex-direction:column;gap:4px}
+    .shower-filter-reminder strong{font-size:16px;color:#405565}
+    .shower-filter-reminder span{font-size:13px;line-height:1.55;color:#5f6972}
     @media(max-width:520px){
       .tl-ticket-btn,.tl-exchange-btn{min-width:46px;padding:8px;font-size:0}
       .tl-ticket-btn::before{content:'官網';font-size:12px}
@@ -98,11 +101,19 @@
       card.querySelector('.toprow')?.insertAdjacentElement('afterend', esim);
     }
 
-    if (!card.querySelector('.insurance-reminder')) {
-      const insurance = document.createElement('div');
+    let insurance = card.querySelector('.insurance-reminder');
+    if (!insurance) {
+      insurance = document.createElement('div');
       insurance.className = 'insurance-reminder';
       insurance.innerHTML = '<strong>🛡️ 出發前確認保險</strong><span>記得投保旅遊平安險＋旅遊不便險，確認保障期間涵蓋完整旅程。</span>';
       esim.insertAdjacentElement('afterend', insurance);
+    }
+
+    if (!card.querySelector('.shower-filter-reminder')) {
+      const shower = document.createElement('div');
+      shower.className = 'shower-filter-reminder';
+      shower.innerHTML = '<strong>🚿 行前準備</strong><span>記得帶蓮蓬頭過濾器。</span>';
+      insurance.insertAdjacentElement('afterend', shower);
     }
   }
 
