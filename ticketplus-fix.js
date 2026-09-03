@@ -17,11 +17,14 @@
       if (title !== 'YOASOBI 超惑星演唱會搶票') return;
 
       const detail = li.querySelector('.tl-detail');
-      if (detail) detail.textContent = 'Ticket Plus 遠大售票系統';
-      if (li.querySelector('.tl-ticket-btn')) return;
+      if (detail && detail.textContent !== 'Ticket Plus 遠大售票系統') {
+        detail.textContent = 'Ticket Plus 遠大售票系統';
+      }
 
+      if (li.querySelector('.tl-ticket-btn')) return;
       const row = li.querySelector('.tl-row');
       if (!row) return;
+
       const link = document.createElement('a');
       link.className = 'tl-ticket-btn';
       link.href = 'https://ticketplus.com.tw/';
@@ -34,7 +37,11 @@
   }
 
   addTicketLink();
-  try { updateLiveMode(); } catch (_) {}
+
+  // Timeline 每 30 秒可能被重新 render，因此保留 observer；
+  // 但 callback 僅在真的需要時修改 DOM，避免 observer 自我觸發形成無限迴圈。
   const observer = new MutationObserver(addTicketLink);
-  document.querySelectorAll('.day-timeline').forEach(el => observer.observe(el, {childList:true, subtree:true}));
+  document.querySelectorAll('.day-timeline').forEach(el => {
+    observer.observe(el, {childList:true, subtree:true});
+  });
 })();
