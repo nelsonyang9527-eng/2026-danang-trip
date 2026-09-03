@@ -72,6 +72,7 @@ p{margin:0;line-height:1.65}
 .summary h3{margin-top:0}
 .summary p{color:#d9e0e7}
 
+
 .countdown{
   margin-top:16px;padding:18px 18px 16px;border-radius:20px;
   background:linear-gradient(135deg,#0f1720,#1f3b57);color:#fff;
@@ -141,11 +142,13 @@ li.next-step::before{
 }
 </style>
 </head>
+
 <body>
 <main>
   <header class="hero">
     <h1>越南峴港｜旅遊行程卡</h1>
     <div class="sub">2026/9/14－9/18｜公司固定行程、集合細節、主要地點地圖與自由時段一次看。</div>
+
     <div class="countdown" id="countdownBox">
       <div class="countdown-label">距離 9/14 桃園機場集合出發</div>
       <div class="countdown-main" id="countdown">計算中…</div>
@@ -154,102 +157,237 @@ li.next-step::before{
   </header>
 
   <section class="mapcard">
-    <div class="maphead"><strong>主要地點地圖</strong><span>可縮放／拖曳／點標記</span></div>
+    <div class="maphead">
+      <strong>主要地點地圖</strong>
+      <span>可縮放／拖曳／點標記</span>
+    </div>
     <div id="map"></div>
     <div class="mapnote">點地圖標記後，可直接用 Google Maps 開啟該地點。</div>
   </section>
 
-  <section class="card trip-day" data-day-start="2026-09-14T00:00:00+08:00" data-day-end="2026-09-15T00:00:00+07:00">
-    <div class="toprow"><h2>9/14（一）</h2><span class="tag">抵達日</span></div>
-    <div class="badge">空閒度 ★★☆☆☆</div>
-    <h3>固定行程</h3>
-    <ul><li class="trip-step" data-start="2026-09-14T07:00:00+08:00" data-end="2026-09-14T09:45:00+08:00"><strong>07:00｜桃園國際機場第二航廈集合</strong><br>集合地點：長榮航空 18 號櫃檯。<br>抵達後請尋找福委 EJ／慧柔，領取護照及登機證。</li><li class="trip-step" data-start="2026-09-14T09:45:00+08:00" data-end="2026-09-14T11:35:00+07:00">09:45｜BR383 起飛</li><li class="trip-step" data-start="2026-09-14T11:35:00+07:00" data-end="2026-09-14T13:30:00+07:00">11:35｜抵達峴港</li><li class="trip-step" data-start="2026-09-14T11:35:00+07:00" data-end="2026-09-14T13:30:00+07:00">抵達後｜Peninsula Hotel Danang 寄放行李</li><li class="trip-step" data-start="2026-09-14T18:00:00+07:00">18:00｜PPA 聚餐：Mộc quán Seafood</li></ul>
-    <h3 class="orange">可塞時段</h3><p>約 13:30～17:00、20:00 後</p>
-    <h3 class="blue">適合安排</h3><p>飯店附近、美溪沙灘、咖啡、按摩；避免排太遠。</p>
-    <div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang" target="_blank" rel="noopener">📍 飯店</a><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Moc+quan+Seafood+Da+Nang+26+To+Hien+Thanh" target="_blank" rel="noopener">📍 晚餐</a></div>
-  </section>
+  
+    <section class="card trip-day" data-day-start="2026-09-14T00:00:00+08:00" data-day-end="2026-09-15T00:00:00+07:00">
+      <div class="toprow"><h2>9/14（一）</h2><span class="tag">抵達日</span></div>
+      <div class="badge">空閒度 ★★☆☆☆</div>
+      <h3>固定行程</h3>
+      <ul><li class="trip-step" data-start="2026-09-14T06:30:00+08:00" data-end="2026-09-14T07:00:00+08:00"><strong>06:30｜送機接送出發</strong></li><li class="trip-step" data-start="2026-09-14T07:00:00+08:00" data-end="2026-09-14T09:45:00+08:00"><strong>07:00｜桃園國際機場第二航廈集合</strong><br>
+集合地點：長榮航空 18 號櫃檯。<br>
+抵達後請尋找福委 EJ／慧柔，領取護照及登機證。</li><li class="trip-step" data-start="2026-09-14T09:45:00+08:00" data-end="2026-09-14T11:35:00+07:00">09:45｜BR383 起飛</li><li class="trip-step" data-start="2026-09-14T11:35:00+07:00" data-end="2026-09-14T13:30:00+07:00">11:35｜抵達峴港</li><li class="trip-step" data-start="2026-09-14T11:35:00+07:00" data-end="2026-09-14T13:30:00+07:00">抵達後｜Peninsula Hotel Danang 寄放行李</li><li class="trip-step" data-start="2026-09-14T18:00:00+07:00">18:00｜PPA 聚餐：Mộc quán Seafood</li></ul>
+      <h3 class="orange">可塞時段</h3>
+      <p>約 13:30～17:00、20:00 後</p>
+      <h3 class="blue">適合安排</h3>
+      <p>飯店附近、美溪沙灘、咖啡、按摩；避免排太遠。</p>
+      <div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang" target="_blank" rel="noopener">📍 飯店</a><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Moc+quan+Seafood+Da+Nang+26+To+Hien+Thanh" target="_blank" rel="noopener">📍 晚餐</a></div>
+    </section>
+    
+    <section class="card trip-day" data-day-start="2026-09-15T00:00:00+07:00" data-day-end="2026-09-16T00:00:00+07:00">
+      <div class="toprow"><h2>9/15（二）</h2><span class="tag">完整自由日</span></div>
+      <div class="badge">空閒度 ★★★★★</div>
+      <h3>固定行程</h3>
+      <ul><li>公司無固定集合時間或指定地點</li></ul>
+      <h3 class="orange">可塞時段</h3>
+      <p>早上～晚上整天</p>
+      <h3 class="blue">適合安排</h3>
+      <p>最適合大型一日遊：巴拿山、會安、五行山＋會安。</p>
+      <div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang" target="_blank" rel="noopener">📍 飯店起點</a></div>
+    </section>
+    
+    <section class="card trip-day" data-day-start="2026-09-16T00:00:00+07:00" data-day-end="2026-09-17T00:00:00+07:00">
+      <div class="toprow"><h2>9/16（三）</h2><span class="tag">晚宴日</span></div>
+      <div class="badge">空閒度 ★★★★☆</div>
+      <h3>固定行程</h3>
+      <ul><li class="trip-step" data-start="2026-09-16T17:50:00+07:00" data-end="2026-09-16T18:00:00+07:00">17:50｜BRILLIANT SEAFOOD 集合</li><li class="trip-step" data-start="2026-09-16T18:00:00+07:00" data-end="2026-09-16T21:00:00+07:00">18:00～21:00｜全公司聚餐</li><li>建議 17:30～17:35 從飯店出發</li></ul>
+      <h3 class="orange">可塞時段</h3>
+      <p>早上～約 16:30</p>
+      <h3 class="blue">適合安排</h3>
+      <p>市區、山茶半島、五行山、咖啡、按摩；下午回飯店整理。</p>
+      <div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Brilliant+Seafood+178+Ho+Nghinh+Da+Nang" target="_blank" rel="noopener">📍 晚宴</a></div>
+    </section>
+    
+    <section class="card trip-day" data-day-start="2026-09-17T00:00:00+07:00" data-day-end="2026-09-18T00:00:00+07:00">
+      <div class="toprow"><h2>9/17（四）</h2><span class="tag">完整自由日</span></div>
+      <div class="badge">空閒度 ★★★★★</div>
+      <h3>固定行程</h3>
+      <ul><li>公司無固定集合時間或指定地點</li></ul>
+      <h3 class="orange">可塞時段</h3>
+      <p>早上～晚上整天</p>
+      <h3 class="blue">適合安排</h3>
+      <p>大型一日遊、會安夜遊、順化或補前幾天沒去到的景點。</p>
+      <div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang" target="_blank" rel="noopener">📍 飯店起點</a></div>
+    </section>
+    
+    <section class="card trip-day" data-day-start="2026-09-18T00:00:00+07:00" data-day-end="2026-09-19T00:00:00+08:00">
+      <div class="toprow"><h2>9/18（五）</h2><span class="tag">回程日</span></div>
+      <div class="badge">空閒度 ★☆☆☆☆</div>
+      <h3>固定行程</h3>
+      <ul><li class="trip-step" data-start="2026-09-18T10:30:00+07:00" data-end="2026-09-18T12:55:00+07:00">10:30｜峴港機場 T2 集合（自行前往）</li><li class="trip-step" data-start="2026-09-18T12:55:00+07:00" data-end="2026-09-18T16:45:00+08:00">12:55｜BR384 起飛</li><li class="trip-step" data-start="2026-09-18T16:45:00+08:00" data-end="2026-09-18T18:00:00+08:00">16:45｜抵達桃園</li><li><strong>接機接送｜依實際航班抵達時間安排</strong></li></ul>
+      <h3 class="orange">可塞時段</h3>
+      <p>早餐～出發前</p>
+      <h3 class="blue">適合安排</h3>
+      <p>早餐、附近咖啡、整理行李；不建議再跑景點。</p>
+      <div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Da+Nang+International+Terminal+T2" target="_blank" rel="noopener">📍 峴港機場 T2</a></div>
+    </section>
+    
 
-  <section class="card trip-day" data-day-start="2026-09-15T00:00:00+07:00" data-day-end="2026-09-16T00:00:00+07:00">
-    <div class="toprow"><h2>9/15（二）</h2><span class="tag">完整自由日</span></div>
-    <div class="badge">空閒度 ★★★★★</div>
-    <h3>固定行程</h3><ul><li>公司無固定集合時間或指定地點</li></ul>
-    <h3 class="orange">可塞時段</h3><p>早上～晚上整天</p>
-    <h3 class="blue">適合安排</h3><p>最適合大型一日遊：巴拿山、會安、五行山＋會安。</p>
-    <div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang" target="_blank" rel="noopener">📍 飯店起點</a></div>
-  </section>
+  
+<section class="card">
+  <div class="toprow"><h2>行前重點</h2><span class="tag">快速確認</span></div>
+  <h3>時間與時差</h3>
+  <ul>
+    <li>9/3（四）前完成護照正本繳交。</li>
+    <li>越南時間比台灣慢 1 小時；抵達越南後，所有集合及用餐時間均以越南當地時間為準。</li>
+  </ul>
 
-  <section class="card trip-day" data-day-start="2026-09-16T00:00:00+07:00" data-day-end="2026-09-17T00:00:00+07:00">
-    <div class="toprow"><h2>9/16（三）</h2><span class="tag">晚宴日</span></div>
-    <div class="badge">空閒度 ★★★★☆</div>
-    <h3>固定行程</h3><ul><li class="trip-step" data-start="2026-09-16T17:50:00+07:00" data-end="2026-09-16T18:00:00+07:00">17:50｜BRILLIANT SEAFOOD 集合</li><li class="trip-step" data-start="2026-09-16T18:00:00+07:00" data-end="2026-09-16T21:00:00+07:00">18:00～21:00｜全公司聚餐</li><li>建議 17:30～17:35 從飯店出發</li></ul>
-    <h3 class="orange">可塞時段</h3><p>早上～約 16:30</p>
-    <h3 class="blue">適合安排</h3><p>市區、山茶半島、五行山、咖啡、按摩；下午回飯店整理。</p>
-    <div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Brilliant+Seafood+178+Ho+Nghinh+Da+Nang" target="_blank" rel="noopener">📍 晚宴</a></div>
-  </section>
+  <h3>行李</h3>
+  <ul>
+    <li>托運：1 件，最多 23 kg。</li>
+    <li>手提：1 件，最多 7 kg。</li>
+    <li><strong>行動電源、鋰電池、備用電池不可托運，務必放隨身行李。</strong></li>
+    <li>超過 100 ml 液體、噴霧、剪刀及尖銳物品建議放托運行李。</li>
+  </ul>
 
-  <section class="card trip-day" data-day-start="2026-09-17T00:00:00+07:00" data-day-end="2026-09-18T00:00:00+07:00">
-    <div class="toprow"><h2>9/17（四）</h2><span class="tag">完整自由日</span></div>
-    <div class="badge">空閒度 ★★★★★</div>
-    <h3>固定行程</h3><ul><li>公司無固定集合時間或指定地點</li></ul>
-    <h3 class="orange">可塞時段</h3><p>早上～晚上整天</p>
-    <h3 class="blue">適合安排</h3><p>大型一日遊、會安夜遊、順化或補前幾天沒去到的景點。</p>
-    <div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang" target="_blank" rel="noopener">📍 飯店起點</a></div>
-  </section>
+  <h3>天氣與穿著</h3>
+  <ul>
+    <li>9 月為雨季初期，約 25～31°C，午後可能有短暫雷雨。</li>
+    <li>建議攜帶雨傘、薄外套、薄長袖、防曬用品。</li>
+    <li>若前往寺廟或宗教場所，避免露肩及過度暴露服裝。</li>
+  </ul>
 
-  <section class="card trip-day" data-day-start="2026-09-18T00:00:00+07:00" data-day-end="2026-09-19T00:00:00+08:00">
-    <div class="toprow"><h2>9/18（五）</h2><span class="tag">回程日</span></div>
-    <div class="badge">空閒度 ★☆☆☆☆</div>
-    <h3>固定行程</h3><ul><li class="trip-step" data-start="2026-09-18T10:30:00+07:00" data-end="2026-09-18T12:55:00+07:00">10:30｜峴港機場 T2 集合（自行前往）</li><li class="trip-step" data-start="2026-09-18T12:55:00+07:00" data-end="2026-09-18T16:45:00+08:00">12:55｜BR384 起飛</li><li class="trip-step" data-start="2026-09-18T16:45:00+08:00" data-end="2026-09-18T18:00:00+08:00">16:45｜抵達桃園</li></ul>
-    <h3 class="orange">可塞時段</h3><p>早餐～出發前</p>
-    <h3 class="blue">適合安排</h3><p>早餐、附近咖啡、整理行李；不建議再跑景點。</p>
-    <div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Da+Nang+International+Terminal+T2" target="_blank" rel="noopener">📍 峴港機場 T2</a></div>
-  </section>
+  <h3>換匯、付款與用電</h3>
+  <ul>
+    <li><strong>換匯建議：</strong>可攜帶新台幣或美金，到越南當地換越南盾；若帶美金，建議使用新版、無破損、無污損及無明顯折痕的鈔票。</li>
+    <li><strong>Grab：</strong>出發前先完成 App 註冊並綁定信用卡，到越南叫車時可直接使用，減少現金找零的不便。</li>
+    <li>快速換算：100,000 越南盾約 NT$130（僅供心算）。</li>
+    <li>越南電壓 220V；充電器標示 100～240V 即可直接使用。</li>
+    <li>建議帶少量現金；飯店、大型餐廳、超市與 Grab 多可使用信用卡或其他付款方式。</li>
+  </ul>
 
-  <section class="card">
-    <div class="toprow"><h2>行前重點</h2><span class="tag">快速確認</span></div>
-    <h3>時間與時差</h3><ul><li>9/3（四）前完成護照正本繳交。</li><li>越南時間比台灣慢 1 小時；抵達越南後，所有集合及用餐時間均以越南當地時間為準。</li></ul>
-    <h3>行李</h3><ul><li>托運：1 件，最多 23 kg。</li><li>手提：1 件，最多 7 kg。</li><li><strong>行動電源、鋰電池、備用電池不可托運，務必放隨身行李。</strong></li><li>超過 100 ml 液體、噴霧、剪刀及尖銳物品建議放托運行李。</li></ul>
-    <h3>天氣與穿著</h3><ul><li>9 月為雨季初期，約 25～31°C，午後可能有短暫雷雨。</li><li>建議攜帶雨傘、薄外套、薄長袖、防曬用品。</li><li>若前往寺廟或宗教場所，避免露肩及過度暴露服裝。</li></ul>
-    <h3>換匯、付款與用電</h3><ul><li><strong>換匯建議：</strong>可攜帶新台幣或美金，到越南當地換越南盾；若帶美金，建議使用新版、無破損、無污損及無明顯折痕的鈔票。</li><li><strong>Grab：</strong>出發前先完成 App 註冊並綁定信用卡，到越南叫車時可直接使用，減少現金找零的不便。</li><li>快速換算：100,000 越南盾約 NT$130（僅供心算）。</li><li>越南電壓 220V；充電器標示 100～240V 即可直接使用。</li><li>建議帶少量現金；飯店、大型餐廳、超市與 Grab 多可使用信用卡或其他付款方式。</li></ul>
-    <h3>不要帶</h3><ul><li>肉類、水果及動植物產品，避免涉及海關檢疫限制。</li><li>電子煙、加熱菸、煙彈及相關設備建議完全不要攜帶。</li></ul>
-  </section>
+  <h3>不要帶</h3>
+  <ul>
+    <li>肉類、水果及動植物產品，避免涉及海關檢疫限制。</li>
+    <li>電子煙、加熱菸、煙彈及相關設備建議完全不要攜帶。</li>
+  </ul>
+</section>
 
-  <section class="summary"><h3>行程空檔總覽</h3><p><strong>9/15、9/17：</strong>最適合大型行程<br><strong>9/16：</strong>可排半日～大半日<br><strong>9/14：</strong>抵達日，適合輕鬆活動<br><strong>9/18：</strong>早餐後準備回程</p></section>
+<section class="summary">
+    <h3>行程空檔總覽</h3>
+    <p>
+      <strong>9/15、9/17：</strong>最適合大型行程<br>
+      <strong>9/16：</strong>可排半日～大半日<br>
+      <strong>9/14：</strong>抵達日，適合輕鬆活動<br>
+      <strong>9/18：</strong>早餐後準備回程
+    </p>
+  </section>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const places = [{"name":"Peninsula Hotel Danang","lat":16.0957,"lng":108.245,"type":"住宿","map":"https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang"},{"name":"Mộc quán Seafood Đà Nẵng","lat":16.0666,"lng":108.24,"type":"9/14 晚餐","map":"https://www.google.com/maps/search/?api=1&query=Moc+quan+Seafood+Da+Nang+26+To+Hien+Thanh"},{"name":"BRILLIANT SEAFOOD","lat":16.0714,"lng":108.2447,"type":"9/16 公司晚宴","map":"https://www.google.com/maps/search/?api=1&query=Brilliant+Seafood+178+Ho+Nghinh+Da+Nang"},{"name":"Da Nang International Terminal T2","lat":16.0439,"lng":108.1994,"type":"9/18 回程機場","map":"https://www.google.com/maps/search/?api=1&query=Da+Nang+International+Terminal+T2"}];
+const places = [{"name": "Peninsula Hotel Danang", "lat": 16.0957, "lng": 108.245, "type": "住宿", "map": "https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang"}, {"name": "Mộc quán Seafood Đà Nẵng", "lat": 16.0666, "lng": 108.24, "type": "9/14 晚餐", "map": "https://www.google.com/maps/search/?api=1&query=Moc+quan+Seafood+Da+Nang+26+To+Hien+Thanh"}, {"name": "BRILLIANT SEAFOOD", "lat": 16.0714, "lng": 108.2447, "type": "9/16 公司晚宴", "map": "https://www.google.com/maps/search/?api=1&query=Brilliant+Seafood+178+Ho+Nghinh+Da+Nang"}, {"name": "Da Nang International Terminal T2", "lat": 16.0439, "lng": 108.1994, "type": "9/18 回程機場", "map": "https://www.google.com/maps/search/?api=1&query=Da+Nang+International+Terminal+T2"}];
 
-window.addEventListener('load',function(){
-  const map=L.map('map',{scrollWheelZoom:false,zoomControl:true});
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(map);
-  const bounds=L.latLngBounds([]);
-  places.forEach(p=>{const marker=L.marker([p.lat,p.lng]).addTo(map);marker.bindPopup(`<strong>${p.name}</strong><br>${p.type}<br><br><a href="${p.map}" target="_blank" rel="noopener">Google Maps 開啟</a>`);bounds.extend([p.lat,p.lng]);});
-  map.fitBounds(bounds,{padding:[30,30]});
-  setTimeout(()=>map.invalidateSize(),150);setTimeout(()=>map.invalidateSize(),600);
-  window.addEventListener('resize',()=>map.invalidateSize());
+window.addEventListener('load', function () {
+  const map = L.map('map', {
+    scrollWheelZoom: false,
+    zoomControl: true
+  });
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap'
+  }).addTo(map);
+
+  const bounds = L.latLngBounds([]);
+
+  places.forEach(p => {
+    const marker = L.marker([p.lat, p.lng]).addTo(map);
+    marker.bindPopup(
+      `<strong>${p.name}</strong><br>${p.type}<br><br>` +
+      `<a href="${p.map}" target="_blank" rel="noopener">Google Maps 開啟</a>`
+    );
+    bounds.extend([p.lat, p.lng]);
+  });
+
+  map.fitBounds(bounds, { padding: [30,30] });
+
+  // 解決 Netlify / LINE WebView 初始尺寸計算不完整
+  setTimeout(() => map.invalidateSize(), 150);
+  setTimeout(() => map.invalidateSize(), 600);
+
+  window.addEventListener('resize', () => {
+    map.invalidateSize();
+  });
 });
 
-const tripStart=new Date('2026-09-14T07:00:00+08:00');
-const tripEnd=new Date('2026-09-18T18:00:00+08:00');
-function pad2(n){return String(n).padStart(2,'0');}
+
+const tripStart = new Date('2026-09-14T07:00:00+08:00');
+const tripEnd = new Date('2026-09-18T18:00:00+08:00');
+
+function pad2(n){ return String(n).padStart(2,'0'); }
+
 function updateCountdown(){
-  const now=new Date();const el=document.getElementById('countdown');const sub=document.getElementById('countdownSub');let diff=tripStart-now;
-  if(diff>0){const totalSeconds=Math.floor(diff/1000);const days=Math.floor(totalSeconds/86400);const hours=Math.floor((totalSeconds%86400)/3600);const mins=Math.floor((totalSeconds%3600)/60);const secs=totalSeconds%60;el.innerHTML=`<span class="num">${days}</span> 天 <span class="num">${pad2(hours)}</span> 時 <span class="num">${pad2(mins)}</span> 分 <span class="num">${pad2(secs)}</span> 秒`;sub.textContent='集合時間：2026/9/14 07:00（台灣時間）';}
-  else if(now<=tripEnd){el.textContent='旅程進行中 ✈️';sub.textContent='下方會依目前時間自動標示今天與正在進行／接下來的行程';}
-  else{el.textContent='旅程已結束';sub.textContent='2026/9/14－9/18 越南峴港員工旅遊';}
+  const now = new Date();
+  const el = document.getElementById('countdown');
+  const sub = document.getElementById('countdownSub');
+  let diff = tripStart - now;
+
+  if (diff > 0) {
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const mins = Math.floor((totalSeconds % 3600) / 60);
+    const secs = totalSeconds % 60;
+    el.innerHTML =
+      `<span class="num">${days}</span> 天 ` +
+      `<span class="num">${pad2(hours)}</span> 時 ` +
+      `<span class="num">${pad2(mins)}</span> 分 ` +
+      `<span class="num">${pad2(secs)}</span> 秒`;
+    sub.textContent = '集合時間：2026/9/14 07:00（台灣時間）';
+  } else if (now <= tripEnd) {
+    el.textContent = '旅程進行中 ✈️';
+    sub.textContent = '下方會依目前時間自動標示今天與正在進行／接下來的行程';
+  } else {
+    el.textContent = '旅程已結束';
+    sub.textContent = '2026/9/14－9/18 越南峴港員工旅遊';
+  }
 }
+
 function updateCurrentTrip(){
-  const now=new Date();
-  document.querySelectorAll('.trip-day').forEach(card=>{const start=new Date(card.dataset.dayStart);const end=new Date(card.dataset.dayEnd);card.classList.toggle('current-day',now>=start&&now<end);});
-  const steps=[...document.querySelectorAll('.trip-step')];steps.forEach(s=>s.classList.remove('current-step','next-step'));
-  const active=steps.find(s=>{if(!s.dataset.start||!s.dataset.end)return false;const start=new Date(s.dataset.start);const end=new Date(s.dataset.end);return now>=start&&now<end;});
-  if(active){active.classList.add('current-step');return;}
-  const next=steps.filter(s=>s.dataset.start&&new Date(s.dataset.start)>now).sort((a,b)=>new Date(a.dataset.start)-new Date(b.dataset.start))[0];
-  if(next)next.classList.add('next-step');
+  const now = new Date();
+
+  document.querySelectorAll('.trip-day').forEach(card => {
+    const start = new Date(card.dataset.dayStart);
+    const end = new Date(card.dataset.dayEnd);
+    card.classList.toggle('current-day', now >= start && now < end);
+  });
+
+  const steps = [...document.querySelectorAll('.trip-step')];
+  steps.forEach(s => s.classList.remove('current-step','next-step'));
+
+  // 優先找「正在進行中」且有明確起訖時間的行程
+  const active = steps.find(s => {
+    if (!s.dataset.start || !s.dataset.end) return false;
+    const start = new Date(s.dataset.start);
+    const end = new Date(s.dataset.end);
+    return now >= start && now < end;
+  });
+
+  if (active) {
+    active.classList.add('current-step');
+    return;
+  }
+
+  // 沒有正在進行的固定行程時，標示下一個固定行程
+  const next = steps
+    .filter(s => s.dataset.start && new Date(s.dataset.start) > now)
+    .sort((a,b) => new Date(a.dataset.start) - new Date(b.dataset.start))[0];
+
+  if (next) next.classList.add('next-step');
 }
-updateCountdown();updateCurrentTrip();setInterval(updateCountdown,1000);setInterval(updateCurrentTrip,15000);
+
+updateCountdown();
+updateCurrentTrip();
+setInterval(updateCountdown, 1000);
+setInterval(updateCurrentTrip, 15000);
+
 </script>
 </body>
 </html>
