@@ -3,11 +3,18 @@
   const ticketItem = itinerary.find(i => i.id === 'd3-yoasobi-ticket');
   if (ticketItem) ticketItem.detail = 'Ticket Plus 遠大售票系統';
 
-  // 第一天下飛機後先去 Khải Hoàn III 換匯，再前往飯店；不硬猜中途時間。
+  // 第一天下飛機後先回飯店；13:30 自由行程開始時再先去換匯。
   const arriveItem = itinerary.find(i => i.id === 'd1-arrive');
   if (arriveItem) {
-    arriveItem.title = '抵達峴港／第一站換匯／前往飯店';
-    arriveItem.detail = '遊覽車 B車｜Tiệm vàng Khải Hoàn III - Exchange Money Here';
+    arriveItem.title = '抵達峴港／前往飯店';
+    arriveItem.detail = '遊覽車 B車';
+  }
+
+  const d1Free = itinerary.find(i => i.id === 'd1-free1');
+  if (d1Free) {
+    d1Free.title = '自由行程';
+    d1Free.detail = '先換匯，再自由選擇：美溪沙灘／咖啡／按摩 SPA／隨意逛';
+    delete d1Free.destination;
   }
 
   const style = document.createElement('style');
@@ -62,14 +69,18 @@
     document.querySelectorAll('.day-timeline li').forEach(li => {
       const titleEl = li.querySelector('.tl-title');
       const title = titleEl?.textContent?.trim();
-      if (title !== '抵達峴港／前往飯店' && title !== '抵達峴港／第一站換匯／前往飯店') return;
+      if (title !== '自由行程') return;
 
-      if (titleEl && titleEl.textContent !== '抵達峴港／第一站換匯／前往飯店') {
-        titleEl.textContent = '抵達峴港／第一站換匯／前往飯店';
-      }
+      const time = li.querySelector('.tl-time')?.textContent?.trim();
+      if (time !== '13:30') return;
+
       const detail = li.querySelector('.tl-detail');
-      const text = '遊覽車 B車｜Tiệm vàng Khải Hoàn III - Exchange Money Here';
+      const text = '先換匯，再自由選擇：美溪沙灘／咖啡／按摩 SPA／隨意逛';
       if (detail && detail.textContent !== text) detail.textContent = text;
+
+      // 這段不固定綁 Peninsula Hotel，避免自由行程下方多顯示飯店地點。
+      li.querySelector('.tl-dest')?.remove();
+      li.querySelector('.tl-map-btn')?.remove();
 
       if (li.querySelector('.tl-exchange-btn')) return;
       const row = li.querySelector('.tl-row');
@@ -82,9 +93,7 @@
       link.rel = 'noopener';
       link.textContent = '📍 換匯';
       link.setAttribute('aria-label', '開啟 Tiệm vàng Khải Hoàn III 換匯地圖');
-      const existingMap = row.querySelector('.tl-map-btn');
-      if (existingMap) row.insertBefore(link, existingMap);
-      else row.append(link);
+      row.append(link);
     });
   }
 
