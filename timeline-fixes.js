@@ -25,6 +25,45 @@
     item.detail = detail;
   });
 
+  // 9/16 11:00 YOASOBI 超惑星演唱會搶票：切開原本整段待安排行程，
+  // 讓「最新動態」在接近 11:00 時可以正確把搶票列為下一個重要行程。
+  const d3Free = byId('d3-free');
+  if (d3Free) {
+    d3Free.end = '2026-09-16T11:00:00+07:00';
+    d3Free.endDate = new Date(d3Free.end);
+  }
+  if (!byId('d3-yoasobi-ticket')) {
+    itinerary.push({
+      id:'d3-yoasobi-ticket',
+      day:'2026-09-16',
+      start:'2026-09-16T11:00:00+07:00',
+      end:'2026-09-16T11:30:00+07:00',
+      title:'YOASOBI 超惑星演唱會搶票',
+      detail:'Ticket Plus 遠大售票系統｜非常重要',
+      type:'ticket',
+      important:true,
+      veryImportant:true,
+      zone:DANANG_TZ,
+      startDate:new Date('2026-09-16T11:00:00+07:00'),
+      endDate:new Date('2026-09-16T11:30:00+07:00')
+    });
+  }
+  if (!byId('d3-free-after-ticket')) {
+    itinerary.push({
+      id:'d3-free-after-ticket',
+      day:'2026-09-16',
+      start:'2026-09-16T11:30:00+07:00',
+      end:'2026-09-16T16:30:00+07:00',
+      title:'待安排行程',
+      detail:'建議：市區、山茶半島、五行山、咖啡或按摩；下午回飯店整理',
+      type:'free',
+      destination:destinations.hotel,
+      zone:DANANG_TZ,
+      startDate:new Date('2026-09-16T11:30:00+07:00'),
+      endDate:new Date('2026-09-16T16:30:00+07:00')
+    });
+  }
+
   // 9/16 將 17:50 集合與 18:00 聚餐合併為同一個正式行程。
   const meetIndex = itinerary.findIndex(i => i.id === 'd3-meet');
   if (meetIndex >= 0) itinerary.splice(meetIndex, 1);
@@ -72,6 +111,27 @@
     });
   }
 
+  // 行前重點精簡：常識型的「時間與時差／不要帶」移除，改強調 eSIM。
+  const preTripCard = [...document.querySelectorAll('.card.all-only')].find(card => card.querySelector('h2')?.textContent.trim() === '行前重點');
+  if (preTripCard) {
+    [...preTripCard.querySelectorAll('h3')].forEach(h => {
+      const text = h.textContent.trim();
+      if (text === '時間與時差' || text === '不要帶') {
+        const list = h.nextElementSibling;
+        if (list?.tagName === 'UL') list.remove();
+        h.remove();
+      }
+    });
+
+    if (!preTripCard.querySelector('.esim-reminder')) {
+      const esim = document.createElement('div');
+      esim.className = 'esim-reminder';
+      esim.innerHTML = '<strong>📶 出發前記得買 eSIM</strong><span>建議先在台灣完成購買與安裝，到峴港後可直接開啟使用。</span>';
+      const top = preTripCard.querySelector('.toprow');
+      top?.insertAdjacentElement('afterend', esim);
+    }
+  }
+
   const style = document.createElement('style');
   style.textContent = `
     .day-timeline{border-top:0!important;display:flex!important;flex-direction:column!important;gap:10px!important;margin-top:10px!important}
@@ -89,9 +149,27 @@
     }
     .day-timeline li.important-item.done{opacity:.68}
 
+    /* YOASOBI 搶票是最高優先事項，覆蓋一般淡藍固定行程。 */
+    .day-timeline li.very-important-item,
+    .day-timeline li.very-important-item.next-important,
+    .day-timeline li.very-important-item.now{
+      background:#fff0f0!important;
+      border:2px solid #e55757!important;
+      border-left:6px solid #d72f2f!important;
+      color:#7f1d1d!important;
+      box-shadow:0 5px 16px rgba(190,45,45,.10)!important;
+    }
+    .day-timeline li.very-important-item .tl-title{font-weight:950!important}
+    .day-timeline li.very-important-item .tl-detail{color:#a42c2c!important;font-weight:800!important}
+    .day-timeline li.very-important-item.done{opacity:.62}
+
     /* 非固定行程仍用目前狀態區別。 */
     .day-timeline li.now:not(.important-item){background:#f2fbf6!important;border-color:#d7eee1!important;border-left:4px solid var(--green)!important}
     .day-timeline li.next-important:not(.important-item){background:#fff8e8!important;border-color:#f2dfad!important;border-left:4px solid #e5ad38!important}
+
+    .esim-reminder{margin:14px 0 18px;padding:14px 15px;border-radius:14px;background:#eef6fd;border:1px solid #d4e7f7;border-left:5px solid #397eaf;display:flex;flex-direction:column;gap:4px}
+    .esim-reminder strong{font-size:16px;color:#174f78}
+    .esim-reminder span{font-size:13px;line-height:1.55;color:#546372}
 
     .tl-map-btn{align-self:center}
     @media(max-width:520px){
@@ -130,6 +208,7 @@
         else if (now >= item.startDate && now < item.endDate) li.className = 'now';
         else li.className = 'upcoming';
         if (item.important) li.classList.add('important-item');
+        if (item.veryImportant) li.classList.add('very-important-item');
         if (nextImportant && item.id === nextImportant.id) li.classList.add('next-important');
 
         const row = document.createElement('div');
