@@ -6,6 +6,10 @@
   const transfer = byId('d1-transfer');
   if (transfer) transfer.detail = '溫暖家大廳';
 
+  // 抵達峴港／前往飯店也是固定行程，套用固定行程淡藍色樣式。
+  const arriveDanang = byId('d1-arrive');
+  if (arriveDanang) arriveDanang.important = true;
+
   const freeSuggestions = {
     'd1-free1': '建議：飯店附近、美溪沙灘、咖啡、按摩',
     'd1-free2': '建議：飯店附近散步、按摩、宵夜或自由休息',
@@ -31,13 +35,50 @@
     dinner.important = true;
   }
 
+  // 9/18 早餐／整理行李改為 08:00 開始。
+  const lastBreakfast = byId('d5-free');
+  if (lastBreakfast) {
+    lastBreakfast.start = '2026-09-18T08:00:00+07:00';
+    lastBreakfast.startDate = new Date(lastBreakfast.start);
+    lastBreakfast.detail = '早餐、整理行李，準備前往機場';
+  }
+
+  // 16:45 抵達桃園／接機接送後，補上 18:00 溫暖的家。
+  if (!byId('d5-home')) {
+    itinerary.push({
+      id:'d5-home',
+      day:'2026-09-18',
+      start:'2026-09-18T18:00:00+08:00',
+      end:'2026-09-18T18:30:00+08:00',
+      title:'溫暖的家',
+      type:'arrival',
+      important:true,
+      zone:TAIPEI_TZ,
+      startDate:new Date('2026-09-18T18:00:00+08:00'),
+      endDate:new Date('2026-09-18T18:30:00+08:00')
+    });
+  }
+
+  // 最後一天不再重複顯示「可塞時段／適合安排」，Timeline 已足夠。
+  const lastDayCard = document.querySelector('.trip-day[data-tab-day="2026-09-18"]');
+  if (lastDayCard) {
+    [...lastDayCard.querySelectorAll('h3')].forEach(h => {
+      const text = h.textContent.trim();
+      if (text === '可塞時段' || text === '適合安排') {
+        const p = h.nextElementSibling;
+        if (p?.tagName === 'P') p.remove();
+        h.remove();
+      }
+    });
+  }
+
   const style = document.createElement('style');
   style.textContent = `
     .day-timeline{border-top:0!important;display:flex!important;flex-direction:column!important;gap:10px!important;margin-top:10px!important}
     .day-timeline li{border:1px solid #e6eaf0!important;border-radius:14px!important;margin:0!important;padding:13px 60px 13px 34px!important;background:#fff}
     .day-timeline li.done{background:#fafbfc!important;color:#9aa1aa}
 
-    /* 固定／重要行程統一淡藍色，不再因下一個重要行程變成黃色底。 */
+    /* 固定／重要行程統一淡藍色。 */
     .day-timeline li.important-item,
     .day-timeline li.important-item.done,
     .day-timeline li.important-item.next-important,
