@@ -15,7 +15,7 @@
   const card = document.querySelector('.trip-day[data-tab-day="2026-09-17"]');
   if (card) {
     const tag = card.querySelector('.tag');
-    if (tag) tag.textContent = '會安';
+    if (tag) tag.textContent = '會安日';
 
     // Timeline 已提供完整資訊，移除舊的空閒度與建議摘要。
     card.querySelector('.badge')?.remove();
@@ -38,7 +38,6 @@
       const detail = li.querySelector('.tl-detail');
       if (detail && detail.textContent !== '尚未訂車') detail.textContent = '尚未訂車';
 
-      // 取消原本會安印象秀規劃，不再顯示 Klook 印象秀按鈕。
       li.querySelector('.tl-hoian-klook-btn')?.remove();
     });
   }
