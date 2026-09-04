@@ -26,3 +26,9 @@
   .day-timeline .tl-dest{margin-left:50px!important;max-width:calc(100% - 50px);font-size:12px}
   .day-timeline .tl-row{width:100%;max-width:100%}
 }
+
+/* Clean timeline override: remove decorative left rail / circle markers. */
+.day-timeline{padding-left:0!important}
+.day-timeline::before{display:none!important;content:none!important}
+.day-timeline li::before{display:none!important;content:none!important}
+@media(max-width:520px){.day-timeline{padding-left:0!important}}
