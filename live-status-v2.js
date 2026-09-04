@@ -201,7 +201,6 @@
     }
     const target = await pointFromAddress(next.destination);
 
-    // 非同步查地址期間，狀態可能已經更新；只要目前仍有同一個下一行程才套用結果。
     let latest;
     try { latest = computeTravelState(getNow()).next; } catch (_) { latest = next; }
     if (latest?.id !== next.id) return;
@@ -233,4 +232,83 @@
 
   renderLiveV2();
   setInterval(renderLiveV2, 30000);
+})();
+
+// 手機閱讀性修正＋回到頂端按鈕。
+(() => {
+  const style = document.createElement('style');
+  style.textContent = `
+    /* 移除先前加入的旅行 emoji。 */
+    .live-kicker{display:block!important}
+    .live-kicker::before{content:none!important;display:none!important}
+
+    /* 已完成的固定行程不要淡到看不清楚。 */
+    .day-timeline li.important-item.done{
+      opacity:1!important;
+      color:#637181!important;
+      background:#f1f6fa!important;
+      border-color:#cbddea!important;
+    }
+    .day-timeline li.important-item.done .tl-title{color:#596979!important}
+    .day-timeline li.important-item.done .tl-detail,
+    .day-timeline li.important-item.done .tl-dest{color:#788694!important}
+
+    /* 右下角 TOP。 */
+    .back-to-top{
+      position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:2400;
+      width:48px;height:48px;border:1px solid #d8dee7;border-radius:50%;
+      background:rgba(255,255,255,.94);color:#344250;font:inherit;font-size:12px;font-weight:900;
+      box-shadow:0 7px 22px rgba(15,23,32,.15);cursor:pointer;
+      opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .18s ease,transform .18s ease;
+      backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)
+    }
+    .back-to-top.show{opacity:1;transform:translateY(0);pointer-events:auto}
+    .back-to-top:active{transform:scale(.96)}
+
+    @media(max-width:520px){
+      /* 手機上 action button 改到文字下方靠右，不再擠壓標題與地點。 */
+      .day-timeline .tl-row{display:block!important}
+      .day-timeline .tl-copy{width:100%!important;min-width:0!important}
+      .day-timeline .tl-map-btn,
+      .day-timeline .tl-exchange-btn,
+      .day-timeline .tl-ticket-btn,
+      .day-timeline .tl-klook-btn,
+      .day-timeline .tl-hoian-klook-btn{
+        display:flex!important;
+        width:max-content!important;
+        max-width:100%!important;
+        margin:9px 0 0 auto!important;
+        min-width:48px!important;
+        min-height:38px!important;
+      }
+      .day-timeline li{padding-right:12px!important}
+      .day-timeline .tl-detail,.day-timeline .tl-dest{padding-left:54px!important;padding-right:0!important}
+      .back-to-top{right:14px;bottom:calc(14px + env(safe-area-inset-bottom));width:46px;height:46px}
+    }
+  `;
+  document.head.append(style);
+
+  let btn = document.getElementById('backToTopBtn');
+  if (!btn) {
+    btn = document.createElement('button');
+    btn.id = 'backToTopBtn';
+    btn.className = 'back-to-top';
+    btn.type = 'button';
+    btn.textContent = 'TOP';
+    btn.setAttribute('aria-label', '回到頁面最上方');
+    btn.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+    document.body.append(btn);
+  }
+
+  let ticking = false;
+  function updateTopButton() {
+    ticking = false;
+    btn.classList.toggle('show', window.scrollY > 480);
+  }
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateTopButton);
+  }, {passive:true});
+  updateTopButton();
 })();
