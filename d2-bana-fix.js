@@ -123,3 +123,12 @@
   script.dataset.liveStatusV2 = '1';
   document.body.append(script);
 })();
+
+// UI 小修：移除旅行圖示，並加入往下滑後顯示的 TOP 按鈕。
+(() => {
+  if (document.querySelector('script[data-ui-top-fix]')) return;
+  const script = document.createElement('script');
+  script.src = 'ui-top-fix.js';
+  script.dataset.uiTopFix = '1';
+  document.body.append(script);
+})();
