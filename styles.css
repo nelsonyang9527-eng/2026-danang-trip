@@ -32,3 +32,10 @@
 .day-timeline::before{display:none!important;content:none!important}
 .day-timeline li::before{display:none!important;content:none!important}
 @media(max-width:520px){.day-timeline{padding-left:0!important}}
+
+/* Strong override because timeline-fixes.js injects later CSS. */
+html body main .trip-day .day-timeline{padding-left:0!important;margin-left:0!important}
+html body main .trip-day .day-timeline::before{display:none!important;content:none!important;width:0!important;background:none!important}
+html body main .trip-day .day-timeline li::before{display:none!important;content:none!important;width:0!important;height:0!important;border:0!important;box-shadow:none!important;background:none!important}
+html body main .trip-day .day-timeline li{padding-left:0!important}
+@media(max-width:520px){html body main .trip-day .day-timeline{padding-left:0!important}html body main .trip-day .day-timeline li{padding-left:0!important}}
