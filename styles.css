@@ -11,3 +11,18 @@
 /* 主要地點地圖已移除：保留底層舊程式相容性，但不再佔任何版面。 */
 #mainMapCard{display:none!important}
 .live-kicker::before{content:none!important;display:none!important}
+
+/* Mobile timeline layout fix: keep all text inside the card and align secondary text with the title. */
+.day-timeline li{min-width:0;overflow:visible;overflow-wrap:anywhere;word-break:break-word}
+.day-timeline li>span:not(.tl-time):not(.tl-map-btn){min-width:0}
+.day-timeline .tl-time{vertical-align:top}
+.day-timeline .tl-dest{margin:4px 0 0 54px!important;max-width:calc(100% - 54px);padding:0!important;line-height:1.45;overflow-wrap:anywhere;word-break:break-word}
+.day-timeline .tl-row{display:flex;align-items:flex-start;gap:0;min-width:0;flex-wrap:wrap}
+.day-timeline .tl-row>*{min-width:0}
+.day-timeline .tl-map-btn{flex:0 0 auto}
+@media(max-width:520px){
+  .day-timeline li{padding-left:30px!important;padding-right:8px!important}
+  .day-timeline .tl-time{min-width:50px}
+  .day-timeline .tl-dest{margin-left:50px!important;max-width:calc(100% - 50px);font-size:12px}
+  .day-timeline .tl-row{width:100%;max-width:100%}
+}
