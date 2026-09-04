@@ -114,3 +114,12 @@
   script.dataset.d1EveningPlan = '1';
   document.body.append(script);
 })();
+
+// 載入最新動態 v2：行前重點捷徑＋GPS／地點 fallback 的剩餘時間。
+(() => {
+  if (document.querySelector('script[data-live-status-v2]')) return;
+  const script = document.createElement('script');
+  script.src = 'live-status-v2.js';
+  script.dataset.liveStatusV2 = '1';
+  document.body.append(script);
+})();
