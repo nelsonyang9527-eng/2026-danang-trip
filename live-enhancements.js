@@ -307,3 +307,129 @@
   try { renderDayTimelines = renderIntegratedTimelines; } catch (_) {}
   renderIntegratedTimelines(getNow());
 })();
+
+// 最新動態新版：現在顯示「扣掉 Grab 車程後的剩餘時間」；下一行程強調時間＋標題。
+(() => {
+  const style = document.createElement('style');
+  style.textContent = `
+    #liveStayBadge,#liveTravelEstimate,#liveLeaveBy{display:none!important}
+    .live-remaining-time{margin-top:9px;font-size:17px;font-weight:900;color:#166f49;line-height:1.45}
+    .live-remaining-meta{margin-top:3px;font-size:12px;color:#6b7280;line-height:1.45;font-weight:650}
+    .live-next-big-time{display:inline-block;margin-right:8px;font-size:26px;line-height:1.1;font-weight:950;font-variant-numeric:tabular-nums;color:#173f62;vertical-align:-1px}
+    .live-panel.next .live-title{font-size:18px;line-height:1.45}
+    .live-panel.next .live-time{margin-top:6px;font-size:13px;line-height:1.5;color:#5e6874}
+    #liveCountdown{display:none!important}
+    @media(max-width:520px){.live-next-big-time{font-size:24px}.live-remaining-time{font-size:16px}}
+  `;
+  document.head.append(style);
+
+  const nowPanel = document.querySelector('.live-panel.now');
+  const nowTime = document.getElementById('liveNowTime');
+  const remaining = document.createElement('div');
+  remaining.id = 'liveRemainingTime';
+  remaining.className = 'live-remaining-time';
+  const remainingMeta = document.createElement('div');
+  remainingMeta.id = 'liveRemainingMeta';
+  remainingMeta.className = 'live-remaining-meta';
+  if (nowTime) {
+    nowTime.insertAdjacentElement('afterend', remainingMeta);
+    nowTime.insertAdjacentElement('afterend', remaining);
+  } else if (nowPanel) {
+    nowPanel.append(remaining, remainingMeta);
+  }
+
+  let gpsPoint = null;
+
+  function pointFromDestination(dest) {
+    if (!dest || !Number.isFinite(dest.lat) || !Number.isFinite(dest.lng)) return null;
+    return {lat:dest.lat,lng:dest.lng};
+  }
+
+  function formatMinutes(mins) {
+    mins = Math.max(0, Math.floor(mins));
+    const h = Math.floor(mins / 60), m = mins % 60;
+    if (h && m) return `${h} 小時 ${m} 分`;
+    if (h) return `${h} 小時`;
+    return `${m} 分`;
+  }
+
+  function estimateGrabMinutes(km) {
+    const roadKm = km * 1.20;
+    return Math.max(5, Math.ceil((roadKm / 25) * 60 + 4));
+  }
+
+  function renderCompactLive() {
+    let now, state;
+    try {
+      now = getNow();
+      state = computeTravelState(now);
+    } catch (_) { return; }
+
+    const next = state.next;
+    const nextLabel = document.getElementById('liveNextLabel');
+    const nextTitle = document.getElementById('liveNextTitle');
+    const nextTime = document.getElementById('liveNextTime');
+    const countdown = document.getElementById('liveCountdown');
+    if (countdown) countdown.textContent = '';
+
+    if (!next) {
+      remaining.textContent = '';
+      remainingMeta.textContent = '';
+      return;
+    }
+
+    // 下一個行程：大時間＋標題，子標題只留行程細節，不再顯示重複倒數。
+    if (nextLabel) nextLabel.textContent = '下一個行程';
+    if (nextTitle) {
+      nextTitle.textContent = '';
+      const time = document.createElement('span');
+      time.className = 'live-next-big-time';
+      time.textContent = formatHM(next.startDate, next.zone || DANANG_TZ);
+      nextTitle.append(time, document.createTextNode(next.title));
+    }
+    if (nextTime) nextTime.textContent = next.detail || '';
+
+    const minsUntilNext = Math.max(0, Math.ceil((next.startDate - now) / 60000));
+    const source = gpsPoint || pointFromDestination(state.active?.destination);
+    const target = pointFromDestination(next.destination);
+
+    if (source && target) {
+      const km = haversineKm(source.lat, source.lng, target.lat, target.lng);
+      const grabMin = estimateGrabMinutes(km);
+      const stayMin = Math.max(0, minsUntilNext - grabMin);
+      remaining.textContent = stayMin > 0 ? `剩餘時間：${formatMinutes(stayMin)}` : '剩餘時間：建議現在出發';
+      remainingMeta.textContent = `已扣除 Grab 預估約 ${grabMin} 分鐘｜${gpsPoint ? '依目前 GPS 位置' : '依目前行程地點'}`;
+    } else if (!source && target) {
+      remaining.textContent = '剩餘時間：取得目前位置後計算';
+      remainingMeta.textContent = '會從下一個行程時間扣除 Grab 預估車程';
+    } else if (!target) {
+      remaining.textContent = '剩餘時間：待確認下一個行程地點';
+      remainingMeta.textContent = '';
+    }
+  }
+
+  // 使用者點原本定位按鈕後，剩餘時間優先改用實際 GPS 位置估算。
+  document.getElementById('liveLocationBtn')?.addEventListener('click', () => {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(
+      p => {
+        gpsPoint = {lat:p.coords.latitude,lng:p.coords.longitude};
+        renderCompactLive();
+      },
+      () => {},
+      {enableHighAccuracy:false,timeout:8000,maximumAge:120000}
+    );
+  });
+
+  // app.js 每 30 秒會重畫一次最新動態；包住原函式，確保新版排版立即跟著重畫。
+  try {
+    const baseUpdateLiveMode = updateLiveMode;
+    updateLiveMode = function() {
+      baseUpdateLiveMode();
+      renderCompactLive();
+    };
+  } catch (_) {}
+
+  renderCompactLive();
+  setInterval(renderCompactLive, 30000);
+})();
