@@ -1,7 +1,12 @@
 // Timeline 補充：YOASOBI 官網、第一天換匯、行前提醒。
 (() => {
   const ticketItem = itinerary.find(i => i.id === 'd3-yoasobi-ticket');
-  if (ticketItem) ticketItem.detail = 'Ticket Plus 遠大售票系統';
+  if (ticketItem) {
+    ticketItem.title = 'YOASOBI 超惑星演唱會搶票';
+    ticketItem.detail = 'Ticket Plus 遠大售票系統';
+    ticketItem.important = true;
+    ticketItem.veryImportant = true;
+  }
 
   // 第一天下飛機後先回飯店；13:30 自由行程開始時再先去換匯。
   const arriveItem = itinerary.find(i => i.id === 'd1-arrive');
@@ -56,10 +61,15 @@
 
   function addTicketLink() {
     document.querySelectorAll('.day-timeline li').forEach(li => {
-      const title = li.querySelector('.tl-title')?.textContent?.trim();
-      if (title !== 'YOASOBI 超惑星演唱會搶票') return;
+      const titleEl = li.querySelector('.tl-title');
+      const title = titleEl?.textContent?.trim();
+      if (title !== 'YOASOBI 超惑星演唱會搶票' && title !== 'Ticket Plus 遠大售票系統') return;
 
-      const detail = li.querySelector('.tl-detail');
+      // 新舊 Timeline 樣式都能修正回正確顯示：主標題是任務，補充說明才是售票系統。
+      if (titleEl && titleEl.textContent !== 'YOASOBI 超惑星演唱會搶票') {
+        titleEl.textContent = 'YOASOBI 超惑星演唱會搶票';
+      }
+      const detail = li.querySelector('.tl-inline-detail, .tl-detail');
       if (detail && detail.textContent !== 'Ticket Plus 遠大售票系統') {
         detail.textContent = 'Ticket Plus 遠大售票系統';
       }
@@ -88,7 +98,7 @@
       const time = li.querySelector('.tl-time')?.textContent?.trim();
       if (time !== '13:30') return;
 
-      const detail = li.querySelector('.tl-detail');
+      const detail = li.querySelector('.tl-inline-detail, .tl-detail');
       const text = '先換匯，再自由選擇：美溪沙灘／咖啡／按摩 SPA／隨意逛';
       if (detail && detail.textContent !== text) detail.textContent = text;
 
