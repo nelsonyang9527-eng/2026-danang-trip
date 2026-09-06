@@ -63,8 +63,6 @@
       border-left:5px solid #d79a22!important;
     }
     .day-timeline li.bana-transfer-item .tl-detail{color:#9a6510!important;font-weight:800!important}
-    .tl-klook-btn{flex:0 0 auto;margin-left:auto;align-self:center;min-height:40px;padding:8px 11px;border-radius:11px;background:#fff;color:#d66a00;border:1px solid #efc18e;text-decoration:none;font-size:13px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
-    @media(max-width:520px){.tl-klook-btn{min-width:48px;padding:8px;font-size:0}.tl-klook-btn::before{content:'Klook';font-size:12px}}
   `;
   document.head.append(style);
 
@@ -75,31 +73,23 @@
       li.classList.add('bana-transfer-item');
       li.classList.remove('booking-pending-item');
 
+      // 時間欄只顯示時間，避免把「出發／回程待定」混進去造成手機版跑版。
       const time = li.querySelector('.tl-time');
-      if (time && time.textContent !== '10:00 出發｜回程待定') time.textContent = '10:00 出發｜回程待定';
+      if (time && time.textContent !== '10:00') time.textContent = '10:00';
 
       const detail = li.querySelector('.tl-detail');
       const text = '6 人｜12 人座接送車｜飯店一起出發｜回程時間待定，當天再確認';
       if (detail && detail.textContent !== text) detail.textContent = text;
 
-      if (li.querySelector('.tl-klook-btn')) return;
-      const row = li.querySelector('.tl-row');
-      if (!row) return;
-      const link = document.createElement('a');
-      link.className = 'tl-klook-btn';
-      link.href = 'https://s.klook.com/c/Ny6dxWm6wq';
-      link.target = '_blank';
-      link.rel = 'noopener';
-      link.textContent = 'Klook 接送';
-      link.setAttribute('aria-label', '開啟 Klook 巴拿山接送');
-      row.append(link);
+      // 接送由朋友安排，不顯示 Klook 連結。
+      li.querySelector('.tl-klook-btn')?.remove();
     });
   }
 
   try { updateLiveMode(); } catch (_) {}
   decorateBanaItem();
 
-  // Timeline 每 30 秒會重繪；僅在內容真的不同或按鈕不存在時才修改 DOM，避免 observer 迴圈。
+  // Timeline 每 30 秒會重繪；僅在內容真的不同時修改 DOM，避免 observer 迴圈。
   const observer = new MutationObserver(decorateBanaItem);
   document.querySelectorAll('.day-timeline').forEach(el => observer.observe(el, {childList:true, subtree:true}));
 })();
