@@ -148,6 +148,66 @@
       }
       html body main .trip-day .day-timeline .tl-time { font-size: 17px !important; }
     }
+
+    .customs-reminder {
+      margin: 18px 0 4px;
+      padding: 16px;
+      border: 1px solid #f3c34c;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #fff9df 0%, #fff4c2 100%);
+      color: #4b3a08;
+      box-shadow: 0 8px 20px rgba(120, 84, 0, .08);
+    }
+    .customs-reminder-title {
+      margin: 0 0 8px;
+      font-size: 17px;
+      line-height: 1.35;
+      font-weight: 800;
+    }
+    .customs-reminder p {
+      margin: 0 0 10px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+    .customs-reminder-note {
+      font-size: 12.5px;
+      opacity: .78;
+    }
+    .customs-reminder-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: #8b6500;
+      color: #fff !important;
+      text-decoration: none;
+      font-weight: 700;
+      max-width: 100%;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    @media (max-width: 390px) {
+      .customs-reminder { padding: 14px 12px; }
+      .customs-reminder-link { width: 100%; }
+    }
   `;
   document.head.append(style);
+
+  const returnDay = document.querySelector('.trip-day[data-tab-day="2026-09-18"]');
+  if (returnDay && !returnDay.querySelector('.customs-reminder')) {
+    const reminder = document.createElement('aside');
+    reminder.className = 'customs-reminder';
+    reminder.setAttribute('aria-label', '回台灣前入境物品提醒');
+    reminder.innerHTML = `
+      <div class="customs-reminder-title">⚠️ 回台灣前檢查</div>
+      <p>有買零食、泡麵、肉製品，或其他不確定能不能帶入境的東西，可先用「台灣入境 AI 放大鏡」檢查。</p>
+      <a class="customs-reminder-link" href="https://ai-customs.tw/" target="_blank" rel="noopener">🔎 開啟台灣入境 AI 放大鏡</a>
+      <p class="customs-reminder-note">此網站非政府網站，AI 結果僅供參考；有疑義時仍以財政部關務署、防檢署及現場判定為準。</p>
+    `;
+    const timeline = returnDay.querySelector('.day-timeline');
+    if (timeline) timeline.insertAdjacentElement('afterend', reminder);
+    else returnDay.prepend(reminder);
+  }
 })();
