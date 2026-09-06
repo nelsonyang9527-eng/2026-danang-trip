@@ -1,13 +1,13 @@
-// 9/15 巴拿山包車規劃：中午 12:00 出發，上午留在飯店休息或附近走走。
+// 9/15 巴拿山包車規劃：10:00 飯店出發，6 人搭 12 人座；回程時間待定。
 (() => {
   const morning = itinerary.find(i => i.id === 'd2-free');
   if (morning) {
     morning.start = '2026-09-15T08:00:00+07:00';
-    morning.end = '2026-09-15T12:00:00+07:00';
+    morning.end = '2026-09-15T10:00:00+07:00';
     morning.startDate = new Date(morning.start);
     morning.endDate = new Date(morning.end);
     morning.title = '飯店休息／附近走走';
-    morning.detail = '上午自由安排，可在飯店休息或飯店附近散步';
+    morning.detail = '上午自由安排，10:00 前回飯店準備集合';
     morning.type = 'free';
     morning.important = false;
     morning.bookingPending = false;
@@ -19,20 +19,23 @@
     bana = {
       id:'d2-bana',
       day:'2026-09-15',
-      start:'2026-09-15T12:00:00+07:00',
+      start:'2026-09-15T10:00:00+07:00',
       end:'2026-09-15T18:00:00+07:00',
       title:'包車前往巴拿山',
       detail:'',
       type:'daytrip',
       important:true,
-      bookingPending:true,
+      bookingPending:false,
       zone:DANANG_TZ,
-      startDate:new Date('2026-09-15T12:00:00+07:00'),
+      startDate:new Date('2026-09-15T10:00:00+07:00'),
       endDate:new Date('2026-09-15T18:00:00+07:00')
     };
     itinerary.push(bana);
   }
-  bana.detail = '推薦必逛：黃金橋／法國村／Fantasy Park｜尚未訂車｜12:00–18:00';
+  bana.start = '2026-09-15T10:00:00+07:00';
+  bana.startDate = new Date(bana.start);
+  bana.bookingPending = false;
+  bana.detail = '6 人｜12 人座接送車｜飯店一起出發｜回程時間待定，當天再確認';
 
   // 9/15 已有巴拿山規劃，不再顯示舊的「空閒度／可塞時段／適合安排」。
   const d2Card = document.querySelector('.trip-day[data-tab-day="2026-09-15"]');
@@ -52,14 +55,14 @@
 
   const style = document.createElement('style');
   style.textContent = `
-    .day-timeline li.booking-pending-item,
-    .day-timeline li.booking-pending-item.next-important,
-    .day-timeline li.booking-pending-item.now{
+    .day-timeline li.bana-transfer-item,
+    .day-timeline li.bana-transfer-item.next-important,
+    .day-timeline li.bana-transfer-item.now{
       background:#fff8e8!important;
       border-color:#efd797!important;
       border-left:5px solid #d79a22!important;
     }
-    .day-timeline li.booking-pending-item .tl-detail{color:#9a6510!important;font-weight:800!important}
+    .day-timeline li.bana-transfer-item .tl-detail{color:#9a6510!important;font-weight:800!important}
     .tl-klook-btn{flex:0 0 auto;margin-left:auto;align-self:center;min-height:40px;padding:8px 11px;border-radius:11px;background:#fff;color:#d66a00;border:1px solid #efc18e;text-decoration:none;font-size:13px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
     @media(max-width:520px){.tl-klook-btn{min-width:48px;padding:8px;font-size:0}.tl-klook-btn::before{content:'Klook';font-size:12px}}
   `;
@@ -69,10 +72,14 @@
     document.querySelectorAll('.day-timeline li').forEach(li => {
       const title = li.querySelector('.tl-title')?.textContent?.trim();
       if (title !== '包車前往巴拿山') return;
-      li.classList.add('booking-pending-item');
+      li.classList.add('bana-transfer-item');
+      li.classList.remove('booking-pending-item');
+
+      const time = li.querySelector('.tl-time');
+      if (time && time.textContent !== '10:00 出發｜回程待定') time.textContent = '10:00 出發｜回程待定';
 
       const detail = li.querySelector('.tl-detail');
-      const text = '推薦必逛：黃金橋／法國村／Fantasy Park｜尚未訂車｜12:00–18:00';
+      const text = '6 人｜12 人座接送車｜飯店一起出發｜回程時間待定，當天再確認';
       if (detail && detail.textContent !== text) detail.textContent = text;
 
       if (li.querySelector('.tl-klook-btn')) return;
