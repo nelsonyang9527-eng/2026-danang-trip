@@ -31,7 +31,47 @@
   const makeCard = ({ time = '建議', title, detail = '', link = '', kind = 'optional' }) => {
     const li = document.createElement('li');
     li.className = `tl-extra ${kind}`;
-    li.innerHTML = `<div class="tl-row"><div class="tl-time-block"><span class="tl-time">${time}</span></div><div class="tl-copy"><div class="tl-primary"><div class="tl-title">${title}</div>${detail ? `<div class="tl-inline-detail">${detail}</div>` : ''}${link ? `<div class="links"><a class="mapbtn" href="${link}" target="_blank" rel="noopener">📍 導航</a></div>` : ''}</div></div></div>`;
+
+    const row = document.createElement('div');
+    row.className = 'tl-row';
+
+    const timeBlock = document.createElement('div');
+    timeBlock.className = 'tl-time-block';
+    const timeText = document.createElement('span');
+    timeText.className = 'tl-time';
+    timeText.textContent = time;
+    timeBlock.append(timeText);
+
+    const copy = document.createElement('div');
+    copy.className = 'tl-copy';
+    const primary = document.createElement('div');
+    primary.className = 'tl-primary';
+    const titleEl = document.createElement('div');
+    titleEl.className = 'tl-title';
+    titleEl.textContent = title;
+    primary.append(titleEl);
+
+    if (detail) {
+      const detailEl = document.createElement('div');
+      detailEl.className = 'tl-inline-detail';
+      detailEl.textContent = detail;
+      primary.append(detailEl);
+    }
+    copy.append(primary);
+    row.append(timeBlock, copy);
+
+    if (link) {
+      const map = document.createElement('a');
+      map.className = 'tl-map-btn';
+      map.href = link;
+      map.target = '_blank';
+      map.rel = 'noopener';
+      map.setAttribute('aria-label', `用 Google Maps 開啟 ${title}`);
+      map.title = 'Google Maps';
+      row.append(map);
+    }
+
+    li.append(row);
     return li;
   };
 
