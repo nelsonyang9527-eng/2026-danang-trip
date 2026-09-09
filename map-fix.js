@@ -43,3 +43,78 @@
     if (!collapse.hidden) setTimeout(refreshMap, 180);
   });
 })();
+
+// 9/16 改為博物館自由參觀日，不再顯示「預計安排一日導覽」等舊導覽占位內容。
+(() => {
+  if (typeof itinerary === 'undefined') return;
+
+  const chamMuseum = {
+    name:'Museum of Cham Sculpture 占婆雕刻博物館',
+    mapQuery:'Museum of Cham Sculpture Da Nang'
+  };
+  const danangMuseum = {
+    name:'Da Nang Museum 峴港博物館',
+    mapQuery:'Da Nang Museum'
+  };
+  const conMarket = {
+    name:'Chợ Cồn 共市場',
+    mapQuery:'Cho Con Da Nang'
+  };
+
+  // 移除 9/16 舊自由日、導覽占位、搶票切段與集合拆卡，避免同一天出現重複資訊。
+  for (let i = itinerary.length - 1; i >= 0; i -= 1) {
+    if (itinerary[i].day === '2026-09-16') itinerary.splice(i, 1);
+  }
+
+  const makeItem = item => ({
+    ...item,
+    zone:DANANG_TZ,
+    startDate:new Date(item.start),
+    endDate:new Date(item.end)
+  });
+
+  itinerary.push(
+    makeItem({
+      id:'d3-cham-museum', day:'2026-09-16',
+      start:'2026-09-16T09:30:00+07:00', end:'2026-09-16T10:45:00+07:00',
+      title:'占婆雕刻博物館', detail:'自由參觀，不排導覽',
+      type:'museum', destination:chamMuseum
+    }),
+    makeItem({
+      id:'d3-danang-museum', day:'2026-09-16',
+      start:'2026-09-16T11:15:00+07:00', end:'2026-09-16T12:15:00+07:00',
+      title:'峴港博物館', detail:'自由參觀，不排導覽',
+      type:'museum', destination:danangMuseum
+    }),
+    makeItem({
+      id:'d3-con-market', day:'2026-09-16',
+      start:'2026-09-16T14:15:00+07:00', end:'2026-09-16T16:30:00+07:00',
+      title:'Chợ Cồn 共市場', detail:'逛市場、吃小吃，依現場狀況彈性安排',
+      type:'market', destination:conMarket
+    }),
+    makeItem({
+      id:'d3-dinner', day:'2026-09-16',
+      start:'2026-09-16T18:00:00+07:00', end:'2026-09-16T21:00:00+07:00',
+      title:'BRILLIANT SEAFOOD',
+      detail:'PPA 全公司聚餐｜6桌｜建議 17:30～17:35 從飯店出發，18:00 前抵達',
+      type:'meal', important:true, destination:destinations.brilliant
+    })
+  );
+
+  itinerary.sort((a,b) => a.startDate - b.startDate);
+
+  const section = document.querySelector('.trip-day[data-tab-day="2026-09-16"]');
+  if (section) {
+    const tag = section.querySelector('.toprow .tag');
+    if (tag) tag.textContent = '博物館 + 共市場 + 聚餐';
+    const badge = section.querySelector('.badge');
+    if (badge) badge.textContent = '占婆雕刻博物館・峴港博物館・共市場・公司聚餐';
+  }
+
+  try {
+    if (typeof renderDayTimelines === 'function') renderDayTimelines(getNow());
+    if (typeof updateLiveMode === 'function') updateLiveMode();
+  } catch (err) {
+    console.error('9/16 museum itinerary refresh failed', err);
+  }
+})();
