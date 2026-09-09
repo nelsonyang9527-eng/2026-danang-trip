@@ -1,115 +1,187 @@
-// Keep merged suggestion cards attached after every timeline re-render.
+// 將推薦行程整合進每日時間線：主卡簡潔，展開後每個地點都有名稱、地址與 Google Maps。
 (() => {
-  const plans = {
+  const ticketIndex = itinerary.findIndex(i => i.id === 'd3-yoasobi-ticket');
+  if (ticketIndex >= 0) itinerary.splice(ticketIndex, 1);
+
+  const groups = {
     '2026-09-14': [
-      { time: '午餐', title: 'Bánh mì / Phở / Bún bò', detail: '飯店附近輕食即可，不要吃太撐。', link: 'https://www.google.com/maps/search/Banh+mi+Pho+Bun+bo+near+Peninsula+Hotel+Danang', kind: 'recommend', before: '18:00' },
-      { time: '下午', title: 'Wonderlust - Coffee & Souvenir', detail: '咖啡＋伴手禮，可一次解決。', link: 'https://www.google.com/maps/search/Wonderlust+Coffee+%26+Souvenir+Da+Nang', kind: 'recommend', before: '18:00' },
-      { time: '備選', title: 'Trình cà phê / LỤC LAM / Star Kitchen / Dragon Market', detail: '依當下位置與時間挑一站即可，不必全部跑。', kind: 'optional', before: '18:00' },
-      { time: '16:00', title: '美溪沙灘 My Khe Beach', detail: '散步、看海，之後準備前往晚餐。', link: 'https://www.google.com/maps/search/My+Khe+Beach+Da+Nang', kind: 'recommend', before: '18:00' }
+      {
+        time:'午餐', title:'午餐輕食', detail:'飯店附近簡單吃，不要太撐；18:00 還有海鮮聚餐。', before:'18:00',
+        places:[
+          {name:'Bánh mì / Phở / Bún bò（飯店周邊搜尋）', address:'Peninsula Hotel Danang 周邊', note:'三選一即可，依當下位置找最近的。', map:'https://www.google.com/maps/search/Banh+mi+Pho+Bun+bo+near+Peninsula+Hotel+Danang'}
+        ]
+      },
+      {
+        time:'下午', title:'咖啡＋伴手禮', detail:'建議挑 1～2 站即可，不需要全部跑。', before:'18:00',
+        places:[
+          {name:'WONDERLUST - Coffee & Souvenir', address:'96 Trần Phú, Hải Châu, Đà Nẵng', note:'主選：咖啡＋伴手禮一次處理。', map:'https://www.google.com/maps/search/WONDERLUST+Coffee+Souvenir+96+Tran+Phu+Da+Nang'},
+          {name:'Trình cà phê - Chợ Hàn', address:'Bạch Đằng, Hải Châu, Đà Nẵng', note:'想喝越南咖啡可選。', map:'https://www.google.com/maps/search/Trinh+ca+phe+Cho+Han+Da+Nang'},
+          {name:'LỤC LAM', address:'104 Trần Phú, Hải Châu, Đà Nẵng', note:'茶、巧克力、咖啡與伴手禮。', map:'https://www.google.com/maps/search/LUC+LAM+104+Tran+Phu+Da+Nang'},
+          {name:'Star Kitchen Souvenir Gift Shop - Danang', address:'75 Trần Quốc Toản, Hải Châu, Đà Nẵng', note:'伴手禮備選。', map:'https://www.google.com/maps/search/Star+Kitchen+75+Tran+Quoc+Toan+Da+Nang'},
+          {name:'Dragon Market', address:'49 Trần Bạch Đằng, An Hải, Đà Nẵng', note:'靠近美溪沙灘，適合順路補小物。', map:'https://www.google.com/maps/search/Dragon+Market+49+Tran+Bach+Dang+Da+Nang'}
+        ]
+      },
+      {
+        time:'16:00', title:'美溪沙灘', detail:'散步、看海，之後準備前往晚餐。', before:'18:00',
+        places:[
+          {name:'My Khe Beach', address:'Võ Nguyên Giáp, Đà Nẵng', note:'抓約 45～60 分鐘即可。', map:'https://www.google.com/maps/search/My+Khe+Beach+Da+Nang'}
+        ]
+      },
+      {
+        time:'20:00後', title:'夜市・龍橋・越式洗頭', detail:'晚餐後依體力選擇，不必全部完成。', after:'晚餐後自由安排',
+        places:[
+          {name:'Sơn Trà Night Market', address:'Mai Hắc Đế, Sơn Trà, Đà Nẵng', note:'逛夜市、小吃、伴手禮。', map:'https://www.google.com/maps/search/Son+Tra+Night+Market+Da+Nang'},
+          {name:'Dragon Bridge', address:'Cầu Rồng, Đà Nẵng', note:'可搭配愛情橋、韓江河畔散步。', map:'https://www.google.com/maps/search/Dragon+Bridge+Da+Nang'},
+          {name:'BALI Spa • Cafe', address:'485 Trần Hưng Đạo, An Hải, Đà Nẵng', note:'越式養生洗頭／Head Spa；晚餐時再決定是否訂位。', map:'https://www.google.com/maps/search/BALI+Spa+Cafe+485+Tran+Hung+Dao+Da+Nang'}
+        ]
+      }
     ],
     '2026-09-15': [
-      { time: '午餐', title: '巴拿山上解決', detail: '依現場行程彈性安排。', kind: 'optional', before: '19:00' },
-      { time: '回程', title: '接送時間待定', detail: '依現場狀況決定，回飯店後銜接晚間 Tour。', kind: 'optional', before: '19:00' },
-      { time: 'Tour', title: '可能包含景點', detail: 'Love Pier、龍橋、APEC Park、Chè Liên、Hương Bia。', kind: 'optional' }
+      {
+        time:'巴拿山', title:'白天安排建議', detail:'10:00 飯店出發；午餐山上解決。為了銜接 19:00 Tour，建議約 16:30～17:00 開始下山。', before:'19:00',
+        places:[
+          {name:'Sun World Ba Na Hills', address:'Hòa Ninh, Hòa Vang, Đà Nẵng', note:'白天主要行程。', map:'https://www.google.com/maps/search/Sun+World+Ba+Na+Hills'},
+          {name:'Peninsula Hotel Danang', address:'Sơn Trà, Đà Nẵng', note:'回程接送時間仍待定；導航可直接帶回飯店。', map:'https://www.google.com/maps/search/Peninsula+Hotel+Danang'}
+        ]
+      },
+      {
+        time:'Tour', title:'19:00 Tour 可能包含', detail:'實際停靠以 Tour 當天安排為準。', after:'19:00',
+        places:[
+          {name:'Cầu Tình Yêu - Love Pier', address:'Trần Hưng Đạo, An Hải, Đà Nẵng', note:'韓江畔愛情橋。', map:'https://www.google.com/maps/search/Cau+Tinh+Yeu+Da+Nang'},
+          {name:'Dragon Bridge', address:'Cầu Rồng, Đà Nẵng', note:'龍橋夜景。', map:'https://www.google.com/maps/search/Dragon+Bridge+Da+Nang'},
+          {name:'APEC Park', address:'Bình Hiên, Hải Châu, Đà Nẵng', note:'市中心河岸公園。', map:'https://www.google.com/maps/search/APEC+Park+Da+Nang'},
+          {name:'Chè Liên', address:'Đà Nẵng', note:'越式甜品。', map:'https://www.google.com/maps/search/Che+Lien+Da+Nang'},
+          {name:'Hương Bia - Danang Craft Beer', address:'18 Tạ Mỹ Duật, An Hải, Đà Nẵng', note:'精釀啤酒。', map:'https://www.google.com/maps/search/Huong+Bia+18+Ta+My+Duat+Da+Nang'}
+        ]
+      }
     ],
     '2026-09-16': [
-      { time: '備案', title: 'Pizza 4P’s Indochina Đà Nẵng', detail: '臨時需要替代餐廳時再考慮。', link: 'https://www.google.com/maps/search/Pizza+4P%27s+Indochina+Da+Nang', kind: 'optional' }
+      {
+        time:'備案', title:'餐廳備案', detail:'只有臨時需要替代餐廳時再開。',
+        places:[
+          {name:'Pizza 4P’s Indochina Đà Nẵng', address:'Indochina Riverside Towers 2F, 74 Bạch Đằng, Hải Châu, Đà Nẵng', note:'不放進主行程，只保留快速導航。', map:'https://www.google.com/maps/search/Pizza+4Ps+Indochina+74+Bach+Dang+Da+Nang'}
+        ]
+      }
     ],
     '2026-09-17': [
-      { time: '白天', title: 'Hoi An Ancient Town 會安古城', detail: '慢慢逛古城，依序穿插日本橋、福建會館。', link: 'https://www.google.com/maps/search/Hoi+An+Ancient+Town', kind: 'recommend' },
-      { time: '順遊', title: '日本橋＋福建會館', detail: '古城內步行安排，不必切成獨立大區塊。', kind: 'optional' },
-      { time: '午餐', title: 'Cao lầu / White Rose', detail: '吃會安特色料理。', link: 'https://www.google.com/maps/search/White+Rose+Restaurant+Hoi+An', kind: 'recommend' },
-      { time: '下午', title: '按摩備選', detail: 'Five Senses Spa / Metta Spa；走累再安排。', kind: 'optional' },
-      { time: '傍晚', title: '留在古城看夜色', detail: '按摩後再回古城散步，感受點燈後氣氛。', kind: 'recommend' }
+      {
+        time:'白天', title:'會安古城順遊', detail:'以古城散步為主，不把每個景點拆成固定時段。',
+        places:[
+          {name:'Hoi An Ancient Town', address:'Phường Minh An, Hội An', note:'整天主區域。', map:'https://www.google.com/maps/search/Hoi+An+Ancient+Town'},
+          {name:'Japanese Covered Bridge', address:'Phường Minh An, Hội An', note:'古城內順遊。', map:'https://www.google.com/maps/search/Japanese+Covered+Bridge+Hoi+An'},
+          {name:'Fujian Assembly Hall', address:'46 Trần Phú, Hội An', note:'古城內順遊。', map:'https://www.google.com/maps/search/Fujian+Assembly+Hall+46+Tran+Phu+Hoi+An'}
+        ]
+      },
+      {
+        time:'午餐', title:'會安特色料理', detail:'Cao lầu 或 White Rose 擇一主餐方向。',
+        places:[
+          {name:'White Rose Restaurant', address:'533 Hai Bà Trưng, Hội An', note:'白玫瑰餃／會安特色料理。', map:'https://www.google.com/maps/search/White+Rose+Restaurant+533+Hai+Ba+Trung+Hoi+An'},
+          {name:'Cao lầu（古城周邊搜尋）', address:'Hoi An Ancient Town 周邊', note:'依當下位置找順路店家。', map:'https://www.google.com/maps/search/Cao+lau+Hoi+An+Ancient+Town'}
+        ]
+      },
+      {
+        time:'下午', title:'按摩備選', detail:'走累再安排，按摩後繼續留在古城等夜色。',
+        places:[
+          {name:'Five Senses Spa Hoi An', address:'14 Phan Bội Châu, Hội An', note:'古城附近按摩備選。', map:'https://www.google.com/maps/search/Five+Senses+Spa+14+Phan+Boi+Chau+Hoi+An'},
+          {name:'Metta Spa & Massage Hoi An', address:'54 Phan Bội Châu, Hội An', note:'按摩備選。', map:'https://www.google.com/maps/search/Metta+Spa+54+Phan+Boi+Chau+Hoi+An'}
+        ]
+      }
     ],
     '2026-09-18': [
-      { time: '早餐', title: '附近咖啡＋整理行李', detail: '出發前以飯店周邊為主，不再跑遠景點。', kind: 'recommend', before: '10:30' },
-      { time: '回台後', title: '接機接送', detail: '依實際航班抵達時間安排。', kind: 'optional' }
+      {
+        time:'早餐', title:'飯店附近就好', detail:'整理行李優先，不另外跑遠景點。', before:'10:30',
+        places:[
+          {name:'Peninsula Hotel Danang 周邊咖啡', address:'Sơn Trà, Đà Nẵng', note:'有時間才喝，避免影響 10:30 機場集合。', map:'https://www.google.com/maps/search/Coffee+near+Peninsula+Hotel+Danang'}
+        ]
+      }
     ]
   };
 
-  const makeCard = ({ time = '建議', title, detail = '', link = '', kind = 'optional' }) => {
-    const li = document.createElement('li');
-    li.className = `tl-extra ${kind}`;
+  const style = document.createElement('style');
+  style.textContent = `
+    .trip-day.itinerary-merged > h3,
+    .trip-day.itinerary-merged > ul:not(.day-timeline),
+    .trip-day.itinerary-merged > p,
+    .trip-day.itinerary-merged > .links{display:none!important}
+    .day-timeline .tl-extra .tl-row{border:1px solid #eadfca!important;background:#fffaf1!important;box-shadow:0 4px 14px rgba(90,65,20,.05)!important}
+    .rec-details{width:100%;min-width:0}
+    .rec-details summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12.5px;font-weight:800;color:#956518;margin-top:5px;min-height:28px}
+    .rec-details summary::-webkit-details-marker{display:none}
+    .rec-details summary::after{content:'⌄';font-size:18px;line-height:1;transition:transform .18s ease}
+    .rec-details[open] summary::after{transform:rotate(180deg)}
+    .rec-list{display:flex;flex-direction:column;gap:8px;margin-top:9px;padding-top:9px;border-top:1px solid #eadfca}
+    .rec-place{display:grid;grid-template-columns:minmax(0,1fr) 38px;gap:9px;align-items:center;padding:9px 0}
+    .rec-place + .rec-place{border-top:1px solid #eee5d6}
+    .rec-name{font-size:14px;font-weight:900;line-height:1.35;color:#252a2e;overflow-wrap:anywhere}
+    .rec-address{font-size:11.5px;line-height:1.45;color:#78818a;margin-top:2px;overflow-wrap:anywhere}
+    .rec-note{font-size:12px;line-height:1.45;color:#5f6870;margin-top:3px;overflow-wrap:anywhere}
+    .rec-map-btn{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#edf5fc;color:#2474b8;text-decoration:none;flex:0 0 auto}
+    .rec-map-btn::before{content:'⌖';font-size:20px;font-weight:800;line-height:1}
+    .ticket-reminder{margin:10px 0 12px;padding:11px 12px;border-radius:13px;background:#fff7ef;border:1px solid #f0d4b8;display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .ticket-reminder-copy{min-width:0}.ticket-reminder strong{display:block;font-size:13px;color:#9c4c23}.ticket-reminder span{display:block;margin-top:2px;font-size:11.5px;line-height:1.4;color:#6e6259}
+    .ticket-reminder a{flex:0 0 auto;min-height:34px;padding:7px 9px;border-radius:10px;border:1px solid #e3b890;background:#fff;color:#9c4c23;text-decoration:none;font-size:11px;font-weight:900}
+    @media(max-width:390px){.rec-place{grid-template-columns:minmax(0,1fr) 34px}.rec-map-btn{width:34px;height:34px}.ticket-reminder{align-items:flex-start;flex-direction:column}.ticket-reminder a{align-self:flex-end}}
+  `;
+  document.head.append(style);
 
-    const row = document.createElement('div');
-    row.className = 'tl-row';
-
-    const timeBlock = document.createElement('div');
-    timeBlock.className = 'tl-time-block';
-    const timeText = document.createElement('span');
-    timeText.className = 'tl-time';
-    timeText.textContent = time;
-    timeBlock.append(timeText);
-
-    const copy = document.createElement('div');
-    copy.className = 'tl-copy';
-    const primary = document.createElement('div');
-    primary.className = 'tl-primary';
-    const titleEl = document.createElement('div');
-    titleEl.className = 'tl-title';
-    titleEl.textContent = title;
-    primary.append(titleEl);
-
-    if (detail) {
-      const detailEl = document.createElement('div');
-      detailEl.className = 'tl-inline-detail';
-      detailEl.textContent = detail;
-      primary.append(detailEl);
-    }
-    copy.append(primary);
-    row.append(timeBlock, copy);
-
-    if (link) {
-      const map = document.createElement('a');
-      map.className = 'tl-map-btn';
-      map.href = link;
-      map.target = '_blank';
-      map.rel = 'noopener';
-      map.setAttribute('aria-label', `用 Google Maps 開啟 ${title}`);
-      map.title = 'Google Maps';
-      row.append(map);
-    }
-
-    li.append(row);
+  function makeGroup(group){
+    const li=document.createElement('li');
+    li.className='tl-extra recommend';
+    const row=document.createElement('div'); row.className='tl-row';
+    const timeBlock=document.createElement('div'); timeBlock.className='tl-time-block';
+    const time=document.createElement('span'); time.className='tl-time'; time.textContent=group.time; timeBlock.append(time);
+    const copy=document.createElement('div'); copy.className='tl-copy';
+    const primary=document.createElement('div'); primary.className='tl-primary';
+    const title=document.createElement('div'); title.className='tl-title'; title.textContent=group.title; primary.append(title);
+    if(group.detail){const detail=document.createElement('div'); detail.className='tl-inline-detail'; detail.textContent=group.detail; primary.append(detail)}
+    const details=document.createElement('details'); details.className='rec-details';
+    const summary=document.createElement('summary'); summary.textContent=`查看推薦 ${group.places.length} 個地點`; details.append(summary);
+    const list=document.createElement('div'); list.className='rec-list';
+    group.places.forEach(place=>{
+      const item=document.createElement('div'); item.className='rec-place';
+      const text=document.createElement('div');
+      const name=document.createElement('div'); name.className='rec-name'; name.textContent=place.name;
+      const address=document.createElement('div'); address.className='rec-address'; address.textContent=place.address;
+      text.append(name,address);
+      if(place.note){const note=document.createElement('div'); note.className='rec-note'; note.textContent=place.note; text.append(note)}
+      const map=document.createElement('a'); map.className='rec-map-btn'; map.href=place.map; map.target='_blank'; map.rel='noopener'; map.title='Google Maps'; map.setAttribute('aria-label',`用 Google Maps 開啟 ${place.name}`);
+      item.append(text,map); list.append(item);
+    });
+    details.append(list); primary.append(details); copy.append(primary); row.append(timeBlock,copy); li.append(row);
     return li;
-  };
+  }
 
-  function mergeExtras() {
-    Object.entries(plans).forEach(([day, items]) => {
-      const section = document.querySelector(`.trip-day[data-tab-day="${day}"]`);
-      const timeline = section?.querySelector('.day-timeline');
-      if (!section || !timeline) return;
-
-      timeline.querySelectorAll('.tl-extra').forEach(el => el.remove());
-      items.forEach(item => {
-        const card = makeCard(item);
-        if (item.before) {
-          const target = [...timeline.children].find(el => !el.classList.contains('tl-extra') && el.textContent.includes(item.before));
-          if (target) timeline.insertBefore(card, target);
-          else timeline.append(card);
-        } else {
-          timeline.append(card);
-        }
+  function findTarget(timeline,needle){return [...timeline.children].find(el=>!el.classList.contains('tl-extra')&&el.textContent.includes(needle))||null}
+  function mergeGroups(){
+    Object.entries(groups).forEach(([day,items])=>{
+      const section=document.querySelector(`.trip-day[data-tab-day="${day}"]`); const timeline=section?.querySelector('.day-timeline');
+      if(!section||!timeline)return;
+      timeline.querySelectorAll('.tl-extra').forEach(el=>el.remove());
+      items.forEach(group=>{
+        const card=makeGroup(group);
+        if(group.before){const target=findTarget(timeline,group.before); target?timeline.insertBefore(card,target):timeline.append(card)}
+        else if(group.after){const target=findTarget(timeline,group.after); target?target.insertAdjacentElement('afterend',card):timeline.append(card)}
+        else timeline.append(card);
       });
       section.classList.add('itinerary-merged');
     });
+    addTicketReminder();
   }
 
-  // layout-hotfix may have merged once before the readable timeline renderer ran.
-  // Re-merge now, then wrap future timeline renders so suggestions never disappear.
-  mergeExtras();
-  if (typeof window.renderDayTimelines === 'function' && !window.renderDayTimelines.__mergedExtrasWrapped) {
-    const original = window.renderDayTimelines;
-    const wrapped = function(...args) {
-      const result = original.apply(this, args);
-      mergeExtras();
-      return result;
-    };
-    wrapped.__mergedExtrasWrapped = true;
-    window.renderDayTimelines = wrapped;
+  function addTicketReminder(){
+    const section=document.querySelector('.trip-day[data-tab-day="2026-09-16"]'); if(!section)return;
+    section.querySelector('.ticket-reminder')?.remove();
+    const reminder=document.createElement('aside'); reminder.className='ticket-reminder';
+    reminder.innerHTML='<div class="ticket-reminder-copy"><strong>⏰ 11:00｜YOASOBI Ticket Plus 搶票提醒</strong><span>手機操作提醒，不算行程，不影響「現在／下一個」判斷。</span></div><a href="https://ticketplus.com.tw/" target="_blank" rel="noopener">Ticket Plus</a>';
+    const timeline=section.querySelector('.day-timeline'); timeline?.insertAdjacentElement('afterend',reminder);
   }
 
-  // One more pass after current synchronous initialization settles.
-  setTimeout(mergeExtras, 0);
+  try{if(typeof window.renderDayTimelines==='function')window.renderDayTimelines(getNow())}catch(_){ }
+  mergeGroups();
+  if(typeof window.renderDayTimelines==='function'&&!window.renderDayTimelines.__recommendationWrapped){
+    const original=window.renderDayTimelines;
+    const wrapped=function(...args){const result=original.apply(this,args); mergeGroups(); return result};
+    wrapped.__recommendationWrapped=true; window.renderDayTimelines=wrapped;
+  }
+  setTimeout(mergeGroups,0);
 })();
