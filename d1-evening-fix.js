@@ -1,43 +1,22 @@
-// 9/14 晚餐後預排行程：龍橋東岸散步／夜市，再到 BALI Spa • Cafe 做越式養生洗頭。
+// 9/14 晚餐後維持自由安排；夜市、龍橋與越式洗頭改由推薦折疊卡呈現，不參與「現在／下一個」判斷。
 (() => {
-  const freeEvening = itinerary.find(i => i.id === 'd1-free2');
-  if (freeEvening) {
-    freeEvening.start = '2026-09-14T20:00:00+07:00';
-    freeEvening.end = '2026-09-14T21:00:00+07:00';
-    freeEvening.startDate = new Date(freeEvening.start);
-    freeEvening.endDate = new Date(freeEvening.end);
-    freeEvening.title = '龍橋東岸散步／夜市';
-    freeEvening.detail = '約 45～60 分鐘｜鯉魚化龍像 → 愛情橋 → 韓江河畔／夜市 → 龍橋夜景';
-    freeEvening.type = 'planned';
-    freeEvening.important = false;
-    freeEvening.destination = {
-      name:'DHC Marina／Cá Chép Hóa Rồng（鯉魚化龍像）',
-      mapQuery:'DHC Marina Ca Chep Hoa Rong Da Nang'
-    };
+  const evening = itinerary.find(i => i.id === 'd1-free2');
+  if (evening) {
+    evening.start = '2026-09-14T20:00:00+07:00';
+    evening.end = '2026-09-14T23:59:59+07:00';
+    evening.startDate = new Date(evening.start);
+    evening.endDate = new Date(evening.end);
+    evening.title = '晚餐後自由安排';
+    evening.detail = '可選：山茶夜市／龍橋河畔散步／越式養生洗頭';
+    evening.type = 'free';
+    evening.important = false;
+    delete evening.destination;
   }
 
-  if (!itinerary.find(i => i.id === 'd1-bali-headspa')) {
-    itinerary.push({
-      id:'d1-bali-headspa',
-      day:'2026-09-14',
-      start:'2026-09-14T21:15:00+07:00',
-      end:'2026-09-14T22:00:00+07:00',
-      title:'BALI Spa • Cafe｜越式養生洗頭',
-      detail:'Wellness Hair Wash & Head Spa｜吃飯時再訂位｜營業時間 09:00～02:00',
-      type:'planned',
-      important:false,
-      destination:{
-        name:'BALI Spa • Cafe',
-        mapQuery:'BALI Spa Cafe 485 Tran Hung Dao An Hai Da Nang Vietnam'
-      },
-      zone:DANANG_TZ,
-      startDate:new Date('2026-09-14T21:15:00+07:00'),
-      endDate:new Date('2026-09-14T22:00:00+07:00')
-    });
-  }
+  // 舊版曾把 BALI 洗頭排成固定時間節點；改回純推薦，避免影響即時行程。
+  const oldBaliIndex = itinerary.findIndex(i => i.id === 'd1-bali-headspa');
+  if (oldBaliIndex >= 0) itinerary.splice(oldBaliIndex, 1);
 
-  // 下方已不需要重複顯示「行程空檔總覽」。
   document.querySelector('.summary.all-only')?.remove();
-
   try { updateLiveMode(); } catch (_) {}
 })();
