@@ -3,6 +3,17 @@
   const ticketIndex = itinerary.findIndex(i => i.id === 'd3-yoasobi-ticket');
   if (ticketIndex >= 0) itinerary.splice(ticketIndex, 1);
 
+  // 9/15 已有明確的巴拿山與晚間 Klook 行程，取代原本「完整自由日」，讓現在／下一個行程與倒數能正確判斷。
+  const d2Items = [
+    {id:'d2-breakfast',day:'2026-09-15',start:'2026-09-15T00:00:00+07:00',end:'2026-09-15T10:00:00+07:00',title:'早餐／飯店準備',type:'free',destination:destinations.hotel,zone:DANANG_TZ},
+    {id:'d2-bana',day:'2026-09-15',start:'2026-09-15T10:00:00+07:00',end:'2026-09-15T18:00:00+07:00',title:'巴拿山 Sun World Ba Na Hills',detail:'10:00 從飯店出發；預計 18:00 回到飯店',type:'activity',important:true,zone:DANANG_TZ},
+    {id:'d2-hotel-return',day:'2026-09-15',start:'2026-09-15T18:00:00+07:00',end:'2026-09-15T19:00:00+07:00',title:'回飯店／準備 Klook Tour',detail:'巴拿山預計 18:00 回到 Peninsula Hotel Danang',type:'transfer',important:true,destination:destinations.hotel,zone:DANANG_TZ},
+    {id:'d2-klook-food-tour',day:'2026-09-15',start:'2026-09-15T19:00:00+07:00',end:'2026-09-15T22:00:00+07:00',title:'米其林街頭美食與精釀啤酒私人機車之旅',detail:'Klook｜19:00 集合',type:'activity',important:true,zone:DANANG_TZ},
+    {id:'d2-free-night',day:'2026-09-15',start:'2026-09-15T22:00:00+07:00',end:'2026-09-15T23:59:59+07:00',title:'Tour 後自由活動',type:'free',zone:DANANG_TZ}
+  ].map(i=>({...i,startDate:new Date(i.start),endDate:new Date(i.end)}));
+  for(let i=itinerary.length-1;i>=0;i--){if(itinerary[i].day==='2026-09-15')itinerary.splice(i,1)}
+  itinerary.push(...d2Items);
+
   const groups = {
     '2026-09-14': [
       {
@@ -38,20 +49,22 @@
     ],
     '2026-09-15': [
       {
-        time:'巴拿山', title:'白天安排建議', detail:'10:00 飯店出發；午餐山上解決。為了銜接 19:00 Tour，建議約 16:30～17:00 開始下山。', before:'19:00',
+        time:'巴拿山', title:'白天安排', detail:'10:00 飯店出發；午餐山上解決。預計 18:00 回到飯店，接著準備 19:00 Klook Tour。', before:'18:00',
         places:[
           {name:'Sun World Ba Na Hills', address:'Hòa Ninh, Hòa Vang, Đà Nẵng', note:'白天主要行程。', map:'https://www.google.com/maps/search/Sun+World+Ba+Na+Hills'},
-          {name:'Peninsula Hotel Danang', address:'Sơn Trà, Đà Nẵng', note:'回程接送時間仍待定；導航可直接帶回飯店。', map:'https://www.google.com/maps/search/Peninsula+Hotel+Danang'}
+          {name:'Peninsula Hotel Danang', address:'Sơn Trà, Đà Nẵng', note:'巴拿山預計 18:00 回到飯店。', map:'https://www.google.com/maps/search/Peninsula+Hotel+Danang'}
         ]
       },
       {
-        time:'Tour', title:'19:00 Tour 可能包含', detail:'實際停靠以 Tour 當天安排為準。', after:'19:00',
+        time:'19:00', title:'米其林街頭美食與精釀啤酒私人機車之旅', detail:'Klook 已購買行程；18:00 回飯店後整理，19:00 前往指定集合地點。', after:'19:00',
         places:[
-          {name:'Cầu Tình Yêu - Love Pier', address:'Trần Hưng Đạo, An Hải, Đà Nẵng', note:'韓江畔愛情橋。', map:'https://www.google.com/maps/search/Cau+Tinh+Yeu+Da+Nang'},
-          {name:'Dragon Bridge', address:'Cầu Rồng, Đà Nẵng', note:'龍橋夜景。', map:'https://www.google.com/maps/search/Dragon+Bridge+Da+Nang'},
-          {name:'APEC Park', address:'Bình Hiên, Hải Châu, Đà Nẵng', note:'市中心河岸公園。', map:'https://www.google.com/maps/search/APEC+Park+Da+Nang'},
-          {name:'Chè Liên', address:'Đà Nẵng', note:'越式甜品。', map:'https://www.google.com/maps/search/Che+Lien+Da+Nang'},
-          {name:'Hương Bia - Danang Craft Beer', address:'18 Tạ Mỹ Duật, An Hải, Đà Nẵng', note:'精釀啤酒。', map:'https://www.google.com/maps/search/Huong+Bia+18+Ta+My+Duat+Da+Nang'}
+          {name:'Klook Tour 集合地點', address:'依 Klook 指定 Google Maps 地點', note:'19:00 集合，出發前直接用此連結導航。', map:'https://maps.app.goo.gl/HuasPNrby1p1vp4Z7'},
+          {name:'Klook 行程頁', address:'米其林街頭美食與精釀啤酒私人機車之旅', note:'已購買行程，可快速開啟訂購頁確認內容。', map:'https://www.klook.com/zh-TW/activity/224232-da-nang-michelin-street-foods-craft-beer-tasting-private-motorbike-tour/?spm=BookingDetail.ActivityCard&clickId=afd505550c'},
+          {name:'Cầu Tình Yêu - Love Pier', address:'Trần Hưng Đạo, An Hải, Đà Nẵng', note:'Tour 可能停靠；實際以當天安排為準。', map:'https://www.google.com/maps/search/Cau+Tinh+Yeu+Da+Nang'},
+          {name:'Dragon Bridge', address:'Cầu Rồng, Đà Nẵng', note:'Tour 可能停靠；實際以當天安排為準。', map:'https://www.google.com/maps/search/Dragon+Bridge+Da+Nang'},
+          {name:'APEC Park', address:'Bình Hiên, Hải Châu, Đà Nẵng', note:'Tour 可能停靠；實際以當天安排為準。', map:'https://www.google.com/maps/search/APEC+Park+Da+Nang'},
+          {name:'Chè Liên', address:'Đà Nẵng', note:'Tour 可能停靠；實際以當天安排為準。', map:'https://www.google.com/maps/search/Che+Lien+Da+Nang'},
+          {name:'Hương Bia - Danang Craft Beer', address:'18 Tạ Mỹ Duật, An Hải, Đà Nẵng', note:'Tour 可能停靠；實際以當天安排為準。', map:'https://www.google.com/maps/search/Huong+Bia+18+Ta+My+Duat+Da+Nang'}
         ]
       }
     ],
@@ -144,7 +157,7 @@
       const address=document.createElement('div'); address.className='rec-address'; address.textContent=place.address;
       text.append(name,address);
       if(place.note){const note=document.createElement('div'); note.className='rec-note'; note.textContent=place.note; text.append(note)}
-      const map=document.createElement('a'); map.className='rec-map-btn'; map.href=place.map; map.target='_blank'; map.rel='noopener'; map.title='Google Maps'; map.setAttribute('aria-label',`用 Google Maps 開啟 ${place.name}`);
+      const map=document.createElement('a'); map.className='rec-map-btn'; map.href=place.map; map.target='_blank'; map.rel='noopener'; map.title=place.map.includes('klook.com')?'Klook':'Google Maps'; map.setAttribute('aria-label',`${map.title}：${place.name}`);
       item.append(text,map); list.append(item);
     });
     details.append(list); primary.append(details); copy.append(primary); row.append(timeBlock,copy); li.append(row);
@@ -177,6 +190,7 @@
   }
 
   try{if(typeof window.renderDayTimelines==='function')window.renderDayTimelines(getNow())}catch(_){ }
+  try{if(typeof updateLiveMode==='function')updateLiveMode()}catch(_){ }
   mergeGroups();
   if(typeof window.renderDayTimelines==='function'&&!window.renderDayTimelines.__recommendationWrapped){
     const original=window.renderDayTimelines;
