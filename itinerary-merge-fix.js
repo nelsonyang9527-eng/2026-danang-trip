@@ -70,9 +70,9 @@
     ],
     '2026-09-16': [
       {
-        time:'備案', title:'餐廳備案', detail:'只有臨時需要替代餐廳時再開。',
+        time:'午餐', title:'午餐備案', detail:'中午用餐需要備選時再開。',
         places:[
-          {name:'Pizza 4P’s Indochina Đà Nẵng', address:'Indochina Riverside Towers 2F, 74 Bạch Đằng, Hải Châu, Đà Nẵng', note:'不放進主行程，只保留快速導航。', map:'https://www.google.com/maps/search/Pizza+4Ps+Indochina+74+Bach+Dang+Da+Nang'}
+          {name:'Pizza 4P’s Indochina Đà Nẵng', address:'Indochina Riverside Towers 2F, 74 Bạch Đằng, Hải Châu, Đà Nẵng', note:'午餐備案，只保留快速導航。', map:'https://www.google.com/maps/search/Pizza+4Ps+Indochina+74+Bach+Dang+Da+Nang'}
         ]
       }
     ],
@@ -102,9 +102,9 @@
     ],
     '2026-09-18': [
       {
-        time:'早餐', title:'飯店附近就好', detail:'整理行李優先，不另外跑遠景點。', before:'10:30',
+        time:'08:00', title:'飯店早餐', detail:'08:00 飯店早餐｜早餐後整理行李，避免影響 10:30 機場集合。', before:'10:30',
         places:[
-          {name:'Peninsula Hotel Danang 周邊咖啡', address:'Sơn Trà, Đà Nẵng', note:'有時間才喝，避免影響 10:30 機場集合。', map:'https://www.google.com/maps/search/Coffee+near+Peninsula+Hotel+Danang'}
+          {name:'Peninsula Hotel Danang', address:'Sơn Trà, Đà Nẵng', note:'早餐在飯店用餐。', map:'https://www.google.com/maps/search/Peninsula+Hotel+Danang'}
         ]
       }
     ]
