@@ -1,4 +1,4 @@
-// 9/15 巴拿山包車規劃：10:00 飯店出發，6 人搭 12 人座；回程時間待定。
+// 9/15 巴拿山包車規劃：08:00 飯店早餐，10:00 飯店出發，6 人搭 12 人座；回程時間待定。
 (() => {
   const morning = itinerary.find(i => i.id === 'd2-free');
   if (morning) {
@@ -6,8 +6,8 @@
     morning.end = '2026-09-15T10:00:00+07:00';
     morning.startDate = new Date(morning.start);
     morning.endDate = new Date(morning.end);
-    morning.title = '飯店休息／附近走走';
-    morning.detail = '上午自由安排，10:00 前回飯店準備集合';
+    morning.title = '飯店早餐';
+    morning.detail = '08:00 飯店早餐｜早餐後自由整理，10:00 前回房準備集合';
     morning.type = 'free';
     morning.important = false;
     morning.bookingPending = false;
