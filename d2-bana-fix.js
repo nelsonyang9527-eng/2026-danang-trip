@@ -129,3 +129,34 @@
   script.dataset.uiTopFix = '1';
   document.body.append(script);
 })();
+
+// 9/14 第一天下午前：登機時間更新為 09:30（台灣時間）。
+(() => {
+  const meeting = itinerary.find(i => i.id === 'd1-tpe');
+  if (meeting) {
+    meeting.end = '2026-09-14T09:30:00+08:00';
+    meeting.endDate = new Date(meeting.end);
+  }
+
+  const flight = itinerary.find(i => i.id === 'd1-flight');
+  if (flight) {
+    flight.start = '2026-09-14T09:30:00+08:00';
+    flight.startDate = new Date(flight.start);
+    flight.title = 'BR383 登機／前往峴港';
+  }
+
+  const d1Card = document.querySelector('.trip-day[data-tab-day="2026-09-14"]');
+  if (d1Card) {
+    const meetingStep = d1Card.querySelector('.trip-step[data-start="2026-09-14T07:00:00+08:00"]');
+    if (meetingStep) meetingStep.dataset.end = '2026-09-14T09:30:00+08:00';
+
+    const flightStep = d1Card.querySelector('.trip-step[data-start="2026-09-14T09:45:00+08:00"]');
+    if (flightStep) {
+      flightStep.dataset.start = '2026-09-14T09:30:00+08:00';
+      flightStep.textContent = '09:30｜BR383 登機';
+    }
+  }
+
+  try { updateCurrentTrip(); } catch (_) {}
+  try { updateLiveMode(); } catch (_) {}
+})();
