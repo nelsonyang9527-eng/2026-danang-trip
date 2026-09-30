@@ -1,145 +1,73 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>2026 越南峴港 GO！｜旅遊卡</title>
-<meta name="description" content="9/14–9/18｜即時行程、集合資訊、Google Maps／Grab 快速導航。">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="zh_TW">
-<meta property="og:url" content="https://nelsonyang9527-eng.github.io/2026-danang-trip/">
-<meta property="og:title" content="2026 越南峴港 GO！｜旅遊行程卡">
-<meta property="og:description" content="9/14–9/18｜即時行程、集合資訊、Google Maps／Grab 快速導航。">
-<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/4/4f/Da_Nang_china_Beach_2020_IMG_4009.jpg">
-<meta property="og:image:alt" content="越南峴港海灘與城市景色">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="2026 越南峴港 GO！｜旅遊行程卡">
-<meta name="twitter:description" content="9/14–9/18｜即時行程、集合資訊、Google Maps／Grab 快速導航。">
-<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/4/4f/Da_Nang_china_Beach_2020_IMG_4009.jpg">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%23da251d%27/%3E%3Cpolygon points=%2732,9 37.4,25.5 54.8,25.5 40.7,35.7 46.1,52 32,42 17.9,52 23.3,35.7 9.2,25.5 26.6,25.5%27 fill=%27%23ffdf00%27/%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%23da251d%27/%3E%3Cpolygon points=%2732,9 37.4,25.5 54.8,25.5 40.7,35.7 46.1,52 32,42 17.9,52 23.3,35.7 9.2,25.5 26.6,25.5%27 fill=%27%23ffdf00%27/%3E%3C/svg%3E">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="styles.css?v=20260904-1520">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>2026 釜山 6天5夜｜旅遊卡</title>
+<meta name="description" content="10/28–11/2｜釜山慢旅行行程卡，西面、慶州、廣安里與自由行。">
+<link rel="stylesheet" href="styles.css?v=20260930-1">
+<style>
+.trip-switch{display:flex;gap:8px;overflow-x:auto;margin:0 0 14px;padding:2px}.trip-switch a{flex:0 0 auto;padding:9px 13px;border:1px solid #d8dee7;border-radius:999px;background:#fff;color:#4b5563;text-decoration:none;font-size:13px;font-weight:800}.trip-switch a.active{background:#1769aa;color:#fff;border-color:#1769aa}.planning{background:linear-gradient(135deg,#102a43,#1769aa)}.soft-note{font-size:13px;color:var(--muted);line-height:1.55}.status-pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#eef5fb;color:#155f9b;font-size:12px;font-weight:800}.choice-list li{margin-bottom:10px}.trip-day .links{margin-top:10px}.history-note{background:#f7f9fb;border:1px solid #edf0f4;border-radius:14px;padding:12px 14px;margin-top:12px;font-size:13px;color:#4b5563}.live-mode.pretrip .live-panel.now{border-left-color:#1769aa}.live-mode.pretrip .live-panel.next{border-left-color:#c9771f}
+@media(max-width:520px){.toprow{align-items:flex-start}.toprow h2{font-size:23px}.tag{text-align:right;font-size:13px;max-width:48%}.trip-switch{margin-left:-2px;margin-right:-2px}}
+</style>
 </head>
-<body>
-<main>
-<section class="live-mode" id="liveMode" aria-live="polite">
-  <div class="live-head"><div><div class="live-kicker">最新動態</div><div id="liveDayTitle" hidden></div><div class="live-test" id="testModeLabel">測試時間模式</div></div><div class="live-clock" id="liveClock">越南 --:--</div></div>
-  <div class="live-grid">
-    <div class="live-panel now"><div class="live-label">🟢 現在</div><div class="live-title" id="liveNowTitle">讀取行程中…</div><div class="live-time" id="liveNowTime"></div></div>
-    <div class="live-panel next"><div class="live-label" id="liveNextLabel">下一個</div><div class="live-title" id="liveNextTitle">讀取行程中…</div><div class="live-time" id="liveNextTime"></div><div class="live-countdown" id="liveCountdown"></div><div class="live-destination" id="liveDestination"></div>
-      <div class="live-actions"><button class="live-action grab" id="liveGrabBtn" type="button" hidden>🚕 Grab</button><a class="live-action maps" id="liveMapsBtn" href="#" target="_blank" rel="noopener" hidden>📍 Google Maps</a><button class="live-action location" id="liveLocationBtn" type="button" hidden>◎ 取得目前位置</button></div>
-      <div class="live-distance" id="liveDistance"></div><div class="live-note" id="liveGrabNote"></div>
-    </div>
-  </div>
+<body><main>
+<nav class="trip-switch" aria-label="旅程切換"><a class="active" href="./">🇰🇷 2026 釜山</a><a href="danang.html">🇻🇳 2026 峴港・已結束</a></nav>
+
+<section class="live-mode pretrip" id="liveMode">
+ <div class="live-head"><div><div class="live-kicker">旅程狀態</div></div><div class="live-clock" id="koreaClock">韓國 --:--</div></div>
+ <div class="live-grid">
+  <div class="live-panel now"><div class="live-label">目前</div><div class="live-title" id="statusTitle">行前規劃中</div><div class="live-time" id="statusSub">2026/10/28 出發</div></div>
+  <div class="live-panel next"><div class="live-label">下一個重點</div><div class="live-title" id="nextTitle">10/28 下午請假 → 機場接送</div><div class="live-time" id="nextSub">航班時間待確認</div><div class="live-countdown" id="miniCountdown"></div></div>
+ </div>
 </section>
+
 <header class="hero">
-  <h1>2026 越南峴港 GO！｜旅遊卡</h1>
-  <div class="timezones" aria-label="台灣與越南目前時間"><span>🇹🇼 台灣 <strong id="taiwanTime">--:--</strong></span><span>🇻🇳 越南 <strong id="vietnamTime">--:--</strong></span></div>
-  <div class="countdown" id="countdownBox"><div class="countdown-label">距離 9/14 送機接送出發</div><div class="countdown-main" id="countdown">計算中…</div><div class="countdown-sub" id="countdownSub">送機接送：2026/9/14 06:30（台灣時間）</div></div>
+ <h1>2026 釜山 6天5夜｜旅遊卡</h1>
+ <div class="sub">10/28（三）～11/2（一）・住宿：西面站附近<br>慢旅行｜一天一個主要區域｜保留咖啡與休息時間</div>
+ <div class="timezones"><span>🇹🇼 台灣 <strong id="taiwanTime">--:--</strong></span><span>🇰🇷 韓國 <strong id="koreaTime">--:--</strong></span></div>
+ <div class="countdown planning"><div class="countdown-label">距離 10/28 釜山旅行</div><div class="countdown-main" id="countdown">計算中…</div><div class="countdown-sub" id="countdownSub">確切機場接送與航班時間待確認</div></div>
 </header>
+
 <nav class="day-tabs-wrap" aria-label="行程日期分頁"><div class="day-tabs" id="dayTabs">
-  <button class="day-tab" type="button" data-tab="all">全部</button><button class="day-tab" type="button" data-tab="2026-09-14">9/14</button><button class="day-tab" type="button" data-tab="2026-09-15">9/15</button><button class="day-tab" type="button" data-tab="2026-09-16">9/16</button><button class="day-tab" type="button" data-tab="2026-09-17">9/17</button><button class="day-tab" type="button" data-tab="2026-09-18">9/18</button>
+<button class="day-tab active" data-tab="all">總覽</button><button class="day-tab" data-tab="2026-10-28">10/28</button><button class="day-tab" data-tab="2026-10-29">10/29</button><button class="day-tab" data-tab="2026-10-30">10/30</button><button class="day-tab" data-tab="2026-10-31">10/31</button><button class="day-tab" data-tab="2026-11-01">11/1</button><button class="day-tab" data-tab="2026-11-02">11/2</button>
 </div></nav>
-<section class="mapcard" id="mainMapCard"><div class="maphead"><button class="map-toggle" id="mapToggle" type="button" aria-expanded="false" aria-controls="mapCollapse"><strong>主要地點地圖</strong><span class="map-toggle-meta"><span id="mapScopeLabel">全部行程</span><span class="map-chevron">⌄</span></span></button></div><div class="map-collapse" id="mapCollapse" hidden><div id="map"></div><div class="mapnote">地圖會依目前選擇的日期顯示相關地點；點標記可直接用 Google Maps 開啟。</div></div></section>
-<section class="card trip-day" data-tab-day="2026-09-14">
-  <div class="toprow"><h2>9/14（一）</h2><span class="tag">抵達日</span></div><div class="badge">咖啡・小物・海灘・海鮮</div><ul class="day-timeline" data-timeline></ul>
-  <h3>固定行程</h3><ul>
-    <li class="trip-step" data-start="2026-09-14T06:30:00+08:00" data-end="2026-09-14T07:00:00+08:00"><strong>06:30｜送機接送出發</strong></li>
-    <li class="trip-step" data-start="2026-09-14T07:00:00+08:00" data-end="2026-09-14T09:45:00+08:00"><strong>07:00｜桃園國際機場第二航廈集合</strong><br>集合地點：長榮航空 18 號櫃檯。<br>抵達後請尋找福委 EJ／慧柔，領取護照及登機證。</li>
-    <li class="trip-step" data-start="2026-09-14T09:45:00+08:00" data-end="2026-09-14T11:35:00+07:00">09:45｜BR383 起飛</li>
-    <li class="trip-step" data-start="2026-09-14T11:35:00+07:00" data-end="2026-09-14T13:00:00+07:00">11:35｜抵達峴港</li>
-    <li class="trip-step" data-start="2026-09-14T12:30:00+07:00" data-end="2026-09-14T13:15:00+07:00">抵達後｜Peninsula Hotel Danang 寄放行李</li>
-    <li class="trip-step" data-start="2026-09-14T18:00:00+07:00" data-end="2026-09-14T20:00:00+07:00">18:00｜Mộc quán Seafood Đà Nẵng 海鮮聚餐</li>
-  </ul>
-  <h3 class="orange">下午建議</h3><ul>
-    <li><strong>午餐輕食｜Bánh mì / Phở / Bún bò</strong><br>飯店附近找即可，不要吃太撐。<div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/Banh+mi+Pho+Bun+bo+near+Peninsula+Hotel+Danang" target="_blank" rel="noopener">📍 導航</a></div></li>
-    <li><strong>Trình cà phê - Chợ Hàn</strong><br>越南咖啡備選。<div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/Tr%C3%ACnh+c%C3%A0+ph%C3%AA+Ch%E1%BB%A3+H%C3%A0n+Da+Nang" target="_blank" rel="noopener">📍 導航</a></div></li>
-    <li><strong>Wonderlust - Coffee & Souvenir</strong><br>咖啡＋伴手禮，可一次解決。<div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/Wonderlust+Coffee+%26+Souvenir+Da+Nang" target="_blank" rel="noopener">📍 導航</a></div></li>
-    <li><strong>LỤC LAM Da Nang</strong><br>小物／伴手禮備選。<div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/L%E1%BB%A4C+LAM+Da+Nang" target="_blank" rel="noopener">📍 導航</a></div></li>
-    <li><strong>Star Kitchen Souvenir Gift Shop Da Nang</strong><br>伴手禮備選。<div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/Star+Kitchen+Souvenir+Gift+Shop+Da+Nang" target="_blank" rel="noopener">📍 導航</a></div></li>
-    <li><strong>Dragon Market Da Nang</strong><br>靠近美溪沙灘的小物／伴手禮備選。<div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/Dragon+Market+Da+Nang+49+Tran+Bach+Dang" target="_blank" rel="noopener">📍 導航</a></div></li>
-    <li><strong>16:00 左右｜美溪沙灘 My Khe Beach</strong><br>散步、看海，之後準備前往晚餐。<div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/My+Khe+Beach+Da+Nang" target="_blank" rel="noopener">📍 導航</a></div></li>
-  </ul>
-  <h3 class="blue">晚上固定</h3><ul><li><strong>18:00｜Mộc quán Seafood Đà Nẵng</strong><div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/M%E1%BB%99c+qu%C3%A1n+Seafood+%C4%90%C3%A0+N%E1%BA%B5ng" target="_blank" rel="noopener">📍 導航</a></div></li></ul>
-</section>
-<section class="card trip-day" data-tab-day="2026-09-15">
-  <div class="toprow"><h2>9/15（二）</h2><span class="tag">巴拿山 + 美食 Tour</span></div><div class="badge">白天巴拿山・晚上機車美食</div><ul class="day-timeline" data-timeline></ul>
-  <h3>主要行程</h3><ul>
-    <li class="trip-step" data-start="2026-09-15T10:00:00+07:00" data-end="2026-09-15T11:00:00+07:00">10:00｜從飯店出發前往 Sun World Ba Na Hills</li>
-    <li>午餐｜巴拿山上解決。</li>
-    <li>回程接送時間待定，依現場狀況決定。</li>
-    <li class="trip-step" data-start="2026-09-15T19:00:00+07:00" data-end="2026-09-15T22:00:00+07:00">19:00｜Klook 米其林街頭美食 & 精釀啤酒機車 Tour</li>
-  </ul>
-  <h3 class="blue">Tour 可能包含</h3><p>Love Pier / Cầu Tình Yêu、Dragon Bridge 龍橋、APEC Park、Chè Liên、Hương Bia - Danang Craft Beer。</p>
-  <div class="links">
-    <a class="mapbtn" href="https://www.google.com/maps/search/Sun+World+Ba+Na+Hills" target="_blank" rel="noopener">📍 巴拿山</a>
-    <a class="mapbtn" href="https://www.google.com/maps/search/C%E1%BA%A7u+T%C3%ACnh+Y%C3%AAu+Da+Nang" target="_blank" rel="noopener">📍 Love Pier</a>
-    <a class="mapbtn" href="https://www.google.com/maps/search/Dragon+Bridge+Da+Nang" target="_blank" rel="noopener">📍 龍橋</a>
-    <a class="mapbtn" href="https://www.google.com/maps/search/APEC+Park+Da+Nang" target="_blank" rel="noopener">📍 APEC Park</a>
-    <a class="mapbtn" href="https://www.google.com/maps/search/Ch%C3%A8+Li%C3%AAn+Da+Nang" target="_blank" rel="noopener">📍 Chè Liên</a>
-    <a class="mapbtn" href="https://www.google.com/maps/search/H%C6%B0%C6%A1ng+Bia+Danang+Craft+Beer" target="_blank" rel="noopener">📍 Hương Bia</a>
-  </div>
-</section>
-<section class="card trip-day" data-tab-day="2026-09-16">
-  <div class="toprow"><h2>9/16（三）</h2><span class="tag">城市歷史 + 共市場 + 聚餐</span></div><div class="badge">市區文化日</div><ul class="day-timeline" data-timeline></ul>
-  <h3>主要行程</h3><ul>
-    <li class="trip-step" data-start="2026-09-16T09:30:00+07:00" data-end="2026-09-16T10:45:00+07:00">09:30｜Museum of Cham Sculpture 占婆雕刻博物館</li>
-    <li class="trip-step" data-start="2026-09-16T11:15:00+07:00" data-end="2026-09-16T12:15:00+07:00">11:15｜Da Nang Museum 峴港博物館</li>
-    <li class="trip-step" data-start="2026-09-16T12:30:00+07:00" data-end="2026-09-16T14:00:00+07:00">12:30｜午餐：朋友推薦多人分享餐廳（店名／連結待補）</li>
-    <li class="trip-step" data-start="2026-09-16T14:15:00+07:00" data-end="2026-09-16T16:30:00+07:00">14:15｜Chợ Cồn 共市場</li>
-    <li class="trip-step" data-start="2026-09-16T17:50:00+07:00" data-end="2026-09-16T18:00:00+07:00">17:50｜BRILLIANT SEAFOOD 集合</li>
-    <li class="trip-step" data-start="2026-09-16T18:00:00+07:00" data-end="2026-09-16T21:00:00+07:00">18:00～21:00｜BRILLIANT SEAFOOD 全公司聚餐</li>
-  </ul>
-  <h3 class="orange">備案</h3><p>Pizza 4P’s Indochina Đà Nẵng。</p>
-  <div class="links">
-    <a class="mapbtn" href="https://www.google.com/maps/search/Museum+of+Cham+Sculpture+Da+Nang" target="_blank" rel="noopener">📍 占婆雕刻博物館</a>
-    <a class="mapbtn" href="https://www.google.com/maps/search/Da+Nang+Museum" target="_blank" rel="noopener">📍 峴港博物館</a>
-    <a class="mapbtn" href="https://www.google.com/maps/search/Ch%E1%BB%A3+C%E1%BB%93n+Da+Nang" target="_blank" rel="noopener">📍 共市場</a>
-    <a class="mapbtn" href="https://www.google.com/maps/search/Brilliant+Seafood+Da+Nang" target="_blank" rel="noopener">📍 BRILLIANT SEAFOOD</a>
-    <a class="mapbtn" href="https://www.google.com/maps/search/Pizza+4P%27s+Indochina+Da+Nang" target="_blank" rel="noopener">📍 Pizza 4P’s</a>
-  </div>
-</section>
-<section class="card trip-day" data-tab-day="2026-09-17">
-  <div class="toprow"><h2>9/17（四）</h2><span class="tag">會安古城整天</span></div><div class="badge">古城・特色菜・按摩</div><ul class="day-timeline" data-timeline></ul>
-  <h3>主要行程</h3><ul>
-    <li>Hoi An Ancient Town 會安古城。</li>
-    <li>Japanese Covered Bridge 日本橋。</li>
-    <li>Fujian Assembly Hall 福建會館。</li>
-    <li>午餐｜會安特色菜 Cao lầu；也可安排 White Rose Restaurant Hoi An。</li>
-    <li>下午按摩備選｜Five Senses Spa Hoi An / Metta Spa & Massage Hoi An。</li>
-  </ul>
-  <h3 class="blue">安排方式</h3><p>白天慢慢逛古城、吃會安特色料理；下午若走累可先按摩，再留到傍晚感受古城夜色。</p>
-  <div class="links">
-    <a class="mapbtn" href="https://www.google.com/maps/search/Hoi+An+Ancient+Town" target="_blank" rel="noopener">📍 會安古城</a>
-    <a class="mapbtn" href="https://www.google.com/maps/search/Japanese+Covered+Bridge+Hoi+An" target="_blank" rel="noopener">📍 日本橋</a>
-    <a class="mapbtn" href="https://www.google.com/maps/search/Fujian+Assembly+Hall+Hoi+An" target="_blank" rel="noopener">📍 福建會館</a>
-    <a class="mapbtn" href="https://www.google.com/maps/search/Cao+l%E1%BA%A7u+Hoi+An" target="_blank" rel="noopener">📍 Cao lầu</a>
-    <a class="mapbtn" href="https://www.google.com/maps/search/White+Rose+Restaurant+Hoi+An" target="_blank" rel="noopener">📍 White Rose</a>
-    <a class="mapbtn" href="https://www.google.com/maps/search/Five+Senses+Spa+Hoi+An" target="_blank" rel="noopener">📍 Five Senses Spa</a>
-    <a class="mapbtn" href="https://www.google.com/maps/search/Metta+Spa+Massage+Hoi+An" target="_blank" rel="noopener">📍 Metta Spa</a>
-  </div>
-</section>
-<section class="card trip-day" data-tab-day="2026-09-18">
-  <div class="toprow"><h2>9/18（五）</h2><span class="tag">回程日</span></div><div class="badge">空閒度 ★☆☆☆☆</div><ul class="day-timeline" data-timeline></ul>
-  <h3>固定行程</h3><ul><li class="trip-step" data-start="2026-09-18T10:30:00+07:00" data-end="2026-09-18T12:55:00+07:00">10:30｜峴港機場 T2 集合（自行前往）</li><li class="trip-step" data-start="2026-09-18T12:55:00+07:00" data-end="2026-09-18T16:45:00+08:00">12:55｜BR384 起飛</li><li class="trip-step" data-start="2026-09-18T16:45:00+08:00" data-end="2026-09-18T18:00:00+08:00">16:45｜抵達桃園</li><li><strong>接機接送｜依實際航班抵達時間安排</strong></li></ul><h3 class="orange">可塞時段</h3><p>早餐～出發前</p><h3 class="blue">適合安排</h3><p>早餐、附近咖啡、整理行李；不建議再跑景點。</p><div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Da+Nang+International+Terminal+T2" target="_blank" rel="noopener">📍 峴港機場 T2</a></div>
-</section>
-<section class="card all-only"><div class="toprow"><h2>行前重點</h2><span class="tag">快速確認</span></div>
-  <h3>時間與時差</h3><ul><li>9/3（四）前完成護照正本繳交。</li><li>越南時間比台灣慢 1 小時；抵達越南後，所有集合及用餐時間均以越南當地時間為準。</li></ul>
-  <h3>行李</h3><ul><li>托運：1 件，最多 23 kg。</li><li>手提：1 件，最多 7 kg。</li><li><strong>行動電源、鋰電池、備用電池不可托運，務必放隨身行李。</strong></li><li>超過 100 ml 液體、噴霧、剪刀及尖銳物品建議放托運行李。</li></ul>
-  <h3>天氣與穿著</h3><ul><li>9 月為雨季初期，約 25～31°C，午後可能有短暫雷雨。</li><li>建議攜帶雨傘、薄外套、薄長袖、防曬用品。</li><li>若前往寺廟或宗教場所，避免露肩及過度暴露服裝。</li></ul>
-  <h3>換匯、付款與用電</h3><ul><li><strong>換匯建議：</strong>可攜帶新台幣或美金，到越南當地換越南盾；若帶美金，建議使用新版、無破損、無污損及無明顯折痕的鈔票。</li><li><strong>Grab：</strong>出發前先完成 App 註冊並綁定信用卡，到越南叫車時可直接使用，減少現金找零的不便。</li><li>快速換算：100,000 越南盾約 NT$130（僅供心算）。</li><li>越南電壓 220V；充電器標示 100～240V 即可直接使用。</li><li>建議帶少量現金；飯店、大型餐廳、超市與 Grab 多可使用信用卡或其他付款方式。</li></ul>
-  <h3>不要帶</h3><ul><li>肉類、水果及動植物產品，避免涉及海關檢疫限制。</li><li>電子煙、加熱菸、煙彈及相關設備建議完全不要攜帶。</li></ul>
-</section>
-<section class="summary all-only"><h3>行程空檔總覽</h3><p><strong>9/15：</strong>巴拿山＋晚間美食 Tour<br><strong>9/16：</strong>城市歷史＋共市場＋公司聚餐<br><strong>9/17：</strong>會安古城整天<br><strong>9/14：</strong>抵達後咖啡、小物、美溪沙灘<br><strong>9/18：</strong>早餐後準備回程</p></section>
-<div class="toast" id="toast"></div>
+
+<section class="card trip-day" data-tab-day="2026-10-28"><div class="toprow"><h2>10/28（三）</h2><span class="tag">抵達釜山</span></div><div class="badge">上班半天・移動・西面</div>
+<h3>主要行程</h3><ul><li>上午｜上班。</li><li>下午｜請假，機場接送前往機場。</li><li>搭機前往釜山 <span class="status-pill">航班待確認</span></li><li>抵達金海機場 → 前往西面飯店。</li><li>Check-in、放行李。</li><li><strong>晚上｜西面韓式燒肉</strong><br>吃完視體力簡單逛西面商圈。</li></ul>
+<div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Seomyeon+Busan" target="_blank" rel="noopener">📍 西面</a><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Gimhae+International+Airport" target="_blank" rel="noopener">📍 金海機場</a></div></section>
+
+<section class="card trip-day" data-tab-day="2026-10-29"><div class="toprow"><h2>10/29（四）</h2><span class="tag">西面慢遊</span></div><div class="badge">展覽・田浦・Head SPA</div>
+<h3>安排方式</h3><ul><li><strong>睡飽自然醒</strong>，西面吃午餐。</li><li>下午｜博物館／美術館／期間限定展覽，依當期展覽再選。</li><li>田浦、西面商圈逛街，中間安排咖啡店休息。</li><li>晚餐後安排 <strong>Head SPA</strong>：洗頭、頭皮按摩、肩頸放鬆。</li><li>回飯店休息。</li></ul>
+<div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Jeonpo+Cafe+Street+Busan" target="_blank" rel="noopener">📍 田浦咖啡街</a><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Head+Spa+Seomyeon+Busan" target="_blank" rel="noopener">📍 Head SPA 搜尋</a></div></section>
+
+<section class="card trip-day" data-tab-day="2026-10-30"><div class="toprow"><h2>10/30（五）</h2><span class="tag">慶州一日遊</span></div><div class="badge">小團・悠閒・3～4 個景點</div>
+<h3>跟團條件</h3><ul><li>釜山出發的慶州一日遊。</li><li>優先找<strong>行程悠閒、小團、景點不密集</strong>的團。</li><li>約 3～4 個主要景點即可。</li><li>需要足夠自由活動與吃飯時間。</li><li>晚上返回西面，宵夜／休息。</li></ul>
+<div class="history-note">旅行團尚未決定，因此目前不放假集合時間；確定後再加入即時行程與集合提醒。</div>
+<div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Gyeongju+South+Korea" target="_blank" rel="noopener">📍 慶州</a></div></section>
+
+<section class="card trip-day" data-tab-day="2026-10-31"><div class="toprow"><h2>10/31（六）</h2><span class="tag">廣安里</span></div><div class="badge">午後出發・海邊・無人機秀</div>
+<h3>主要行程</h3><ul><li><strong>睡飽自然醒</strong>，午餐後再出發。</li><li>下午｜廣安里海水浴場附近散步。</li><li>咖啡店／逛街／周邊景點，保留休息時間。</li><li>廣安里晚餐。</li><li><strong>晚上｜廣安里 M 無人機燈光秀</strong> <span class="status-pill">時間待確認</span></li><li>看完表演後慢慢逛，再返回西面。</li></ul>
+<div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Gwangalli+Beach+Busan" target="_blank" rel="noopener">📍 廣安里海水浴場</a></div></section>
+
+<section class="card trip-day" data-tab-day="2026-11-01"><div class="toprow"><h2>11/1（日）</h2><span class="tag">自由行</span></div><div class="badge">保留彈性・不塞景點</div>
+<h3>當天再選一個方向</h3><ul class="choice-list"><li><strong>海雲台＋青沙浦</strong>｜海邊散步、咖啡。</li><li><strong>南浦洞＋影島</strong>｜逛街、港景、咖啡。</li><li><strong>文化路線</strong>｜釜山其他博物館／當期展覽。</li><li><strong>完全放鬆</strong>｜購物、咖啡、SPA／按摩，或單純悠閒一天。</li></ul>
+<p class="soft-note">原則：當天只選一個主要區域，不為了打卡跨區趕行程。</p>
+<div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Haeundae+Beach+Busan" target="_blank" rel="noopener">📍 海雲台</a><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Cheongsapo+Busan" target="_blank" rel="noopener">📍 青沙浦</a><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Nampo-dong+Busan" target="_blank" rel="noopener">📍 南浦洞</a><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Yeongdo+Busan" target="_blank" rel="noopener">📍 影島</a></div></section>
+
+<section class="card trip-day" data-tab-day="2026-11-02"><div class="toprow"><h2>11/2（一）</h2><span class="tag">醫美＋回台灣</span></div><div class="badge">西面・醫美・回程</div>
+<h3>主要行程</h3><ul><li>睡飽、整理行李，Check-out／寄放行李。</li><li>西面吃午餐。</li><li class="trip-step" data-start="2026-11-02T12:30:00+09:00" data-end="2026-11-02T13:00:00+09:00"><strong>12:30｜前往醫美診所</strong> <span class="status-pill">診所待確認</span></li><li class="trip-step" data-start="2026-11-02T13:00:00+09:00" data-end="2026-11-02T16:00:00+09:00"><strong>13:00｜醫美</strong><br>男：臉部雷射除斑<br>女：法令紋諮詢／療程</li><li>約 15:00～16:00 結束，西面附近逛街、休息。</li><li>回飯店拿行李。</li><li><strong>約 17:00～17:30｜前往金海機場</strong></li><li>機場晚餐／逛免稅店。</li><li>約 21:00 後班機回台灣 <span class="status-pill">航班待確認</span></li><li>抵達台灣 → 回家。</li></ul>
+<div class="links"><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Gimhae+International+Airport" target="_blank" rel="noopener">📍 金海機場</a></div></section>
+
+<section class="card all-only"><div class="toprow"><h2>旅行風格</h2><span class="tag">這趟的原則</span></div><ul><li>不趕行程，每天睡飽再出門。</li><li>一天以一個主要區域為主，不追求景點數量。</li><li>優先博物館、展覽、表演、SPA、按摩與美食。</li><li>行程中保留咖啡店及休息時間。</li><li>除了慶州跟團之外，以自由行為主。</li></ul></section>
+<section class="summary all-only"><h3>6 天節奏</h3><p><strong>Day 1：</strong>抵達＋西面<br><strong>Day 2：</strong>西面慢遊＋Head SPA<br><strong>Day 3：</strong>慶州小團一日遊<br><strong>Day 4：</strong>廣安里＋無人機秀<br><strong>Day 5：</strong>彈性自由行<br><strong>Day 6：</strong>醫美＋回台灣</p></section>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="app.js?v=20260904-1455"></script>
-<script src="live-enhancements.js?v=20260904-1455"></script>
-<script src="timeline-fixes.js?v=20260904-1455"></script>
-<script src="ticketplus-fix.js?v=20260904-1455"></script>
-<script src="layout-hotfix.js?v=20260904-1525"></script>
-<script src="itinerary-merge-fix.js?v=20260909-0925"></script>
-</body>
-</html>
+<script>
+const tripStart=new Date('2026-10-28T12:00:00+08:00'),tripEnd=new Date('2026-11-03T00:00:00+08:00');
+const fmtTW=new Intl.DateTimeFormat('zh-TW',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',hour12:false});
+const fmtKR=new Intl.DateTimeFormat('zh-TW',{timeZone:'Asia/Seoul',hour:'2-digit',minute:'2-digit',hour12:false});
+function dateKeyKR(d){const p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(d);const o={};p.forEach(x=>o[x.type]=x.value);return o.year+'-'+o.month+'-'+o.day}
+function update(){const n=new Date();taiwanTime.textContent=fmtTW.format(n);koreaTime.textContent=fmtKR.format(n);koreaClock.textContent='韓國 '+fmtKR.format(n);const diff=tripStart-n;if(diff>0){const s=Math.floor(diff/1000),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);countdown.innerHTML='<span class="num">'+d+'</span> 天 <span class="num">'+String(h).padStart(2,'0')+'</span> 時 <span class="num">'+String(m).padStart(2,'0')+'</span> 分';miniCountdown.textContent='還有 '+d+' 天';}else if(n<tripEnd){countdown.textContent='旅程進行中';countdownSub.textContent='依日期切換查看今天行程';statusTitle.textContent='釜山旅行進行中';statusSub.textContent=dateKeyKR(n);miniCountdown.textContent='';}else{countdown.textContent='旅程已結束';countdownSub.textContent='2026/10/28－11/2 釜山 6天5夜';statusTitle.textContent='旅程已結束';statusSub.textContent='可繼續保留為歷史旅程';nextTitle.textContent='沒有後續固定行程';nextSub.textContent='';miniCountdown.textContent='';}}
+function selectTab(tab){document.querySelectorAll('.day-tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));document.querySelectorAll('.trip-day').forEach(c=>c.classList.toggle('tab-hidden',tab!=='all'&&c.dataset.tabDay!==tab));document.querySelectorAll('.all-only').forEach(c=>c.classList.toggle('tab-hidden',tab!=='all'))}
+document.querySelectorAll('.day-tab').forEach(b=>b.addEventListener('click',()=>selectTab(b.dataset.tab)));update();setInterval(update,30000);
+</script>
+</body></html>
