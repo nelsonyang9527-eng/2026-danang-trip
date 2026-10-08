@@ -22,3 +22,9 @@ html body main a:focus-visible,html body main button:focus-visible{outline:3px s
 html body main [hidden]{display:none!important}
 html body main .card.trip-day{padding:24px!important}
 @media(max-width:600px){html body main .card.trip-day{padding:18px!important}}
+/* Archive links follow the same available card width as the overview. */
+html body main .timeline{margin-left:0;padding-left:0;border-left:0}
+html body main .timeline .trip-card{width:100%;max-width:none;overflow:hidden}
+html body main .timeline .trip-card::before{display:none}
+html body main .timeline .trip-cover{height:180px}
+@media(max-width:600px){html body main .timeline .trip-cover{height:168px}}

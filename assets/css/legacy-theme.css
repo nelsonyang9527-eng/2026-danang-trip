@@ -42,3 +42,12 @@ html body main .hero .timezones{margin-top:8px}
 html body main .hero>#historyStatus{margin:0}
 html body main .trip-day.itinerary-merged .day-timeline>li{border:1px solid var(--line)!important;border-radius:12px!important;box-shadow:none!important;background:#fff!important;color:var(--ink)!important}
 html body main .trip-day.itinerary-merged .day-timeline .tl-row{border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;padding:0!important}
+/* Recommendations use full-width rows and reserve the actual touch-target width. */
+html body main .trip-day .rec-details{width:100%;padding:0 12px;box-sizing:border-box}
+html body main .trip-day .rec-details summary{color:#355b94;font-size:14px;font-weight:650;gap:12px}
+html body main .trip-day .rec-list{border-top-color:var(--line);margin-top:0;padding-top:8px}
+html body main .trip-day .rec-place{width:100%;grid-template-columns:minmax(0,1fr) 44px;gap:12px;padding:12px 0}
+html body main .trip-day .rec-place+.rec-place{border-top-color:var(--line)}
+html body main .trip-day .rec-name{font-size:15px;line-height:1.6;font-weight:650;color:var(--ink)}
+html body main .trip-day .rec-address,html body main .trip-day .rec-note{font-size:13px;line-height:1.7;color:var(--muted)}
+html body main .trip-day .rec-map-btn{width:44px;height:44px;justify-self:end}
