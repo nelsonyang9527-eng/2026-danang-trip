@@ -1,0 +1,332 @@
+{
+  "id": "2026-busan",
+  "title": "2026 釜山 6天5夜",
+  "timezone": "Asia/Seoul",
+  "timezoneLabel": "韓國",
+  "start": "2026-10-28",
+  "end": "2026-11-02",
+  "summary": "西面、慶州、廣安里與海雲台；一天一個主要區域，保留咖啡與休息時間。",
+  "notes": [
+    "住宿：西面站附近。",
+    "不趕行程，每天睡飽再出門。",
+    "優先博物館、展覽、表演、SPA、按摩與美食。",
+    "除了慶州跟團之外，以自由行為主。",
+    "航班與機場接送時間待確認。"
+  ],
+  "days": [
+    {
+      "date": "2026-10-28",
+      "title": "抵達釜山",
+      "events": [
+        {
+          "id": "2026-10-28-01",
+          "title": "上午｜上班。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-10-28-02",
+          "title": "下午｜請假，機場接送前往機場。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-10-28-03",
+          "title": "搭機前往釜山 航班待確認",
+          "notes": "",
+          "status": "tentative"
+        },
+        {
+          "id": "2026-10-28-04",
+          "title": "抵達金海機場 → 前往西面飯店。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-10-28-05",
+          "title": "Check-in、放行李。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-10-28-06",
+          "title": "晚上｜西面韓式燒肉",
+          "notes": "吃完視體力簡單逛西面商圈。",
+          "status": "planned"
+        }
+      ],
+      "links": [
+        {
+          "label": "📍 西面",
+          "url": "https://www.google.com/maps/search/?api=1&query=Seomyeon+Busan"
+        },
+        {
+          "label": "📍 金海機場",
+          "url": "https://www.google.com/maps/search/?api=1&query=Gimhae+International+Airport"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-29",
+      "title": "西面慢遊",
+      "events": [
+        {
+          "id": "2026-10-29-01",
+          "title": "睡飽自然醒，西面吃午餐。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-10-29-02",
+          "title": "釜山電影體驗博物館＋CINE 博物館 票券已安排",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-10-29-03",
+          "title": "田浦、西面商圈逛街，中間安排咖啡店休息。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-10-29-04",
+          "title": "晚餐後安排 Head SPA：洗頭、頭皮按摩、肩頸放鬆。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-10-29-05",
+          "title": "回飯店休息。",
+          "notes": "",
+          "status": "planned"
+        }
+      ],
+      "links": [
+        {
+          "label": "📍 田浦咖啡街",
+          "url": "https://www.google.com/maps/search/?api=1&query=Jeonpo+Cafe+Street+Busan"
+        },
+        {
+          "label": "📍 Head SPA 搜尋",
+          "url": "https://www.google.com/maps/search/?api=1&query=Head+Spa+Seomyeon+Busan"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "title": "慶州一日遊",
+      "events": [
+        {
+          "id": "2026-10-30-01",
+          "title": "08:30｜西面地鐵站 4 號出口出發 時間已確定",
+          "notes": "請提早抵達集合點。",
+          "status": "planned",
+          "start": "2026-10-30T08:30:00+09:00",
+          "end": "2026-10-30T08:40:00+09:00"
+        },
+        {
+          "id": "2026-10-30-02",
+          "title": "慶州 VIP 小團文化遺產＆自然一日遊 已安排",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-10-30-03",
+          "title": "依 Klook 當日行程走，晚上返回釜山。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-10-30-04",
+          "title": "回西面後宵夜／休息。",
+          "notes": "",
+          "status": "planned"
+        }
+      ],
+      "links": [
+        {
+          "label": "📍 西面站 4 號出口",
+          "url": "https://www.google.com/maps/search/?api=1&query=Seomyeon+Station+Exit+4+Busan"
+        },
+        {
+          "label": "🎫 Klook 行程",
+          "url": "https://www.klook.com/zh-TW/activity/194604-gyeongju-vip-small-group-heritage-nature-day-tour/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-31",
+      "title": "廣安里",
+      "events": [
+        {
+          "id": "2026-10-31-01",
+          "title": "睡飽自然醒，午餐後再出發。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-10-31-02",
+          "title": "下午｜廣安里海水浴場附近散步。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-10-31-03",
+          "title": "咖啡店／逛街／周邊景點，保留休息時間。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-10-31-04",
+          "title": "廣安里晚餐。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-10-31-05",
+          "title": "晚上｜廣安里 M 無人機燈光秀 時間待確認",
+          "notes": "",
+          "status": "tentative"
+        },
+        {
+          "id": "2026-10-31-06",
+          "title": "看完表演後慢慢逛，再返回西面。",
+          "notes": "",
+          "status": "planned"
+        }
+      ],
+      "links": [
+        {
+          "label": "📍 廣安里海水浴場",
+          "url": "https://www.google.com/maps/search/?api=1&query=Gwangalli+Beach+Busan"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-01",
+      "title": "海雲台・青沙浦",
+      "events": [
+        {
+          "id": "2026-11-01-01",
+          "title": "上午｜睡飽再出門，往海雲台／青沙浦方向移動。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-11-01-02",
+          "title": "13:30–14:00｜膠囊列車 時間已確定",
+          "notes": "",
+          "status": "planned",
+          "start": "2026-11-01T13:30:00+09:00",
+          "end": "2026-11-01T14:00:00+09:00"
+        },
+        {
+          "id": "2026-11-01-03",
+          "title": "列車前後安排海邊散步、咖啡，行程保持悠閒。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-11-01-04",
+          "title": "其餘時間自由安排，不另外塞跨區景點。",
+          "notes": "",
+          "status": "planned"
+        }
+      ],
+      "links": [
+        {
+          "label": "📍 海雲台",
+          "url": "https://www.google.com/maps/search/?api=1&query=Haeundae+Beach+Busan"
+        },
+        {
+          "label": "📍 青沙浦",
+          "url": "https://www.google.com/maps/search/?api=1&query=Cheongsapo+Busan"
+        },
+        {
+          "label": "📍 南浦洞",
+          "url": "https://www.google.com/maps/search/?api=1&query=Nampo-dong+Busan"
+        },
+        {
+          "label": "📍 影島",
+          "url": "https://www.google.com/maps/search/?api=1&query=Yeongdo+Busan"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-02",
+      "title": "預約行程＋回台灣",
+      "events": [
+        {
+          "id": "2026-11-02-01",
+          "title": "睡飽、整理行李，Check-out／寄放行李。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-11-02-02",
+          "title": "西面吃午餐。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-11-02-03",
+          "title": "12:30｜前往預約地點 地點待確認",
+          "notes": "",
+          "status": "tentative",
+          "start": "2026-11-02T12:30:00+09:00",
+          "end": "2026-11-02T13:00:00+09:00"
+        },
+        {
+          "id": "2026-11-02-04",
+          "title": "13:00｜預約行程（細節不公開）",
+          "notes": "",
+          "status": "planned",
+          "start": "2026-11-02T13:00:00+09:00",
+          "end": "2026-11-02T16:00:00+09:00"
+        },
+        {
+          "id": "2026-11-02-05",
+          "title": "約 15:00～16:00 結束，西面附近逛街、休息。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-11-02-06",
+          "title": "回飯店拿行李。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-11-02-07",
+          "title": "約 17:00～17:30｜前往金海機場",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-11-02-08",
+          "title": "機場晚餐／逛免稅店。",
+          "notes": "",
+          "status": "planned"
+        },
+        {
+          "id": "2026-11-02-09",
+          "title": "約 21:00 後班機回台灣 航班待確認",
+          "notes": "",
+          "status": "tentative"
+        },
+        {
+          "id": "2026-11-02-10",
+          "title": "抵達台灣 → 回家。",
+          "notes": "",
+          "status": "planned"
+        }
+      ],
+      "links": [
+        {
+          "label": "📍 金海機場",
+          "url": "https://www.google.com/maps/search/?api=1&query=Gimhae+International+Airport"
+        }
+      ]
+    }
+  ]
+}

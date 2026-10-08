@@ -1,0 +1,20 @@
+[
+  {
+    "id": "2026-busan",
+    "title": "2026 釜山 6天5夜",
+    "start": "2026-10-28",
+    "end": "2026-11-02",
+    "timezone": "Asia/Seoul",
+    "summary": "西面、慶州、廣安里與海雲台；一天一個主要區域，保留咖啡與休息時間。",
+    "url": "trips/2026-busan/"
+  },
+  {
+    "id": "2026-danang",
+    "title": "2026 峴港・會安",
+    "start": "2026-09-14",
+    "end": "2026-09-18",
+    "timezone": "Asia/Ho_Chi_Minh",
+    "summary": "峴港、巴拿山與會安的五天旅程紀錄。",
+    "url": "trips/2026-danang/"
+  }
+]

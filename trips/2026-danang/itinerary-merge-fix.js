@@ -59,7 +59,7 @@
         time:'19:00', title:'米其林街頭美食與精釀啤酒私人機車之旅', detail:'Klook 已購買行程；18:00 回飯店後整理，19:00 前往指定集合地點。', after:'19:00',
         places:[
           {name:'Klook Tour 集合地點', address:'依 Klook 指定 Google Maps 地點', note:'19:00 集合，出發前直接用此連結導航。', map:'https://maps.app.goo.gl/HuasPNrby1p1vp4Z7'},
-          {name:'Klook 行程頁', address:'米其林街頭美食與精釀啤酒私人機車之旅', note:'已購買行程，可快速開啟訂購頁確認內容。', map:'https://www.klook.com/zh-TW/activity/224232-da-nang-michelin-street-foods-craft-beer-tasting-private-motorbike-tour/?spm=BookingDetail.ActivityCard&clickId=afd505550c'},
+          {name:'Klook 行程頁', address:'米其林街頭美食與精釀啤酒私人機車之旅', note:'已購買行程，可快速開啟訂購頁確認內容。', map:'https://www.klook.com/zh-TW/activity/224232-da-nang-michelin-street-foods-craft-beer-tasting-private-motorbike-tour/'},
           {name:'Cầu Tình Yêu - Love Pier', address:'Trần Hưng Đạo, An Hải, Đà Nẵng', note:'Tour 可能停靠；實際以當天安排為準。', map:'https://www.google.com/maps/search/Cau+Tinh+Yeu+Da+Nang'},
           {name:'Dragon Bridge', address:'Cầu Rồng, Đà Nẵng', note:'Tour 可能停靠；實際以當天安排為準。', map:'https://www.google.com/maps/search/Dragon+Bridge+Da+Nang'},
           {name:'APEC Park', address:'Bình Hiên, Hải Châu, Đà Nẵng', note:'Tour 可能停靠；實際以當天安排為準。', map:'https://www.google.com/maps/search/APEC+Park+Da+Nang'},
