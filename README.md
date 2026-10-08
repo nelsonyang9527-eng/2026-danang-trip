@@ -9,6 +9,8 @@ index.html                 旅行總覽（待出發與進行中）
 history.html               歷史軌跡（已結束，依結束日倒序）
 data/trips.json            旅程索引，首頁與歷史頁共用
 assets/css/site.css        新版共用樣式
+assets/css/navigation.css  全站頂部導航（包含歷史頁）
+assets/images/             本地城市插畫
 assets/js/travel.js        共用日期、狀態與安全 DOM 工具
 assets/js/catalog.js       旅程卡片與歷史列表
 assets/js/trip.js          日期分頁與事件卡片
