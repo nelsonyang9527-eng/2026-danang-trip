@@ -45,10 +45,10 @@ html body main .button:hover{background:#1c6563}
 html body main .button.secondary,html body main .timeline .button,html body main .mapbtn{background:#edf4f0;color:#356b62}
 html body main .day-card{border:0;background:transparent;padding:0;margin:28px 0}
 html body main .day-card>h2{font-size:19px;display:flex;align-items:center;gap:10px}
-html body main .day-card>h2::before{content:"";width:5px;height:20px;border-radius:4px;background:#72a899}
-html body main .event-card{position:relative;padding:18px;border:1px solid var(--line);border-radius:16px;box-shadow:0 3px 12px #23443805;margin:12px 0;background:#fff}
+html body main .day-card>h2::before{display:none}
+html body main .event-card{position:relative;padding:20px 18px 20px 58px;border:1px solid var(--line);border-radius:18px;box-shadow:0 4px 16px #23443806;margin:12px 0;background:#fff}
 html body main .event-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
-html body main .event-heading time{font-size:15px;font-weight:750;color:var(--accent);font-variant-numeric:tabular-nums}
+html body main .event-heading time{font-size:19px;font-weight:750;color:var(--accent);font-variant-numeric:tabular-nums}
 html body main .event-card h3{font-size:17px;line-height:1.6;margin:6px 0;letter-spacing:0}
 html body main .event-status{background:#f0f4f2;color:#657e74;font-size:11px;border-radius:6px;font-weight:600}
 html body main .event-card[data-status=confirmed] .event-status{background:#e6f2eb;color:#30715d}
@@ -60,4 +60,16 @@ html body main .day-links .links{margin-top:0}
 html body main .day-links .button{background:white;border:1px solid #deebe4;color:#356b62}
 html body main .notes{background:#eff4f0}
 html body main a:focus-visible,html body main button:focus-visible{outline-color:var(--accent)}
-@media(max-width:600px){html body main .day-card{padding:0}html body main .event-card{padding:16px}html body main .event-card p{font-size:15px}}
+@media(max-width:600px){html body main .day-card{padding:0}html body main .event-card{padding:18px 14px 18px 52px}html body main .event-card p{font-size:15px}}
+
+/* Day separators and numbered stops keep the itinerary easy to scan. */
+html body main .day-heading{flex-wrap:wrap;gap:8px 12px;margin-bottom:18px}
+html body main .day-number{font-size:11px;letter-spacing:.08em;color:#467a67;background:#e5f0e8;padding:6px 9px;border-radius:7px;white-space:nowrap}
+html body main .day-date{margin-left:auto;font-size:13px;font-weight:500;color:var(--muted);font-variant-numeric:tabular-nums}
+html body main .event-number{position:absolute;left:17px;top:21px;display:grid;place-items:center;width:28px;height:28px;border:1px solid #dce8e0;border-radius:50%;background:#f2f7f3;color:#749283;font-size:11px;font-weight:700}
+html body main .event-time-flexible{font-size:13px;font-weight:600;color:#83958b}
+html body main .event-heading{flex-wrap:wrap;gap:8px}
+html body main .event-card .links{padding-top:12px;border-top:1px solid var(--line);margin-top:14px}
+html body main .trip-card .trip-body{padding:22px}
+html body main .trip-card .button{border-radius:10px;font-weight:650}
+@media(max-width:600px){html body main .event-number{left:13px;top:20px;width:26px;height:26px}html body main .event-card h3{font-size:16px}html body main .event-card p{font-size:14px}html body main .trip-body{padding:20px}}

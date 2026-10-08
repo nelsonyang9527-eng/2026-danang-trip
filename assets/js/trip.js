@@ -20,18 +20,23 @@ loadJSON('trip.json').then(trip=>{
   for(const [date,label] of [['all','總覽'],...trip.days.map(day=>[day.date,day.date.slice(5).replace('-','/')])]){
     const button=element('button',label,'tab');button.type='button';button.dataset.date=date;button.addEventListener('click',()=>select(date,true));tabs.append(button);
   }
-  for(const day of trip.days){
-    const card=element('section',undefined,'day-card');card.dataset.date=day.date;card.append(element('h2',`${day.date} · ${day.title}`));
-    for(const event of day.events){
+  for(const [dayIndex,day] of trip.days.entries()){
+    const card=element('section',undefined,'day-card');card.dataset.date=day.date;
+    const dayHeading=element('h2',undefined,'day-heading');
+    dayHeading.append(element('span',`DAY ${String(dayIndex+1).padStart(2,'0')}`,'day-number'),element('span',day.title),element('span',day.date.slice(5).replace('-','/'),'day-date'));
+    card.append(dayHeading);
+    for(const [eventIndex,event] of day.events.entries()){
       const item=element('article',undefined,'event-card');item.id=event.id;
       item.dataset.status=event.status;
       const heading=element('div',undefined,'event-heading');
       heading.append(element('span',labels[event.status],'event-status'));
-      item.append(heading,element('h3',event.title));
-      if(event.start){const time=element('time',new Intl.DateTimeFormat('zh-TW',{timeZone:event.timezone||trip.timezone,hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(event.start)));time.dateTime=event.start;heading.prepend(time)}
+      const order=element('span',String(eventIndex+1).padStart(2,'0'),'event-number');
+      order.setAttribute('aria-hidden','true');
+      item.append(order,heading,element('h3',event.title));
+      if(event.start){const time=element('time',new Intl.DateTimeFormat('zh-TW',{timeZone:event.timezone||trip.timezone,hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(event.start)));time.dateTime=event.start;heading.prepend(time)}else{heading.prepend(element('span','彈性安排','event-time-flexible'))}
       if(event.notes)item.append(element('p',event.notes));
       if(event.location)item.append(element('p',`地點：${event.location}`));
-      for(const link of event.links||[])item.append(publicLink(link.label,link.url));
+      if(event.links?.length){const actions=element('div',undefined,'links');for(const link of event.links)actions.append(publicLink(link.label,link.url));item.append(actions);}
       card.append(item);
     }
     const links=element('div',undefined,'links');for(const link of day.links||[])links.append(publicLink(link.label,link.url));if(links.childElementCount){const actions=element('aside',undefined,'day-links');actions.append(element('h3','地點與導航'),links);card.append(actions);}root.append(card);
