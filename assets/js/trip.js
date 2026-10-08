@@ -24,14 +24,17 @@ loadJSON('trip.json').then(trip=>{
     const card=element('section',undefined,'day-card');card.dataset.date=day.date;card.append(element('h2',`${day.date} · ${day.title}`));
     for(const event of day.events){
       const item=element('article',undefined,'event-card');item.id=event.id;
-      item.append(element('span',labels[event.status],'event-status'),element('h3',event.title));
-      if(event.start){const time=element('time',new Intl.DateTimeFormat('zh-TW',{timeZone:event.timezone||trip.timezone,hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(event.start)));time.dateTime=event.start;item.append(time)}
+      item.dataset.status=event.status;
+      const heading=element('div',undefined,'event-heading');
+      heading.append(element('span',labels[event.status],'event-status'));
+      item.append(heading,element('h3',event.title));
+      if(event.start){const time=element('time',new Intl.DateTimeFormat('zh-TW',{timeZone:event.timezone||trip.timezone,hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(event.start)));time.dateTime=event.start;heading.prepend(time)}
       if(event.notes)item.append(element('p',event.notes));
       if(event.location)item.append(element('p',`地點：${event.location}`));
       for(const link of event.links||[])item.append(publicLink(link.label,link.url));
       card.append(item);
     }
-    const links=element('div',undefined,'links');for(const link of day.links||[])links.append(publicLink(link.label,link.url));card.append(links);root.append(card);
+    const links=element('div',undefined,'links');for(const link of day.links||[])links.append(publicLink(link.label,link.url));if(links.childElementCount){const actions=element('aside',undefined,'day-links');actions.append(element('h3','地點與導航'),links);card.append(actions);}root.append(card);
   }
   const notes=document.querySelector('#notes');for(const note of trip.notes||[])notes.append(element('li',note));
   select('all');

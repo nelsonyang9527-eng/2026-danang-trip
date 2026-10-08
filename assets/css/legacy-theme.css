@@ -51,3 +51,9 @@ html body main .trip-day .rec-place+.rec-place{border-top-color:var(--line)}
 html body main .trip-day .rec-name{font-size:15px;line-height:1.6;font-weight:650;color:var(--ink)}
 html body main .trip-day .rec-address,html body main .trip-day .rec-note{font-size:13px;line-height:1.7;color:var(--muted)}
 html body main .trip-day .rec-map-btn{width:44px;height:44px;justify-self:end}
+html body main .card.trip-day{background:transparent;border:0;padding:0!important;box-shadow:none}
+html body main .trip-day.itinerary-merged .day-timeline>li{border-color:var(--line)!important;border-radius:16px!important;box-shadow:0 3px 12px #23443805!important}
+html body main .trip-day .day-timeline .tl-time{color:var(--accent)!important;font-weight:750!important}
+html body main .trip-day .day-timeline .tl-map-btn,html body main .rec-map-btn{background:#edf4f0!important;color:#356b62!important}
+html body main .trip-day .rec-details summary{color:#356b62}
+html body main .toprow h2{font-size:19px}

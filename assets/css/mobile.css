@@ -28,3 +28,36 @@ html body main .timeline .trip-card{width:100%;max-width:none;overflow:hidden}
 html body main .timeline .trip-card::before{display:none}
 html body main .timeline .trip-cover{height:180px}
 @media(max-width:600px){html body main .timeline .trip-cover{height:168px}}
+/* Travel cards: a softer shared palette and clearer mobile hierarchy. */
+:root{--ink:#273942;--muted:#6f8185;--accent:#237b78;--line:#e2ebe8;--background:#f5f8f6}
+html body main .site-nav .brand{color:var(--ink)}
+html body main .brand-mark{background:var(--accent)}
+html body main .brand>span:last-child{color:var(--accent)!important}
+html body main .nav-links,html body main .tabs,html body main .day-tabs-wrap{background:#eaf1ee;border-color:#dfe8e4}
+html body main .nav-links a[aria-current=page],html body main .tab[aria-pressed=true],html body main .day-tab.active{color:var(--accent)}
+html body main .eyebrow{color:#587e76}
+html body main .eyebrow::before,html body main #tripCount::before{background:var(--accent)}
+html body main .trip-card{border-color:var(--line);box-shadow:0 6px 22px #23443808}
+html body main .trip-body h2{font-size:23px}
+html body main .badge{background:#e6f2eb;color:#30715d;border-radius:8px}
+html body main .button{background:var(--accent);border-radius:12px}
+html body main .button:hover{background:#1c6563}
+html body main .button.secondary,html body main .timeline .button,html body main .mapbtn{background:#edf4f0;color:#356b62}
+html body main .day-card{border:0;background:transparent;padding:0;margin:28px 0}
+html body main .day-card>h2{font-size:19px;display:flex;align-items:center;gap:10px}
+html body main .day-card>h2::before{content:"";width:5px;height:20px;border-radius:4px;background:#72a899}
+html body main .event-card{position:relative;padding:18px;border:1px solid var(--line);border-radius:16px;box-shadow:0 3px 12px #23443805;margin:12px 0;background:#fff}
+html body main .event-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+html body main .event-heading time{font-size:15px;font-weight:750;color:var(--accent);font-variant-numeric:tabular-nums}
+html body main .event-card h3{font-size:17px;line-height:1.6;margin:6px 0;letter-spacing:0}
+html body main .event-status{background:#f0f4f2;color:#657e74;font-size:11px;border-radius:6px;font-weight:600}
+html body main .event-card[data-status=confirmed] .event-status{background:#e6f2eb;color:#30715d}
+html body main .event-card[data-status=tentative] .event-status{background:#fff4de;color:#866326}
+html body main .event-card p{color:var(--muted);margin:6px 0;font-size:14px}
+html body main .day-links{border:1px dashed #d8e4dc;border-radius:14px;padding:14px;background:#eef4f0;margin-top:16px}
+html body main .day-links h3{margin:0 0 10px;font-size:13px;color:#587b70;font-weight:650}
+html body main .day-links .links{margin-top:0}
+html body main .day-links .button{background:white;border:1px solid #deebe4;color:#356b62}
+html body main .notes{background:#eff4f0}
+html body main a:focus-visible,html body main button:focus-visible{outline-color:var(--accent)}
+@media(max-width:600px){html body main .day-card{padding:0}html body main .event-card{padding:16px}html body main .event-card p{font-size:15px}}
