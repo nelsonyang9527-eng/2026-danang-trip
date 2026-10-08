@@ -183,9 +183,10 @@
         },
         {
           "id": "2026-10-31-05",
-          "title": "晚上｜廣安里 M 無人機燈光秀 時間待確認",
-          "notes": "",
-          "status": "tentative"
+          "title": "19:00｜廣安里 M 無人機燈光秀（第一場）",
+          "notes": "官網冬季（10月至2月）每週六 19:00、21:00 各一場，每場約 10～12 分鐘，免費於廣安里海水浴場觀賞。優先看 19:00 第一場；21:00 為備選。遇天候或通訊因素可能延後或取消，當天出發前查看官網公告。",
+          "status": "confirmed",
+          "start": "2026-10-31T19:00:00+09:00"
         },
         {
           "id": "2026-10-31-06",
@@ -198,6 +199,10 @@
         {
           "label": "📍 廣安里海水浴場",
           "url": "https://www.google.com/maps/search/?api=1&query=Gwangalli+Beach+Busan"
+        },
+        {
+          "label": "官方｜M 無人機燈光秀公告",
+          "url": "https://www.gwangallimdrone.co.kr/notice"
         }
       ]
     },
