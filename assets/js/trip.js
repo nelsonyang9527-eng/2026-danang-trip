@@ -12,9 +12,13 @@ loadJSON('trip.json').then(trip=>{
   }
   update();setInterval(update,30000);
   const tabs=document.querySelector('#tabs');
-  function select(date){for(const card of root.children)card.hidden=date!=='all'&&card.dataset.date!==date;for(const button of tabs.children)button.setAttribute('aria-pressed',String(button.dataset.date===date))}
-  for(const [date,label] of [['all','總覽'],...trip.days.map(day=>[day.date,day.date.slice(5)])]){
-    const button=element('button',label,'tab');button.type='button';button.dataset.date=date;button.addEventListener('click',()=>select(date));tabs.append(button);
+  function select(date, fromUser=false){
+    for(const card of root.children)card.hidden=date!=='all'&&card.dataset.date!==date;
+    for(const button of tabs.children){button.setAttribute('aria-pressed',String(button.dataset.date===date));if(button.dataset.date===date&&fromUser)button.scrollIntoView({block:'nearest',inline:'nearest'});}
+    if(fromUser){const top=tabs.getBoundingClientRect().top+window.scrollY-parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'));window.scrollTo({top:Math.max(0,top),behavior:'instant'});}
+  }
+  for(const [date,label] of [['all','總覽'],...trip.days.map(day=>[day.date,day.date.slice(5).replace('-','/')])]){
+    const button=element('button',label,'tab');button.type='button';button.dataset.date=date;button.addEventListener('click',()=>select(date,true));tabs.append(button);
   }
   for(const day of trip.days){
     const card=element('section',undefined,'day-card');card.dataset.date=day.date;card.append(element('h2',`${day.date} · ${day.title}`));

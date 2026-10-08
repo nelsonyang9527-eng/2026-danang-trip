@@ -1,0 +1,44 @@
+/* Adapt preserved historical content to the same visual system as new trips. */
+html body main .hero{padding:0;margin:24px 0}
+html body main .hero h1{margin:10px 0 14px}
+html body main .day-tabs{display:flex;gap:6px;padding:0;margin:0;overflow-x:auto;scrollbar-width:none;background:transparent}
+html body main .day-tab[data-tab=all]{font-size:14px}
+html body main .day-tab[data-tab=all]::after{display:none}
+html body main .timezones{font-size:14px;color:var(--muted);font-weight:500}
+html body main .live-mode{background:white;border:1px solid var(--line);border-radius:18px;box-shadow:none;padding:18px;margin:24px 0}
+html body main .live-kicker{font-size:14px;color:var(--muted)}
+html body main .live-title{color:var(--ink);font-size:18px;font-weight:700}
+html body main .live-grid{gap:10px}
+html body main .live-panel{background:#f5f7fb;border-color:var(--line);border-left-color:#6082b4;border-radius:12px}
+html body main .live-label{font-weight:650;font-size:12px;color:var(--muted)}
+html body main .live-clock{font-size:14px;color:var(--muted)}
+html body main .countdown{background:#edf3ff;color:#315fc6;border:1px solid #dbe6fa;border-radius:14px;box-shadow:none;padding:16px}
+html body main .countdown-label,html body main .countdown-sub{color:#6f82a4}
+html body main .countdown-main{font-size:24px;font-weight:700}
+html body main .toprow{gap:12px;align-items:flex-start}
+html body main .toprow h2{font-size:20px;color:var(--ink);margin:0}
+html body main .tag{font-size:13px;color:var(--muted);font-weight:600;text-align:right}
+html body main .badge{background:#edf3ff;color:#315fc6;padding:4px 10px;border-radius:7px;font-size:12px;font-weight:650;margin:12px 0}
+html body main h3{font-size:17px;color:var(--ink);font-weight:700}
+html body main .mapbtn{background:#edf2fa;color:#355b94;border-radius:10px;font-size:14px;padding:10px 14px;text-decoration:none}
+html body main .summary{background:#fff;border:1px solid var(--line);border-radius:18px;color:var(--ink);padding:18px}
+html body main .summary p{color:var(--muted)}
+html body main .trip-day .day-timeline{border:0!important;padding:0!important;margin:12px 0!important}
+html body main .trip-day .day-timeline>li{border:1px solid var(--line)!important;border-radius:12px!important;padding:15px!important;margin:12px 0!important;background:#fff!important;color:var(--ink)!important}
+html body main .trip-day .day-timeline .tl-row{gap:12px!important;align-items:flex-start!important}
+html body main .trip-day .day-timeline .tl-title{font-size:17px!important;font-weight:650!important;line-height:1.6!important;color:var(--ink)!important}
+html body main .trip-day .day-timeline .tl-time{font-size:13px!important;color:#6f7f95!important}
+html body main .trip-day .day-timeline .tl-detail,html body main .trip-day .day-timeline .tl-dest{font-size:14px!important;line-height:1.7!important;color:var(--muted)!important}
+html body main .trip-day .day-timeline .tl-map-btn,html body main .rec-map-btn{min-width:44px!important;min-height:44px!important;box-sizing:border-box!important;background:#edf2fa!important;color:#355b94!important;border-radius:10px!important}
+html body main .rec-details{border-radius:12px!important;border:1px solid var(--line)!important}
+html body main .rec-details summary{min-height:44px;display:flex;align-items:center}
+@media(max-width:600px){html body main .trip-day .day-timeline .tl-row{flex-wrap:wrap!important}html body main .trip-day .day-timeline .tl-copy{flex:1;min-width:0}html body main .trip-day .day-timeline .tl-detail{padding-left:0!important}html body main .card li{font-size:15px}html body main .live-grid{grid-template-columns:1fr}html body main .timezones{gap:12px}}
+
+html body main.is-history .live-mode,html body main.is-history .countdown{display:none!important}
+html body main .hero .intro{font-size:15px;line-height:1.7;color:var(--muted);margin:0 0 12px}
+html body main .hero .dates{font-size:14px;color:var(--muted);margin:8px 0}
+html body main .hero .timezones strong{color:var(--muted);font-weight:500}
+html body main .hero .timezones{margin-top:8px}
+html body main .hero>#historyStatus{margin:0}
+html body main .trip-day.itinerary-merged .day-timeline>li{border:1px solid var(--line)!important;border-radius:12px!important;box-shadow:none!important;background:#fff!important;color:var(--ink)!important}
+html body main .trip-day.itinerary-merged .day-timeline .tl-row{border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;padding:0!important}
