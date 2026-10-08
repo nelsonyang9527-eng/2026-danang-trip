@@ -25,7 +25,7 @@ loadJSON('trip.json').then(trip=>{
     for(const event of day.events){
       const item=element('article',undefined,'event-card');item.id=event.id;
       item.append(element('span',labels[event.status],'event-status'),element('h3',event.title));
-      if(event.start){const time=element('time',new Intl.DateTimeFormat('zh-TW',{timeZone:trip.timezone,hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(event.start)));time.dateTime=event.start;item.append(time)}
+      if(event.start){const time=element('time',new Intl.DateTimeFormat('zh-TW',{timeZone:event.timezone||trip.timezone,hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(event.start)));time.dateTime=event.start;item.append(time)}
       if(event.notes)item.append(element('p',event.notes));
       if(event.location)item.append(element('p',`地點：${event.location}`));
       for(const link of event.links||[])item.append(publicLink(link.label,link.url));
